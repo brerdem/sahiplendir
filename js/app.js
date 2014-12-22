@@ -227,7 +227,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
                     console.log(error);
                 }
             );
-            //$state.go('profile');
+            $state.go('profile');
         }, function(error) {
             console.log(error);
         });
@@ -290,71 +290,10 @@ app.directive("ionMenuList", function() {
 
 function errorHandler(error) {
         alert(error.message);
-    }
+}
 
 
 
-/*
-
-app.factory('Camera', ['$q', function($q) {
-
-  return {
-    getPicture: function(options) {
-      var q = $q.defer();
-
-      navigator.camera.getPicture(function(result) {
-        // Do any magic you need
-        q.resolve(result);
-      }, function(err) {
-        q.reject(err);
-      }, options);
-
-      return q.promise;
-    }
-  }
-}]);
-
-
-
-app.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
- 
-  // Called to navigate to the main app
-  $scope.startApp = function() {
-    $state.go('main');
-  };
-  $scope.next = function() {
-    $ionicSlideBoxDelegate.next();
-  };
-  $scope.previous = function() {
-    $ionicSlideBoxDelegate.previous();
-  };
-
-  // Called each time the slide changes
-  $scope.slideChanged = function(index) {
-    $scope.slideIndex = index;
-  };
-});
-
-app.controller('MainCtrl', function($scope, Camera) {
-
-  $scope.getPhoto = function() {
-    Camera.getPicture().then(function(imageURI) {
-      console.log(imageURI);
-      $scope.lastPhoto = imageURI;
-    }, function(err) {
-      console.err(err);
-    }, {
-      quality: 75,
-      targetWidth: 320,
-      targetHeight: 320,
-	  correctOrientation: true,
-	  saveToPhotoAlbum: false
-    });
-  };
-
-});
-
-*/
 
 
 
