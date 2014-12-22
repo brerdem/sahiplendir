@@ -1,34 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<title></title>
+<link href="css/ionic.app.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+    <!-- compiled css output -->
+    
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+<!-- ionic/angularjs js -->
+<script src="lib/ionic/js/ionic.bundle.js"></script>
+<!--<script src="lib/openfb.js"></script>-->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+<script src="lib/parse-1.3.2.min.js"></script>
+<script>
+  Parse.initialize("8EsrtjkfqGJE3zoFJ3JxDY54WOCiDo7xuRN8UMoE", "ujUckpnMOoJEdHlZ9wXDrJDpvtYFLEguVD5GLwZx");
+</script>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
 
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-  </head>
-  <body ng-app="starter">
+<!-- your app's js -->
+<script src="js/app.js"></script>
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-pane>
-  </body>
+<!-- cordova script (this will be a 404 during development) -->
+<script src="cordova.js"></script>
+</head>
+
+<body ng-app="Sahiplendir">
+
+<!-- LOGIN TABS-->
+<script id="login.html" type="text/ng-template">
+
+	<ion-tabs class="tabs-striped tabs-bottom tabs-color-positive">
+	
+	  <ion-tab title="Giriş Yap" ui-sref="tabs.signin">
+		<!-- Tab 1 content -->
+		<ion-nav-view hide-nav-bar="true" name="signin-tab" class="background"></ion-nav-view>
+	  </ion-tab>
+	
+	  <ion-tab title="Kaydol" ui-sref="tabs.signup">
+		<!-- Tab 2 content -->
+			<ion-nav-view hide-nav-bar="true" name="signup-tab" class="background"></ion-nav-view>
+	  </ion-tab>
+	
+	</ion-tabs>
+</script>
+	
+
+
+  
+
+
+<ion-side-menus ng-controller="SideMenuCtrl">
+	<ion-side-menu-content drag-content="false">
+		<ion-nav-bar animation="nav-title-slide-ios7" class="bar-positive" align-title="center">
+			<ion-nav-back-button class="button-icon ion-arrow-left-c"> </ion-nav-back-button>
+			<ion-nav-buttons side="right">
+				<button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"> </button>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+		<ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
+	</ion-side-menu-content>
+	<ion-side-menu side="right">
+		<ion-header-bar class="bar-dark">
+			<h1 class="title">Sahiplendir Değiştir</h1>
+		</ion-header-bar>
+		<ion-content>
+			<ion-menu-list ng-controller='CartCtrl'></ion-menu-list>
+		</ion-content>
+	</ion-side-menu>
+</ion-side-menus>
+
+
+
+
+
+
+  
+<!-- HOME -->
+  
+<script id="home.html" type="text/ng-template">
+    <ion-view title="Ana Sayfa" hide-back-button="true">
+	 <ion-nav-buttons side="left">
+          <button class="button button-positive"
+                  ng-click="startApp()">Liste</button></ion-nav-buttons>
+  <ion-content>
+  
+  <ion-slide-box show-pager="true" on-slide-changed="slideChanged($slideIndex)">
+    <ion-slide ng-repeat="image in images">
+      <div> <img src="{{image.url}}" class="full-image"> </div>
+	  <h2 style="">{{image.text}}</h2>
+    </ion-slide>
+    
+  </ion-slide-box>
+  
+  </ion-content>
+    </ion-view>
+  </script> 
+  
+  
+ 
+
+<!-- LIST -->
+  
+<script id="list.html" type="text/ng-template">
+    <ion-view title="Liste">
+  <ion-content ng-controller="ListCtrl">
+  <div class="list">
+    <div class="item my-item"
+      ng-repeat="item in items">
+      <img ng-if="!item.isLetter" ng-src="http://placekitten.com/g/60/70">{{item}}
+    </div>
+  </div>
+</ion-content>
+    </ion-view>
+  </script> 
+
+
+<script id="ionMenuList.html" type="text/ng-template">
+  <div class="list">
+
+	<div class="item" ng-repeat="item in data.items">{{item.label}}</div>
+  </div>
+</script>
+<script id="profile.html" type="text/ng-template">
+ <ion-view></ion-view>
+</script>
+
+
+
+<div id="fb-root"></div>
+<script src="lib/facebookConnectPlugin.js"></script>
+</body>
 </html>
