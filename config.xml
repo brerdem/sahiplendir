@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.burakerdem.sahiplendir"
+        version   = "1.0.0">
+
+    <name>Sahiplendir Test</name>
+
+    <description>
+        Sahiplendir aplikasyonu
+    </description>
+
+    <author href="http://www.burakerdem.com" email="falsemech@gmail.com">
+        Burak Erdem
+    </author>
+	<content src="index.html"/>
+  	<access origin="*"/>
+  
+<gap:splash src="splash.png" />
+    <preference name="phonegap-version" value="3.6.3" />
+	
+	<preference name="show-splash-screen-spinner" value="false" />
+	<preference name="auto-hide-splash-screen" value="true" />
+	<preference name="SplashScreen" value="screen" />
+	<preference name="SplashScreenDelay" value="3000" />
+	<gap:platform name="android" />
+
+	<!-- Plugins -->
+	<gap:plugin name="org.apache.cordova.core.camera" version="0.3.2" />
+	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+	<gap:plugin name="org.li8.inappbrowser" version="0.1" />
+	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
+        <param name="APP_ID" value="1510553752541619" />
+        <param name="APP_NAME" value="Sahiplendir" />
+    </gap:plugin>
+
+
+</widget>
