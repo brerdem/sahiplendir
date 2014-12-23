@@ -73,13 +73,13 @@ var app = angular.module('Sahiplendir', ['ionic'])
 
 app.run(['$rootScope', '$state', '$ionicPlatform', function($rootScope, $state, $ionicPlatform) { 
 	$rootScope.$state = $state; 
-	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+	/*$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
           if (toState.data.authenticate && !Parse.User.current()) {
             // User isn’t authenticated
             $state.transitionTo("tabs.signin");
             event.preventDefault(); 
           }
-    });
+    });*/
 	
 	
 }]);
@@ -131,7 +131,7 @@ app.controller('SideMenuCtrl', function($scope, $ionicSideMenuDelegate) {
 
 
 
-app.controller("CartCtrl", function($scope) {
+app.controller("SideMenuListCtrl", function($scope) {
   
   $scope.data = {
     items : []
@@ -161,13 +161,6 @@ app.controller("MainCtrl", function($scope) {
 
 app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
 		
-	/*openFB.getLoginStatus(function (stat) {
-		if (stat.status == "connected") {
-			$state.go('home');
-		}
-	})*/
-    
-	
 	var fbLogged = new Parse.Promise();
 
     var fbLoginSuccess = function(response) {
@@ -245,47 +238,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
 
 
 app.controller("ProfileCtrl", function($scope, $state) {
-  
-  	
-		/*openFB.api({
-			path: '/me',
-			params: {fields: 'id,name,email'},
-			success: function(user) {
-				$scope.$apply(function() {
-					$scope.user = user;
-				});
-			},
-			error: function(error) {
-				alert('Facebook error: ' + error.error_description);
-			}
-		});*/
-		
-		var parseUser = Parse.User.current();
-		
-		$scope.user = {
-			id : parseUser.get('fbId'),
-			name : parseUser.get('name'),
-			email : parseUser.get('email'),
-			
-		}
-		
-		
-		
-	
-	
-	$scope.logout = function() {
-		console.log('Logout');
-          Parse.User.logOut();
-          $state.go('tabs.signin');	
-		
-		/*openFB.logout(
-                function() {
-                    console.log('Logout successful');
-					$state.go('tabs.signin');
-                },
-                errorHandler);*/
-    }
-  
+    
 })
 
 
@@ -297,7 +250,7 @@ app.directive("ionMenuList", function() {
 })
 
 function errorHandler(error) {
-        alert(error.message);
+  alert(error.message);
 }
 
 
