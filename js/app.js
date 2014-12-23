@@ -206,6 +206,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         })
         .then( function(userObject) {
             var authData = userObject.get('authData');
+			console.log("authdata-promise:"+authdata);
             facebookConnectPlugin.api('/me', null, 
                 function(response) {
                     console.log("/me response:"+response);
@@ -218,7 +219,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
                     console.log("/me error:"+error);
                 }
             );
-            facebookConnectPlugin.api('/me/picture', null,
+            /*facebookConnectPlugin.api('/me/picture', null,
                 function(response) {
 					console.log("/me pic response:"+response.url);
 					
@@ -228,7 +229,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
                 function(error) {
                     console.log("me pic error:"+error);
                 }
-            );
+            );*/
             $state.go('profile');
         }, function(error) {
             console.log("user object:"+error);
