@@ -6,8 +6,7 @@
 <title></title>
 <link href="css/ionic.app.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-    <!-- compiled css output -->
-    
+<!-- compiled css output -->
 
 <!-- ionic/angularjs js -->
 <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -18,8 +17,6 @@
   Parse.initialize("8EsrtjkfqGJE3zoFJ3JxDY54WOCiDo7xuRN8UMoE", "ujUckpnMOoJEdHlZ9wXDrJDpvtYFLEguVD5GLwZx");
 </script>
 
-
-
 <!-- your app's js -->
 <script src="js/app.js"></script>
 
@@ -29,7 +26,30 @@
 
 <body ng-app="Sahiplendir">
 
-<!-- LOGIN TABS-->
+
+
+<ion-side-menus ng-controller="SideMenuCtrl">
+  <ion-side-menu-content drag-content="false">
+    <ion-nav-bar animation="nav-title-slide-ios7" class="bar-positive" align-title="center">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c"> </ion-nav-back-button>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"> </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">Sahiplendir Değiştir</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-menu-list class="background" ng-controller='SideMenuListCtrl'></ion-menu-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
+
+<!-- LOGIN--> 
 <script id="login.html" type="text/ng-template">
 
 	<ion-tabs class="tabs-striped tabs-bottom tabs-color-positive">
@@ -46,91 +66,53 @@
 	
 	</ion-tabs>
 </script>
-	
-
-
-  
-
-
-<ion-side-menus ng-controller="SideMenuCtrl">
-	<ion-side-menu-content drag-content="false">
-		<ion-nav-bar animation="nav-title-slide-ios7" class="bar-positive" align-title="center">
-			<ion-nav-back-button class="button-icon ion-arrow-left-c"> </ion-nav-back-button>
-			<ion-nav-buttons side="right">
-				<button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"> </button>
-			</ion-nav-buttons>
-		</ion-nav-bar>
-		<ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
-	</ion-side-menu-content>
-	<ion-side-menu side="right">
-		<ion-header-bar class="bar-dark">
-			<h1 class="title">Sahiplendir Değiştir</h1>
-		</ion-header-bar>
-		<ion-content>
-			<ion-menu-list ng-controller='CartCtrl'></ion-menu-list>
-		</ion-content>
-	</ion-side-menu>
-</ion-side-menus>
 
 
 
+<!-- HOME --> 
 
-
-
-  
-<!-- HOME -->
-  
 <script id="home.html" type="text/ng-template">
-    <ion-view title="Ana Sayfa" hide-back-button="true">
+   <ion-view title="Ana Sayfa" hide-back-button="true">
 	 <ion-nav-buttons side="left">
           <button class="button button-positive"
                   ng-click="startApp()">Liste</button></ion-nav-buttons>
-  <ion-content>
+  	<ion-content>
   
-  <ion-slide-box show-pager="true" on-slide-changed="slideChanged($slideIndex)">
-    <ion-slide ng-repeat="image in images">
-      <div> <img src="{{image.url}}" class="full-image"> </div>
-	  <h2 style="">{{image.text}}</h2>
-    </ion-slide>
-    
-  </ion-slide-box>
+	  <ion-slide-box show-pager="true" on-slide-changed="slideChanged($slideIndex)">
+		<ion-slide ng-repeat="image in images">
+		  <div> <img src="{{image.url}}" class="full-image"> </div>
+		  <h2 style="">{{image.text}}</h2>
+		</ion-slide>
+	  </ion-slide-box>
   
   </ion-content>
-    </ion-view>
-  </script> 
-  
-  
- 
+   </ion-view>
+</script> 
 
-<!-- LIST -->
-  
+<!-- LIST --> 
+
 <script id="list.html" type="text/ng-template">
     <ion-view title="Liste">
-  <ion-content ng-controller="ListCtrl">
-  <div class="list">
-    <div class="item my-item"
-      ng-repeat="item in items">
-      <img ng-if="!item.isLetter" ng-src="http://placekitten.com/g/60/70">{{item}}
-    </div>
-  </div>
-</ion-content>
-    </ion-view>
-  </script> 
-
-
+	  <ion-content ng-controller="ListCtrl">
+	  <div class="list">
+		<div class="item my-item"
+		  ng-repeat="item in items">
+		  <img ng-if="!item.isLetter" ng-src="http://placekitten.com/g/60/70">{{item}}
+		</div>
+	  </div>
+	</ion-content>
+   </ion-view>
+</script> 
 <script id="ionMenuList.html" type="text/ng-template">
   <div class="list">
-
 	<div class="item" ng-repeat="item in data.items">{{item.label}}</div>
   </div>
-</script>
-<script id="profile.html" type="text/ng-template">
- <ion-view></ion-view>
-</script>
+</script> 
 
 
-
+<!-- Facebook Login -->
 <div id="fb-root"></div>
 <script src="lib/facebookConnectPlugin.js"></script>
+
 </body>
 </html>
