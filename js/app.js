@@ -201,11 +201,10 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         facebookConnectPlugin.login(['email'], fbLoginSuccess, fbLoginError);
 
         fbLogged.then( function(authData) {
-            console.log('Promised string:'+JSON.stringify(authData));
-            return Parse.FacebookUtils.logIn(authData);
-        })
-        .then( function(userObject) {
-            var authData = userObject.get('authData');
+			
+			
+			
+			    var authData = userObject.get('authData');
 			console.log("authdata-promise:"+authdata);
             facebookConnectPlugin.api('/me', null, 
                 function(response) {
@@ -231,6 +230,16 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
                 }
             );*/
             $state.go('profile');
+			
+			
+			
+			
+         
+        })
+        .then( function(userObject) {
+			   console.log('Promised string:'+JSON.stringify(authData));
+            return Parse.FacebookUtils.logIn(authData);
+        
         }, function(error) {
             console.log("user object:"+error);
         });
