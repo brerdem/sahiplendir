@@ -186,7 +186,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         }
         fbLogged.resolve(authData);
         fbLoginSuccess = null;
-        console.log("fblogin response:"+response);
+        console.log("fblogin response str:"+JSON.stringify(response));
     };
 
     var fbLoginError = function(error){
@@ -201,7 +201,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         facebookConnectPlugin.login(['email'], fbLoginSuccess, fbLoginError);
 
         fbLogged.then( function(authData) {
-            console.log('Promised :'+authData);
+            console.log('Promised string:'+JSON.stringify(authData));
             return Parse.FacebookUtils.logIn(authData);
         })
         .then( function(userObject) {
