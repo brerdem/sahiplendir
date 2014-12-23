@@ -28,6 +28,7 @@
 
 
 
+
 <ion-side-menus ng-controller="SideMenuCtrl">
   <ion-side-menu-content drag-content="false">
     <ion-nav-bar animation="nav-title-slide-ios7" class="bar-positive" align-title="center">
@@ -50,6 +51,32 @@
 
 
 <!-- LOGIN--> 
+
+
+
+<ion-side-menus ng-controller="SideMenuCtrl">
+  <ion-side-menu-content drag-content="false">
+    <ion-nav-bar animation="nav-title-slide-ios7" class="bar-positive" align-title="center">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c"> </ion-nav-back-button>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"> </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">Sahiplendir Değiştir</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-menu-list class="background" ng-controller='SideMenuListCtrl'></ion-menu-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
+
+<!-- LOGIN--> 
+
 <script id="login.html" type="text/ng-template">
 
 	<ion-tabs class="tabs-striped tabs-bottom tabs-color-positive">
@@ -89,7 +116,10 @@
    </ion-view>
 </script> 
 
-<!-- LIST EXAMPLE --> 
+
+
+<!-- LIST --> 
+
 
 <script id="list.html" type="text/ng-template">
     <ion-view title="Liste">
