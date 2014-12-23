@@ -206,7 +206,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         })
         .then( function(userObject) {
 			console.log("userobject: "+JSON.stringify(userObject));
-            var authData = userObject.get('authData');
+            var authData = userObject['authData'];
 			console.log("authdata-promise:"+authdata);
             facebookConnectPlugin.api('/me', null, 
                 function(response) {
