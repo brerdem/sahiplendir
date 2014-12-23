@@ -186,7 +186,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         }
         fbLogged.resolve(authData);
         fbLoginSuccess = null;
-        console.log(response);
+        console.log("fblogin response:"+response);
     };
 
     var fbLoginError = function(error){
@@ -208,28 +208,29 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
             var authData = userObject.get('authData');
             facebookConnectPlugin.api('/me', null, 
                 function(response) {
-                    console.log(response);
+                    console.log("/me response:"+response);
 					userObject.set('name', response.name);
                     userObject.set('email', response.email);
                     userObject.save();
-					$scope.name = response.name;
+					//$scope.name = response.name;
                 },
                 function(error) {
-                    console.log(error);
+                    console.log("/me error:"+error);
                 }
             );
             facebookConnectPlugin.api('/me/picture', null,
                 function(response) {
+					console.log("/me pic response:"+response);
                     userObject.set('profilePicture', response.data.url);
                     userObject.save();
                 }, 
                 function(error) {
-                    console.log(error);
+                    console.log("me pic error:"+error);
                 }
             );
             $state.go('profile');
         }, function(error) {
-            console.log(error);
+            console.log("user object:"+error);
         });
     };
 	
