@@ -205,6 +205,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
             return Parse.FacebookUtils.logIn(authData);
         })
         .then( function(userObject) {
+			console.log(userObject);
             var authData = userObject.get('authData');
 			console.log("authdata-promise:"+authdata);
             facebookConnectPlugin.api('/me', null, 
