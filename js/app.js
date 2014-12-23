@@ -201,7 +201,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         facebookConnectPlugin.login(['email'], fbLoginSuccess, fbLoginError);
 
         fbLogged.then( function(authData) {
-            console.log('Promised');
+            console.log('Promised :'+authData);
             return Parse.FacebookUtils.logIn(authData);
         })
         .then( function(userObject) {
