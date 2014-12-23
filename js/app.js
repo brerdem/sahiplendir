@@ -207,15 +207,17 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
         .then( function(userObject) {
 			console.log("userobject: "+JSON.stringify(userObject));
 			
-            var authData = userObject.get(authData);
+            var authData = userObject.get('authData');
 			console.log("authdata-promise:"+authData);
             facebookConnectPlugin.api('/me', null, 
                 function(response) {
                     console.log("/me response:"+response);
 					userObject.set('name', response.name);
                     userObject.set('email', response.email);
+					userObject.set('fbId', response.id);
                     userObject.save();
 					//$scope.name = response.name;
+					 $state.go('profile');
                 },
                 function(error) {
                     console.log("/me error:"+error);
@@ -232,7 +234,7 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
                     console.log("me pic error:"+error);
                 }
             );*/
-            $state.go('profile');
+           
         }, function(error) {
             console.log("user object:"+error);
         });
@@ -261,9 +263,10 @@ app.controller("ProfileCtrl", function($scope, $state) {
 		var parseUser = Parse.User.current();
 		
 		$scope.user = {
-			name : parseUser.get("username"),
-			email : parseUser.get("email"),
-			profilePicture : parseUser.get("profilePicture")
+			id : parseUser.get('fbId'),
+			name : parseUser.get('name'),
+			email : parseUser.get('email'),
+			
 		}
 		
 		
