@@ -220,8 +220,9 @@ app.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
             );
             facebookConnectPlugin.api('/me/picture', null,
                 function(response) {
-					console.log("/me pic response:"+response);
-                    userObject.set('profilePicture', response.data.url);
+					console.log("/me pic response:"+response.url);
+					
+                    userObject.set('profilePicture', response.url);
                     userObject.save();
                 }, 
                 function(error) {
