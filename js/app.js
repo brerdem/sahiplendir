@@ -74,13 +74,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 app.run(['$rootScope', '$state', '$ionicPlatform', function($rootScope, $state, $ionicPlatform) { 
 	$rootScope.$state = $state;
 	
-	/*$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
           if (toState.data.authenticate && !Parse.User.current()) {
             // User isn’t authenticated
             $state.transitionTo("tabs.signin");
             event.preventDefault(); 
           }
-    });*/
+    });
 	
 	
 }]);

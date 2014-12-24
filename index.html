@@ -67,7 +67,10 @@
   </ion-side-menu-content>
   <ion-side-menu side="right">
     <ion-header-bar class="bar-balanced">
-      <h1 class="title">Sahiplendir Değiştir</h1>
+        
+          <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
+          <h1 class="title">{{user.name}}</h1>
+         
     </ion-header-bar>
     <ion-content>
       <ion-menu-list ng-controller='SideMenuListCtrl'></ion-menu-list>

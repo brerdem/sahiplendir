@@ -24,8 +24,11 @@ angular.module('Sahiplendir.controllers', [])
 	$scope.toggleRight = function() {
     $ionicSideMenuDelegate.toggleRight();
   };
-  
-  $scope.name = Parse.User.current() ? Parse.User.current().get('name') : 'Burak Erdem';
+  $scope.user = {
+   
+	  name : Parse.User.current() ? Parse.User.current().get('name') : 'Sahiplendir',
+	  id : Parse.User.current() ? Parse.User.current().get('fbId') : 'undefined'
+  }
 })
 
 

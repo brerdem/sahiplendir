@@ -56,11 +56,39 @@ body {
   padding-bottom: 0;
 }
 
-.background, .background .pane, .background .item, .background .item-complex .item-content{
-    background-color: #fff;
+.background, .background .pane {
+   	background-color: rgba(255, 255, 255, 0.5);
+	background:url(../img/main_pattern.png);
+	
+/*	background: #0089bc;
+	background: -moz-radial-gradient(center, ellipse cover,  #0089bc 0%, #005d80 100%); 
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#0089bc), color-stop(100%,#005d80));
+	background: -webkit-radial-gradient(center, ellipse cover,  #0089bc 0%,#005d80 100%); 
+	background: -o-radial-gradient(center, ellipse cover,  #0089bc 0%,#005d80 100%); 
+	background: -ms-radial-gradient(center, ellipse cover,  #0089bc 0%,#005d80 100%); 
+	background: radial-gradient(ellipse at center,  #0089bc 0%,#005d80 100%); */
+
 }
 
+.radius {
+	border-radius: 10px;
+}
+
+
+
+
+
+.transparent {
+	background-color: rgba(0,0,0,0);
+color: #FFFFFF;
+
+
+}
+
+
 .profile-pic {
-	background-clip: padding-box;
+	-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;;
 }
 

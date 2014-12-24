@@ -1,10 +1,17 @@
-<ion-view title="Profilim" hide-back-button="true" class="padding">
+<ion-view title="Profilim" hide-back-button="true" class="padding has-header">
+
+<ion-content class="padding">
+  
+  <div align="center" class="padding"> <img class="profile-pic" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=normal"> </div>
+  
   <div class="card">
-    <div align="center" class="padding"> <img class="profile-pic" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=normal"> </div>
+    
     <div class="item item-icon-left"> <i class="icon ion-person"></i> {{user.name}} </div>
     <div class="item item-icon-left"> <i class="icon ion-email"></i> {{user.email}} </div>
   </div>
   <div align="center">
     <button class="button button-calm" ng-click="logout()"> Logout </button>
   </div>
+  </ion-content>
+  
 </ion-view>
