@@ -38,9 +38,9 @@ angular.module('Sahiplendir.controllers', [])
  
   $scope.data = {
     items : [
-		{icon: 'img/side-menu/home.svg', label : 'Ana Sayfa'},
-		{icon: 'img/side-menu/cat.svg', label : 'Hayvanları Gör'},
-		{icon: 'img/side-menu/info.svg', label : 'Yararlı Bilgiler'}
+		{icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
+		{icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
+		{icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
 			]
   };
  
