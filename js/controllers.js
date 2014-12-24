@@ -27,28 +27,24 @@ angular.module('Sahiplendir.controllers', [])
   $scope.user = {
    
 	  name : Parse.User.current() ? Parse.User.current().get('name') : 'Sahiplendir',
-	  id : Parse.User.current() ? Parse.User.current().get('fbId') : 'undefined'
+	  id : Parse.User.current() ? Parse.User.current().get('fbId') : 'undefined',
+	  email : Parse.User.current() ? Parse.User.current().get('email') : 'no mail'
   }
 })
 
 
 
 .controller("SideMenuListCtrl", function($scope) {
-  
-  
-  
-  
-  
+ 
   $scope.data = {
-    items : []
+    items : [
+		{icon: 'img/side-menu/home.svg', label : 'Ana Sayfa'},
+		{icon: 'img/side-menu/cat.svg', label : 'Hayvanları Gör'},
+		{icon: 'img/side-menu/info.svg', label : 'Yararlı Bilgiler'}
+			]
   };
-  
-  for(var i = 0; i < 25; i++) {
-    $scope.data.items.push({
-      id : i,
-      label : "Item " + i
-    })
-  }
+ 
+   
   
 })
 

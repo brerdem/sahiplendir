@@ -68,7 +68,7 @@
   <ion-side-menu side="right">
     <ion-header-bar class="bar-balanced">
         
-          <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
+          <img class="" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
           <h1 class="title">{{user.name}}</h1>
          
     </ion-header-bar>
@@ -137,9 +137,13 @@
 	</ion-content>
    </ion-view>
 </script> 
+
+
+
+<!-- SIDE MENU LIST --> 
 <script id="ionMenuList.html" type="text/ng-template">
   <div class="list">
-	<div class="item" ng-repeat="item in data.items">{{item.label}}</div>
+	<div class="item" ng-repeat="item in data.items"><img ng-src="{{item.icon}}" class="icon padding-right" />{{item.label}}</div>
   </div>
 </script> 
 
