@@ -23,7 +23,6 @@ body {
 
 
 
-
 .button.button-icon.input-button {
   position: absolute;
   right: 0;
@@ -32,9 +31,16 @@ body {
 }
 
 .side-menu-i {
-	font-size:20px;
+	vertical-align:middle;
+	font-size:30px;
+
 }
 
+.side-menu-list-item span {
+	height:30px;
+	line-height:-20px;
+	vertical-align:middle;
+}
 
 
 
