@@ -1,0 +1,19 @@
+<ion-view title="Ana Sayfa" hide-back-button="true">
+	 <ion-nav-buttons side="left">
+          <button class="button button-positive"
+                  ng-click="startApp()">Liste</button></ion-nav-buttons>
+  	<ion-content>
+  
+	  <ion-slide-box show-pager="false" on-slide-changed='changeSlide(index)'>
+		<ion-slide ng-repeat="post in posts">
+        
+		 <img src="{{post.image}}" class="full-image">
+          
+          
+		  
+		</ion-slide>
+	  </ion-slide-box>
+     <div class='slider-text-anim' ng-class="{'ng-enter: showAnim'}">{{desc}}</div>
+  
+  </ion-content>
+</ion-view>

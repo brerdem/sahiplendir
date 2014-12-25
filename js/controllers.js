@@ -1,19 +1,41 @@
 angular.module('Sahiplendir.controllers', [])
 
 
-.controller('MainPageCtrl', function($scope, $state) {
-	$scope.images = [
-		{url:'http://test.clckwrk.im/test/1.jpg', text:'Hello Moto 1'},
-		{url:'http://test.clckwrk.im/test/2.jpg', text:'Hello Moto 2'},
-		{url:'http://test.clckwrk.im/test/3.jpg', text:'Hello Moto 3'}
+.controller('MainPageCtrl', function($scope, $state, $animate) {
+	
+	$scope.showAnim = true;
+	
+	$scope.posts = [
+		{image:'http://test.clckwrk.im/test/1.jpg', text:'Hello Moto 1'},
+		{image:'http://test.clckwrk.im/test/2.jpg', text:'Hello Moto 2'},
+		{image:'http://test.clckwrk.im/test/3.jpg', text:'Hello Moto 3'}
 	];
+	
+	$scope.desc = $scope.posts[0].text;
 	
 	$scope.startApp = function() {
     	$state.go('list');
  	 };
+	 
+	 $scope.changeSlide = function(index) {
+		 $scope.showAnim = false;
+		 
+		 
+		 $scope.desc = $scope.posts[index].text;
+		 $animate.enter
+		
+	 }
+	 
 })
 
-.controller('ListCtrl', function($scope) {
+.controller('PostsCtrl', function($scope) {
+	$scope.items = [];
+  for (var i = 0; i < 20; i++) {
+    $scope.items.push('Item ' + i);
+  }
+})
+
+.controller('InfoCtrl', function($scope) {
 	$scope.items = [];
   for (var i = 0; i < 20; i++) {
     $scope.items.push('Item ' + i);
@@ -38,10 +60,10 @@ angular.module('Sahiplendir.controllers', [])
  
   $scope.data = {
     items : [
-		{icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
-		{icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
-		{icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
-			]
+		{href: '#/home', icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
+		{href: '#/posts', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
+		{href: '#/info', icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
+	]
   };
  
    

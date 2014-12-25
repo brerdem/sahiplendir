@@ -7,11 +7,9 @@ var app = angular.module('Sahiplendir', ['ionic', 'Sahiplendir.controllers'])
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	
-      $urlRouterProvider.otherwise('/tab/signin')
-
-      $stateProvider
-	  
-	  
+	//$ionicConfigProvider.views.maxCache(0);
+	$stateProvider
+	  	  
 	  .state('tabs', {
         url: '/tab',
 		abstract: true,
@@ -50,14 +48,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
       .state('home', {
         url: '/home',
 		controller: 'MainPageCtrl',
-        templateUrl: 'home.html'
+        templateUrl: 'templates/home.html'
 		
       })
 	  
-      .state('list', {
-        url: '/list',
-		controller: 'ListCtrl',
-        templateUrl: 'list.html'
+      .state('posts', {
+        url: '/posts',
+		controller: 'PostsCtrl',
+        templateUrl: 'templates/posts.html'
       })
 	  .state('profile', {
         url: '/profile',
@@ -67,12 +65,37 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			   authenticate: true
 		}
       })
+	  
+	  .state('info', {
+        url: '/info',
+		controller: 'InfoCtrl',
+        templateUrl: 'templates/info.html',
+		
+      });
+	  
+	  
+	  $urlRouterProvider.otherwise('/tab/signin')
+	  
+	  	
 	 
 	  
 })
 
 app.run(['$rootScope', '$state', '$ionicPlatform', function($rootScope, $state, $ionicPlatform) { 
 	$rootScope.$state = $state;
+	
+	$ionicPlatform.ready(function() {
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		// for form inputs)
+		if (window.cordova && window.cordova.plugins.Keyboard) {
+		  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if (window.StatusBar) {
+		  // org.apache.cordova.statusbar required
+		  StatusBar.styleDefault();
+		}
+  	});
+	
 	
 	/*$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
           if (toState.data.authenticate && !Parse.User.current()) {

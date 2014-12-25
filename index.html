@@ -41,8 +41,9 @@
     <ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
   </ion-side-menu-content>
   <ion-side-menu side="right">
-    <ion-header-bar class="bar-balanced">
-      <h1 class="title">{{name}}</h1>
+    <ion-header-bar class="bar-balanced" align-title="left">
+      <img ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
+      <h1 class="title">{{user.name}}</h1>
     </ion-header-bar>
     <ion-content>
       <ion-menu-list class="" ng-controller='SideMenuListCtrl'></ion-menu-list>
@@ -66,11 +67,9 @@
     <ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
   </ion-side-menu-content>
   <ion-side-menu side="right">
-    <ion-header-bar class="bar-balanced">
-        
-          <img class="" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
-          <h1 class="title">{{user.name}}</h1>
-         
+    <ion-header-bar class="bar-balanced" align-title="middle">
+        <img class="side-menu-profil-pic padding-right" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
+        <span class="title">{{user.name}}</span>
     </ion-header-bar>
     <ion-content>
       <ion-menu-list ng-controller='SideMenuListCtrl'></ion-menu-list>
@@ -100,50 +99,15 @@
 
 
 
-<!-- HOME --> 
-
-<script id="home.html" type="text/ng-template">
-   <ion-view title="Ana Sayfa" hide-back-button="true">
-	 <ion-nav-buttons side="left">
-          <button class="button button-positive"
-                  ng-click="startApp()">Liste</button></ion-nav-buttons>
-  	<ion-content>
-  
-	  <ion-slide-box show-pager="true" on-slide-changed="slideChanged($slideIndex)">
-		<ion-slide ng-repeat="image in images">
-		  <div> <img src="{{image.url}}" class="full-image"> </div>
-		  <h2 style="">{{image.text}}</h2>
-		</ion-slide>
-	  </ion-slide-box>
-  
-  </ion-content>
-   </ion-view>
-</script> 
-
-
-
-<!-- LIST --> 
-
-
-<script id="list.html" type="text/ng-template">
-    <ion-view title="Liste">
-	  <ion-content ng-controller="ListCtrl">
-	  <div class="list">
-		<div class="item my-item"
-		  ng-repeat="item in items">
-		  <img ng-if="!item.isLetter" ng-src="http://placekitten.com/g/60/70">{{item}}
-		</div>
-	  </div>
-	</ion-content>
-   </ion-view>
-</script> 
-
-
-
 <!-- SIDE MENU LIST --> 
 <script id="ionMenuList.html" type="text/ng-template">
   <div class="list">
-	<div class="item dark side-menu-list-item" ng-repeat="item in data.items"><i ng-class="item.icon" class="icon padding-right side-menu-i"></i><span>{{item.label}}</span></div>
+	
+		<a ng-href='{{item.href}}' class="menu-close item dark" ng-repeat="item in data.items">
+			<i ng-class="item.icon" class="icon padding-right side-menu-i"></i>
+			<span>{{item.label}}</span>
+		</a>
+	
   </div>
 </script> 
 
