@@ -1,9 +1,11 @@
 angular.module('Sahiplendir.controllers', [])
 
 
-.controller('MainPageCtrl', function($scope, $state, $animate) {
+.controller('MainPageCtrl', function($scope, $state) {
 	
-	$scope.showAnim = true;
+	$scope.op = 1;
+	$scope.descClass = '';
+	
 	
 	$scope.posts = [
 		{image:'http://test.clckwrk.im/test/1.jpg', text:'Hello Moto 1'},
@@ -18,11 +20,12 @@ angular.module('Sahiplendir.controllers', [])
  	 };
 	 
 	 $scope.changeSlide = function(index) {
-		 $scope.showAnim = false;
+		 $scope.op = 0;
+		$scope.descClass = 'slider-text-anim-start';
 		 
 		 
 		 $scope.desc = $scope.posts[index].text;
-		 $animate.enter
+		
 		
 	 }
 	 
