@@ -1,19 +1,27 @@
 <ion-view title="Ana Sayfa" hide-back-button="true">
 	 <ion-nav-buttons side="left">
           <button class="button button-positive"
-                  ng-click="startApp()">Liste</button></ion-nav-buttons>
+                  ng-click="startApp()">Posts</button></ion-nav-buttons>
   	<ion-content>
   
-	  <ion-slide-box show-pager="false" on-slide-changed='changeSlide(index)'>
+	  <ion-slide-box show-pager="true" on-slide-changed='changeSlide(index)'>
 		<ion-slide ng-repeat="post in posts">
         
 		 <img src="{{post.image}}" class="full-image">
-          
-          
-		  
+     
 		</ion-slide>
 	  </ion-slide-box>
-     <div ng-style='{opacity: op}' ng-class='descClass'>{{desc}}</div>
+     <div class="slider-text padding">
+     	<h4 ng-show='isHiddenText'>{{desc}}</h4>
+     </div>
+     <ion-list>
+     	<a ng-href='{{item.href}}' class="item stable" ng-repeat="item in mainLinks" ng-class='item.bg'>
+			<i ng-class="item.icon" class="icon padding-right side-menu-i"></i>
+			<span>{{item.label}}</span>
+		</a>
+		</div>
+	 </ion-list>
+      
   
   </ion-content>
 </ion-view>
