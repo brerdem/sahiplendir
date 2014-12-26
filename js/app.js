@@ -78,19 +78,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
       })
 	  
-	  .state('post', {
-        url: '/post',
-		abstract: true,
-		templateUrl: 'templates/post.html'	
-      })
-	  
-	  .state('post.add', {
+
+	  .state('add', {
         url: '/add',
 		controller: 'PostAddCtrl',
         templateUrl: 'templates/post-add.html'
       })
 	  
-	  .state('post.detail', {
+	  .state('detail', {
         url: '/detail',
 		controller: 'PostDetailCtrl',
         templateUrl: 'templates/post-detail.html'

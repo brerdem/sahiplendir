@@ -14,7 +14,7 @@ angular.module('Sahiplendir.controllers', [])
 	$scope.desc = $scope.posts[0].text;
 	
 	$scope.addPost = function() {
-    	$state.go('post.add');
+    	$state.go('add');
  	 };
 	 
 	 $scope.changeSlide = function(index) {
