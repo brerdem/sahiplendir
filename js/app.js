@@ -5,6 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('Sahiplendir', ['ionic', 'Sahiplendir.controllers'])
 
+app.config(function($compileProvider){
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+})
+
 app.config(function($stateProvider, $urlRouterProvider) {
 	
 	//$ionicConfigProvider.views.maxCache(0);
@@ -48,7 +52,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       .state('home', {
         url: '/home',
 		controller: 'MainPageCtrl',
-        templateUrl: 'templates/home.html'
+        templateUrl: 'templates/home.html',
+		cache: false
 		
       })
 	  
@@ -56,7 +61,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/posts',
 		controller: 'PostsCtrl',
         templateUrl: 'templates/posts.html'
-      })
+	  })
 	  .state('profile', {
         url: '/profile',
 		controller: 'ProfileCtrl',
@@ -71,15 +76,32 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'InfoCtrl',
         templateUrl: 'templates/info.html',
 		
-      });
+      })
 	  
+	  .state('post', {
+        url: '/post',
+		abstract: true,
+		templateUrl: 'templates/post.html'	
+      })
+	  
+	  .state('post.add', {
+        url: '/add',
+		controller: 'PostAddCtrl',
+        templateUrl: 'templates/post-add.html'
+      })
+	  
+	  .state('post.detail', {
+        url: '/detail',
+		controller: 'PostDetailCtrl',
+        templateUrl: 'templates/post-detail.html'
+      });
 	  
 	  $urlRouterProvider.otherwise('/tab/signin')
 	  
 	  	
 	 
 	  
-})
+});
 
 app.run(['$rootScope', '$state', '$ionicPlatform', function($rootScope, $state, $ionicPlatform) { 
 	$rootScope.$state = $state;
@@ -107,29 +129,6 @@ app.run(['$rootScope', '$state', '$ionicPlatform', function($rootScope, $state, 
 	
 	
 }]);
-
-<!-- LOCAL STORAGE -->
-
-app.factory('$localstorage', ['$window', function($window) {
-  return {
-    set: function(key, value) {
-      $window.localStorage[key] = value;
-    },
-    get: function(key, defaultValue) {
-      return $window.localStorage[key] || defaultValue;
-    },
-    setObject: function(key, value) {
-      $window.localStorage[key] = JSON.stringify(value);
-    },
-    getObject: function(key) {
-      return JSON.parse($window.localStorage[key] || '{}');
-    }
-  }
-}]);
-
-
-
-
 
 app.directive('backColor', function(){
     return function(scope, element, attrs){
