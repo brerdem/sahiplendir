@@ -1,3 +1,3 @@
 Sahiplendir
 ===========
-Süper bi app
+Sokak hayvanlarını sahiplendirmeyi amaçlayan bir aplikasyon
