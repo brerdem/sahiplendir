@@ -1,4 +1,4 @@
-angular.module('Sahiplendir.controllers', [])
+angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller('MainPageCtrl', function($scope, $state, $timeout) {
@@ -14,7 +14,7 @@ angular.module('Sahiplendir.controllers', [])
 	$scope.desc = $scope.posts[0].text;
 	
 	$scope.addPost = function() {
-    	$state.go('add');
+    	$state.go('post.add');
  	 };
 	 
 	 $scope.changeSlide = function(index) {
@@ -43,9 +43,7 @@ angular.module('Sahiplendir.controllers', [])
     $scope.items.push('Item ' + i);
   }
 })
-.controller('PostAddCtrl', function($scope) {
-	
-})
+
 
 .controller('PostDetailCtrl', function($scope) {
 	
@@ -91,20 +89,20 @@ angular.module('Sahiplendir.controllers', [])
 
 .controller("PostAddCtrl", function($scope, Camera) {
 	$scope.addPostPhoto = function() {
-    console.log('Getting camera');
-    Camera.getPicture().then(function(imageURI) {
-      console.log(imageURI);
-      $scope.lastPhoto = imageURI;
-    }, function(err) {
-      console.err(err);
-    }, {
-      quality: 75,
-	  correctOrientation: true,
-      targetWidth: 320,
-      targetHeight: 320,
-      saveToPhotoAlbum: false
-    });
-    /*
+		console.log('Getting camera');
+		Camera.getPicture().then(function(imageURI) {
+		  console.log(imageURI);
+		  $scope.lastPhoto = imageURI;
+		}, function(err) {
+		  console.err(err);
+		}, {
+		  quality: 75,
+		  correctOrientation: true,
+		  targetWidth: 320,
+		  targetHeight: 320,
+		  saveToPhotoAlbum: false
+		});
+   
     navigator.camera.getPicture(function(imageURI) {
       console.log(imageURI);
     }, function(err) {
@@ -112,8 +110,8 @@ angular.module('Sahiplendir.controllers', [])
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL
     });
-    */
-  }
+    
+  	}
     
 })
 

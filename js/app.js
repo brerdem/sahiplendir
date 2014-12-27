@@ -52,8 +52,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       .state('home', {
         url: '/home',
 		controller: 'MainPageCtrl',
-        templateUrl: 'templates/home.html',
-		cache: false
+        templateUrl: 'templates/home.html'
 		
       })
 	  
@@ -78,18 +77,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
       })
 	  
-
-	  .state('add', {
-        url: '/add',
-		controller: 'PostAddCtrl',
-        templateUrl: 'templates/post-add.html'
+	  
+	  .state('post', {
+        url: '/post',
+		abstract: true
+		
       })
 	  
-	  .state('detail', {
-        url: '/detail',
-		controller: 'PostDetailCtrl',
-        templateUrl: 'templates/post-detail.html'
-      });
+
+	  .state('post.add', {
+        url: '/add',
+		views: {
+			'@' : {
+				controller: 'PostAddCtrl',
+				templateUrl: 'templates/post-add.html'
+			}
+		}
+	  })
+	  
+	
 	  
 	  $urlRouterProvider.otherwise('/tab/signin')
 	  
