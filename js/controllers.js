@@ -98,8 +98,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		}, {
 		  quality: 75,
 		  correctOrientation: true,
-		  targetWidth: 320,
-		  targetHeight: 320,
+		  targetWidth: 120,
+		  targetHeight: 120,
 		  saveToPhotoAlbum: false
 		});
    
