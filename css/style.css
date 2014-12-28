@@ -23,17 +23,8 @@ body {
 }
 
 
-
-.button.button-icon.input-button {
-  position: absolute;
-  right: 0;
-  top: 5px;
-  color: #bbb;
-}
-
-
 .side-menu-title {font-size:18px;vertical-align:middle}
-.side-menu-profil-pic {vertical-align:middle}
+.side-menu-profil-pic {width:33px; height:33px}
 .side-menu-i {vertical-align:middle;font-size:30px;}
 .side-menu-list-item span {height:30px;	line-height:-20px;	vertical-align:middle;}
 

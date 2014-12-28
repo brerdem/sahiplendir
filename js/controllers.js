@@ -88,7 +88,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("PostAddCtrl", function($scope, Camera) {
-	$scope.addPostPhoto = function() {
+	$scope.addPostPhoto = function(from) {
 		console.log('Getting camera');
 		Camera.getPicture().then(function(imageURI) {
 		  console.log(imageURI);
@@ -96,7 +96,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		}, function(err) {
 		  console.err(err);
 		}, {
-		  quality: 75,
+		  quality: 50,
 		  correctOrientation: true,
 		  targetWidth: 120,
 		  targetHeight: 120,

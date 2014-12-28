@@ -1,12 +1,20 @@
-<ion-view title="hello" hide-back-button="true" class="padding has-header">
+<ion-view title="İlan Ekle" class="padding has-header">
 	
-	<ion-content>
+	<ion-content class="padding">
+	
+	
+		  <div class="item-text-wrap card padding-left">
+    		<h4 class="calm">Adım 1: Önce fotoğraf çekin ya da ekleyin.</h4>
+  		  </div>
     
-    	<div align="center" class="padding">
-    	 <button class="button button-large button-balanced icon-left ion-camera" ng-click="addPostPhoto()">Fotoğraf Ekle</button>
+    	<div align="center">
+		
+		
+    	 <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
+		 <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
 		</div>
 		
-		<img class="padding" ng-src='{{lastPhoto}}'>
+		<img class="padding full-image" ng-src='{{lastPhoto}}'>
 
   	</ion-content>
   
