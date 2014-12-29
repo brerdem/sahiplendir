@@ -15,7 +15,7 @@
              <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
             </div>
             
-            <img class="padding full-image" ng-src='{{lastPhoto}}'>
+            
      
 		</ion-slide>
         <ion-slide>
@@ -24,11 +24,12 @@
             </div>
             
             <div class="list list-inset transparent">
+            <img class="padding full-image" ng-src='{{lastPhoto}}'>
                 <label class="item item-input">
                     <input type="text" class="stable" placeholder="Başlık">
                 </label>
                 <label class="item item-input">
-                    <textarea cols="20" placeholder="Açıklama"></textarea>
+                    <textarea cols="40" placeholder="Açıklama"></textarea>
                 </label>
           
                 <div>

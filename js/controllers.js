@@ -87,18 +87,21 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller("PostAddCtrl", function($scope, Camera) {
+.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera) {
 	
 	// PHOTO ADD
+	
+	 $ionicSlideBoxDelegate.enableSlide(false);
+	
 	
 	$scope.addPostPhoto = function(from) {
 		
 		var opt = {
 			
-		  quality: 50,
+		  quality: 65,
 		  correctOrientation: true,
-		  targetWidth: 120,
-		  targetHeight: 120,
+		  targetWidth: 200,
+		  targetHeight: 200,
 		  saveToPhotoAlbum: false,
 		  sourceType  : (from == 'camera') ? 1 : 0
 		
@@ -108,6 +111,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  console.log(imageURI);
 		  
 		  $scope.lastPhoto = imageURI;
+		  $ionicSlideBoxDelegate.next();
+		  
 		}, function(err) {
 		  console.err(err);
 		}, opt);
