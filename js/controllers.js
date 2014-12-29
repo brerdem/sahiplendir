@@ -105,7 +105,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  targetWidth: 120,
 		  targetHeight: 120,
 		  saveToPhotoAlbum: false,
-		  sourceType  : (from == 'camera') ? Camera.PictureSourceType.CAMERA :Camera.PictureSourceType.PHOTOLIBRARY
+		  sourceType  : (from == 'camera') ? 1 : 0
 		});
       
   	}
