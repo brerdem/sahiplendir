@@ -1,21 +1,48 @@
 <ion-view title="İlan Ekle" class="padding has-header">
 	
-	<ion-content class="padding">
+	<ion-pane class="padding" style="padding-top:34px">
+	<ion-slide-box show-pager="true">
+		<ion-slide>
+        
+            <div class="item-text-wrap card padding-left">
+               <h4 class="calm">Adım 1: Önce fotoğraf çekin ya da ekleyin.</h4>
+            </div>
+        
+            <div align="center">
+            
+            
+             <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
+             <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
+            </div>
+            
+            <img class="padding full-image" ng-src='{{lastPhoto}}'>
+     
+		</ion-slide>
+        <ion-slide>
+        	 <div class="item-text-wrap card padding-left">
+               <h4 class="calm">Adım 2: Şimdi ilan bilgilerini girebilirsiniz.</h4>
+            </div>
+            
+            <div class="list list-inset transparent">
+                <label class="item item-input">
+                    <input type="text" class="stable" placeholder="Başlık">
+                </label>
+                <label class="item item-input">
+                    <textarea cols="20" placeholder="Açıklama"></textarea>
+                </label>
+          
+                <div>
+                    <button class="button button-block button-balanced" ng-click="savePost()"> Kaydet </button>
+                </div>
+             </div>
+                    
+            
+        
+        </ion-slide>
+        
+        
+	  </ion-slide-box>
 	
-	
-		  <div class="item-text-wrap card padding-left">
-    		<h4 class="calm">Adım 1: Önce fotoğraf çekin ya da ekleyin.</h4>
-  		  </div>
-    
-    	<div align="center">
-		
-		
-    	 <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
-		 <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
-		</div>
-		
-		<img class="padding full-image" ng-src='{{lastPhoto}}'>
-
-  	</ion-content>
+  	</ion-pane>
   
 </ion-view>

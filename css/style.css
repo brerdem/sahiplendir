@@ -5,6 +5,45 @@ body {
  
 }
 
+/* ICON FONTS */
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?-actw0m');
+	src:url('fonts/icomoon.eot?#iefix-actw0m') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-actw0m') format('woff'),
+		url('fonts/icomoon.ttf?-actw0m') format('truetype'),
+		url('fonts/icomoon.svg?-actw0m#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="sahiplendir-icon-"], [class*=" sahiplendir-icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+.sahiplendir-icon-cat:before {
+	content: "\e600";
+}
+.sahiplendir-icon-home:before {
+	content: "\e601";
+}
+.sahiplendir-icon-info:before {
+	content: "\e602";
+}
+
+
 /*MAIN SLIDER*/
 
 .slider {height:100%; padding:0; margin:0}
@@ -24,7 +63,7 @@ body {
 
 
 .side-menu-title {font-size:18px;vertical-align:middle}
-.side-menu-profil-pic {width:33px; height:33px}
+.side-menu-profil-pic {width:34px; height:34px}
 .side-menu-i {vertical-align:middle;font-size:30px;}
 .side-menu-list-item span {height:30px;	line-height:-20px;	vertical-align:middle;}
 
@@ -68,41 +107,9 @@ border-radius: 10px;;
 /* side menu fonts */
 
 
-@font-face {
-	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-actw0m');
-	src:url('fonts/icomoon.eot?#iefix-actw0m') format('embedded-opentype'),
-		url('fonts/icomoon.woff?-actw0m') format('woff'),
-		url('fonts/icomoon.ttf?-actw0m') format('truetype'),
-		url('fonts/icomoon.svg?-actw0m#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-[class^="sahiplendir-icon-"], [class*=" sahiplendir-icon-"] {
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
 
 
-.sahiplendir-icon-cat:before {
-	content: "\e600";
-}
-.sahiplendir-icon-home:before {
-	content: "\e601";
-}
-.sahiplendir-icon-info:before {
-	content: "\e602";
-}
+
 
 
 

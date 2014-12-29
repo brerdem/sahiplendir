@@ -88,6 +88,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("PostAddCtrl", function($scope, Camera) {
+	
+	// PHOTO ADD
+	
 	$scope.addPostPhoto = function(from) {
 		console.log('Getting camera');
 		Camera.getPicture().then(function(imageURI) {
@@ -100,18 +103,18 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  correctOrientation: true,
 		  targetWidth: 120,
 		  targetHeight: 120,
-		  saveToPhotoAlbum: false
+		  saveToPhotoAlbum: false,
+		  sourceType  : (from == 'camera') ? Camera.PictureSourceType.CAMERA :Camera.PictureSourceType.PHOTOLIBRARY
 		});
-   
-    navigator.camera.getPicture(function(imageURI) {
-      console.log(imageURI);
-    }, function(err) {
-    }, { 
-      quality: 50,
-      destinationType: Camera.DestinationType.DATA_URL
-    });
-    
+      
   	}
+	$scope.savePost = function() {
+		
+	}
+	
+	
+	
+	
     
 })
 

@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('Sahiplendir', ['ionic', 'Sahiplendir.controllers'])
+var app = angular.module('Sahiplendir', ['ionic', 'Sahiplendir.controllers', 'Sahiplendir.directives'])
 
 app.config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
@@ -130,25 +130,6 @@ app.run(['$rootScope', '$state', '$ionicPlatform', function($rootScope, $state, 
 	
 	
 }]);
-
-app.directive('backColor', function(){
-    return function(scope, element, attrs){
-        var clr = attrs.backColor;
-        var content = element.find('a');
-        content.css({
-            'background-color': ''+clr+'-bg',
-           
-        });
-    };
-});
-
-
-app.directive("ionMenuList", function() {
-  return {
-    restrict : "E",
-    templateUrl : "ionMenuList.html"
-  }
-})
 
 
 
