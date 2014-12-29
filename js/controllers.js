@@ -93,21 +93,23 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	$scope.addPostPhoto = function(from) {
 		
-		Camera.setMode(from);
-		Camera.getPicture().then(function(imageURI) {
+		var opt = {
+			
+		  quality: 50,
+		  correctOrientation: true,
+		  targetWidth: 120,
+		  targetHeight: 120,
+		  sourceType  : (from == 'camera') ? 1 : 0
+		
+		}
+				
+		Camera.getPicture(opt).then(function(imageURI) {
 		  console.log(Camera.getMode());
 		  
 		  $scope.lastPhoto = imageURI;
 		}, function(err) {
 		  console.err(err);
-		}, {
-		  quality: 50,
-		  correctOrientation: true,
-		  targetWidth: 120,
-		  targetHeight: 120,
-		  saveToPhotoAlbum: false,
-		  sourceType  : function () { return (Camera.getMode() == 'camera') ? 1 : 0 }
-		});
+		}, opt);
       
   	}
 	$scope.savePost = function() {
