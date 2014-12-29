@@ -3,7 +3,7 @@ angular.module('Sahiplendir.services', [])
 <!-- CAMERA -->
 
 .factory('Camera', ['$q', function($q) {
- 	var camera_mode;
+ 	
   return {
     getPicture: function(options) {
       var q = $q.defer();
@@ -16,15 +16,7 @@ angular.module('Sahiplendir.services', [])
       }, options);
       
       return q.promise;
-    },
-	setMode : function (mode) {
-		camera_mode = mode;
-	}, 
-	getMode : function () {
-		return camera_mode;
-	}
-	
-	
+    }	
   }
 }])
 

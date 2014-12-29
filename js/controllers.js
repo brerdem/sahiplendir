@@ -99,12 +99,13 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  correctOrientation: true,
 		  targetWidth: 120,
 		  targetHeight: 120,
+		  saveToPhotoAlbum: false,
 		  sourceType  : (from == 'camera') ? 1 : 0
 		
 		}
 				
 		Camera.getPicture(opt).then(function(imageURI) {
-		  console.log(Camera.getMode());
+		  console.log(imageURI);
 		  
 		  $scope.lastPhoto = imageURI;
 		}, function(err) {
