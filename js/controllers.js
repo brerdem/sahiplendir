@@ -94,7 +94,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.addPostPhoto = function(from) {
 		console.log('Getting camera');
 		Camera.getPicture().then(function(imageURI) {
-		  console.log(imageURI);
+		  console.log(from);
+		  
 		  $scope.lastPhoto = imageURI;
 		}, function(err) {
 		  console.err(err);
