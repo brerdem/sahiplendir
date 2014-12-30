@@ -151,7 +151,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						
 						userPost.save(null, {       
 							success: function(item) {
-							console.log("saved");
+								console.log("saved");
+								var alertPopup = $ionicPopup.alert({
+								
+								 template: 'Kaydedildi..'
+							  	});
+							   
+							
+							
 							},
 							error: function(error) {
 							//Failure Callback
