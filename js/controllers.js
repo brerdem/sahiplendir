@@ -1,9 +1,10 @@
 angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
-.controller('MainPageCtrl', function($scope, $state, $timeout) {
+.controller('MainPageCtrl', function($scope, $state, $timeout, $ionicSlideBoxDelegate) {
 	
 	$scope.isHiddenText = true;
+	$scope.currentSlide = 0;
 	
 	$scope.posts = [
 		{image:'http://test.clckwrk.im/test/1.jpg', text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ips'},
@@ -18,7 +19,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
  	 };
 	 
 	 $scope.changeSlide = function(index) {
-		 
+		$scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
 		$scope.isHiddenText = false;
 		
 		$timeout(function() {$scope.isHiddenText = true},200);

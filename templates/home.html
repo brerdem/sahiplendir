@@ -7,7 +7,7 @@
 	  <ion-slide-box show-pager="true" on-slide-changed='changeSlide(index)'>
 		<ion-slide ng-repeat="post in posts">
         
-		 <img src="{{post.image}}" class="full-image">
+		 <img src="{{post.image}}" ng-if="$index >= (currentSlide-1) && $index <= (currentSlide+1)" class="full-image">
      
 		</ion-slide>
 	  </ion-slide-box>
