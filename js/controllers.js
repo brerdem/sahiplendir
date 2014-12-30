@@ -101,10 +101,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		
 		var opt = {
 			
-		  quality: 30,
+		  quality: 50,
 		  correctOrientation: true,
-		  targetWidth: 100,
-		  targetHeight: 100,
+		  targetWidth: 300,
+		  targetHeight: 300,
 		  saveToPhotoAlbum: false,
 		  //destinationType: 0,// base64 string
 		  sourceType  : (from == 'camera') ? 1 : 0 // camera or library
@@ -146,6 +146,19 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
  			 			parseFile.save().then(function() {
     				// The file has been saved to Parse.
 						console.log('başarılııııııııııııııııı:'+parseFile.url());
+						var Post = Parse.Object.extend("Post");
+						var userPost = new Post();
+						userPost.set("user_id", Parse.User.current().get("fbId"));
+						userPost.set("post_image1", parseFile.url());
+						userPost.save(null, {       
+							success: function(item) {
+							console.log("saved");
+							},
+							error: function(error) {
+							//Failure Callback
+							console.log("error");
+							}
+						});
 						
 	
   					}, function(error) {
