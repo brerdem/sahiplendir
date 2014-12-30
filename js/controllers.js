@@ -113,9 +113,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 				
 		Camera.getPicture(opt).then(function(imageData) {
 		  
-		  $scope.lastPhoto = 'data:image/jpeg;base64,'+imageData;
 		  
-		  $timeout(function() {$scope.imageData = imageData},200);
+		  
+		  $timeout(function() {$scope.lastPhoto = 'data:image/jpeg;base64,'+imageData;},300);
 		  
 		  $ionicSlideBoxDelegate.next();
 		  
@@ -129,10 +129,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		
 		var file_data = url.substring(url.lastIndexOf('/')+1);
 		var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
-		var parseFile = new Parse.File(name, {base64: $scope.imageData });
+		var parseFile = new Parse.File(name, {base64: $scope.lastPhoto });
  			 parseFile.save().then(function() {
     // The file has been saved to Parse.
-			console.log('IMAGE_DATA:'+$scope.imageData);
+			console.log('IMAGE_DATA:'+$scope.lastPhoto);
 	
   		}, function(error) {
     // The file either could not be read, or could not be saved to Parse.
