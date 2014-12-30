@@ -90,11 +90,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera) {
 	
 	// PHOTO ADD
-	
-	 $ionicSlideBoxDelegate.enableSlide(false);
+	$scope.stopSlide = function(index) {
+	 	$ionicSlideBoxDelegate.enableSlide(false);
+	}
 	
 	
 	$scope.addPostPhoto = function(from) {
+		
+		$scope.imageData = '';
 		
 		var opt = {
 			
@@ -103,14 +106,16 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  targetWidth: 200,
 		  targetHeight: 200,
 		  saveToPhotoAlbum: false,
-		  sourceType  : (from == 'camera') ? 1 : 0
+		  destinationType: 0,// base64 string
+		  sourceType  : (from == 'camera') ? 1 : 0 // camera or library
 		
 		}
 				
-		Camera.getPicture(opt).then(function(imageURI) {
-		  console.log(imageURI);
+		Camera.getPicture(opt).then(function(imageData) {
+		  console.log(imageData);
+		  $scope.imageData = imageData;
 		  
-		  $scope.lastPhoto = imageURI;
+		  $scope.lastPhoto = 'data:image/jpeg;base64,'+imageData;
 		  $ionicSlideBoxDelegate.next();
 		  
 		}, function(err) {
@@ -119,6 +124,16 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
       
   	}
 	$scope.savePost = function() {
+		
+		
+		var file_data = url.substring(url.lastIndexOf('/')+1);
+		var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
+		var parseFile = new Parse.File(name, {base64: $scope.imageData });
+ 			 parseFile.save().then(function() {
+    // The file has been saved to Parse.
+  		}, function(error) {
+    // The file either could not be read, or could not be saved to Parse.
+  		});
 		
 	}
 	
@@ -221,5 +236,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("ProfileCtrl", function($scope, $state) {
     
 })
+
+//
+
 
 
