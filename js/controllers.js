@@ -126,10 +126,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   	}
 	$scope.savePost = function() {
 		
-		
+		console.log ('photo url:'+$scope.lastPhoto)
 		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail);
 		
-		function fail(e) {
+		function gotFail(e) {
 			console.log("FileSystem Error");
 			console.dir(e);
 		};
@@ -140,7 +140,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 				var reader = new FileReader();
 		
 				reader.onloadend = function(e) {
-					console.log(this.result);
+					console.log(e.target.result);
 					
 				}
 		
