@@ -87,7 +87,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout) {
+.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup) {
 	
 	// PHOTO ADD
 	$scope.stopSlide = function(index) {
