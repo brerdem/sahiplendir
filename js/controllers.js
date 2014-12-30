@@ -24,6 +24,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		$timeout(function() {$scope.isHiddenText = true},200);
 		
 		$scope.desc = $scope.posts[index].text;
+		$scope.bannerContentAnimation = 'mheight';
+		
 	 }
 	 
 	 $scope.mainLinks = [
