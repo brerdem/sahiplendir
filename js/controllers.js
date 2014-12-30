@@ -105,7 +105,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  correctOrientation: true,
 		  targetWidth: 100,
 		  targetHeight: 100,
+		  encodingType: 0,
 		  saveToPhotoAlbum: false,
+		  
 		  destinationType: 0,// base64 string
 		  sourceType  : (from == 'camera') ? 1 : 0 // camera or library
 		
