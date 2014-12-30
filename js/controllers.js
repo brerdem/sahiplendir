@@ -101,10 +101,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		
 		var opt = {
 			
-		  quality: 65,
+		  quality: 30,
 		  correctOrientation: true,
-		  targetWidth: 200,
-		  targetHeight: 200,
+		  targetWidth: 100,
+		  targetHeight: 100,
 		  saveToPhotoAlbum: false,
 		  destinationType: 0,// base64 string
 		  sourceType  : (from == 'camera') ? 1 : 0 // camera or library
