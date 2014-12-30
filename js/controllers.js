@@ -132,7 +132,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		var parseFile = new Parse.File(name, {base64: $scope.imageData });
  			 parseFile.save().then(function() {
     // The file has been saved to Parse.
-		console.log(
+			console.log('IMAGE_DATA:'+$scope.imageData);
 	
   		}, function(error) {
     // The file either could not be read, or could not be saved to Parse.
