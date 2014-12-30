@@ -153,9 +153,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							success: function(item) {
 								console.log("saved");
 								var alertPopup = $ionicPopup.alert({
-								
+								 
 								 template: 'Kaydedildi..'
-							  	}).show();
+							  	}).then(function(res) {
+              						console.log('Test Alert Box');
+            					});
 								
 							   
 							
