@@ -97,14 +97,12 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	$scope.addPostPhoto = function(from) {
 		
-		$scope.imageData = '';
-		
 		var opt = {
 			
 		  quality: 50,
 		  correctOrientation: true,
-		  targetWidth: 300,
-		  targetHeight: 300,
+		  targetWidth: 400,
+		  targetHeight: 400,
 		  saveToPhotoAlbum: false,
 		  //destinationType: 0,// base64 string
 		  sourceType  : (from == 'camera') ? 1 : 0 // camera or library
@@ -150,6 +148,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						var userPost = new Post();
 						userPost.set("user_id", Parse.User.current().get("fbId"));
 						userPost.set("post_image1", parseFile.url());
+						
 						userPost.save(null, {       
 							success: function(item) {
 							console.log("saved");
@@ -173,26 +172,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			});
 
 		}
-		
-		
-		/*var file_data = url.substring(url.lastIndexOf('/')+1);
-		var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
-		var parseFile = new Parse.File(name, {base64: $scope.lastPhoto });
- 			 parseFile.save().then(function() {
-    // The file has been saved to Parse.
-			console.log('IMAGE_DATA:'+$scope.lastPhoto);
 	
-  		}, function(error) {
-    // The file either could not be read, or could not be saved to Parse.
-			console.log(error);
-  		});*/
-		
 	}
-	
-	
-	
-	
-    
+
 })
 
 
