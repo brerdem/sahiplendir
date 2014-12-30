@@ -145,7 +145,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 					var parseFile = new Parse.File(name, {base64: data_str });
  			 			parseFile.save().then(function() {
     				// The file has been saved to Parse.
-						console.log('başarılııııııııııııııııı');
+						console.log('başarılııııııııııııııııı:'+parseFile.url());
+						
 	
   					}, function(error) {
     				
