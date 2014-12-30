@@ -105,21 +105,19 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  correctOrientation: true,
 		  targetWidth: 100,
 		  targetHeight: 100,
-		  encodingType: 0,
 		  saveToPhotoAlbum: false,
-		  
-		  destinationType: 0,// base64 string
+		  //destinationType: 0,// base64 string
 		  sourceType  : (from == 'camera') ? 1 : 0 // camera or library
 		
 		}
 				
-		Camera.getPicture(opt).then(function(imageData) {
+		Camera.getPicture(opt).then(function(imageURL) {
 		  
+		  $scope.lastPhoto = imageURL;
 		  
+		  $timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
 		  
-		  $timeout(function() {$scope.lastPhoto = 'data:image/jpeg;base64,'+imageData; console.log($scope.lastPhoto)},300);
-		  
-		  $ionicSlideBoxDelegate.next();
+		 
 		  
 		}, function(err) {
 		  console.err(err);
@@ -129,7 +127,30 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.savePost = function() {
 		
 		
-		var file_data = url.substring(url.lastIndexOf('/')+1);
+		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail);
+		
+		function fail(e) {
+			console.log("FileSystem Error");
+			console.dir(e);
+		};
+		
+		function gotFile(fileEntry) {
+
+			fileEntry.file(function(file) {
+				var reader = new FileReader();
+		
+				reader.onloadend = function(e) {
+					console.log(this.result);
+					
+				}
+		
+				reader.readAsDataURL(file);
+			});
+
+		}
+		
+		
+		/*var file_data = url.substring(url.lastIndexOf('/')+1);
 		var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
 		var parseFile = new Parse.File(name, {base64: $scope.lastPhoto });
  			 parseFile.save().then(function() {
@@ -139,7 +160,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   		}, function(error) {
     // The file either could not be read, or could not be saved to Parse.
 			console.log(error);
-  		});
+  		});*/
 		
 	}
 	
