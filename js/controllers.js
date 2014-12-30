@@ -155,7 +155,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 								var alertPopup = $ionicPopup.alert({
 								
 								 template: 'Kaydedildi..'
-							  	});
+							  	}).show();
+								
 							   
 							
 							
