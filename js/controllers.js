@@ -140,7 +140,18 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 				var reader = new FileReader();
 		
 				reader.onloadend = function(e) {
-					console.log(e.target.result);
+					var data_str = e.target.result;
+					var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
+					var parseFile = new Parse.File(name, {base64: $scope.lastPhoto });
+ 			 			parseFile.save().then(function() {
+    				// The file has been saved to Parse.
+						console.log('başarılııııııııııııııııı');
+	
+  					}, function(error) {
+    				
+						console.log(error);
+  					});
+					
 					
 				}
 		
