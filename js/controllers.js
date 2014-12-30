@@ -112,10 +112,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		}
 				
 		Camera.getPicture(opt).then(function(imageData) {
-		  console.log(imageData);
 		  $scope.imageData = imageData;
 		  
 		  $scope.lastPhoto = 'data:image/jpeg;base64,'+imageData;
+		  console.log($scope.lastPhoto);
 		  $ionicSlideBoxDelegate.next();
 		  
 		}, function(err) {
