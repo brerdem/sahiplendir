@@ -115,7 +115,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  
 		  
 		  
-		  $timeout(function() {$scope.lastPhoto = 'data:image/jpeg;base64,'+imageData;},300);
+		  $timeout(function() {$scope.lastPhoto = 'data:image/jpeg;base64,'+imageData; console.log($scope.lastPhoto)},300);
 		  
 		  $ionicSlideBoxDelegate.next();
 		  
@@ -136,6 +136,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
   		}, function(error) {
     // The file either could not be read, or could not be saved to Parse.
+			console.log(error);
   		});
 		
 	}
