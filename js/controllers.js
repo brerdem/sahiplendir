@@ -87,7 +87,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera) {
+.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout) {
 	
 	// PHOTO ADD
 	$scope.stopSlide = function(index) {
@@ -112,10 +112,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		}
 				
 		Camera.getPicture(opt).then(function(imageData) {
-		  $scope.imageData = imageData;
 		  
 		  $scope.lastPhoto = 'data:image/jpeg;base64,'+imageData;
-		  console.log($scope.lastPhoto);
+		  
+		  $timeout(function() {$scope.imageData = imageData},200);
+		  
 		  $ionicSlideBoxDelegate.next();
 		  
 		}, function(err) {
@@ -131,6 +132,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		var parseFile = new Parse.File(name, {base64: $scope.imageData });
  			 parseFile.save().then(function() {
     // The file has been saved to Parse.
+		console.log(
+	
   		}, function(error) {
     // The file either could not be read, or could not be saved to Parse.
   		});
