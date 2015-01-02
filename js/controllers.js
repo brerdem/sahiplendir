@@ -158,6 +158,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 											
 						post.set("postTitle", "hello moto");
 						post.set("postMessage", "this is message");
+						post.set("userPointer", Parse.User.current());
 						
 						post_image.set("imagePath", parseFile.url());
 						post_image.set("postPointer", post);
