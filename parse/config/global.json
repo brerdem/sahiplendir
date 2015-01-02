@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "Sahiplendir": {
+            "applicationId": "8EsrtjkfqGJE3zoFJ3JxDY54WOCiDo7xuRN8UMoE", 
+            "masterKey": "dQ4KE3ZVUHV38En7SShbsCK9g2OQZbW9qbrM1RfS"
+        }, 
+        "_default": {
+            "link": "Sahiplendir"
+        }
+    }
+}

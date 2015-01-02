@@ -143,7 +143,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			reader.onloadend = function(e) {
 				var data_str = e.target.result;
 				
-				var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
+				var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg";
+				
+				
+				
+				
 				var parseFile = new Parse.File(name, {base64: data_str });
 					parseFile.save().then(function() {
 				// The file has been saved to Parse.
@@ -260,25 +264,25 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                     userObject.set('email', response.email);
 					userObject.set('fbId', response.id);
                     userObject.save();
-					//$scope.name = response.name;
+					facebookConnectPlugin.api('/me/picture', null,
+						function(response) {
+							console.log("/me pic response:"+response.url);
+							
+							userObject.set('profilePicture', response.url);
+							userObject.save();
+						}, 
+						function(error) {
+							console.log("me pic error:"+error);
+						}
+            		);
 					
-					 $state.go('profile');
+					//$state.go('profile');
                 },
                 function(error) {
                     console.log("/me error:"+error);
                 }
             );
-            /*facebookConnectPlugin.api('/me/picture', null,
-                function(response) {
-					console.log("/me pic response:"+response.url);
-					
-                    userObject.set('profilePicture', response.url);
-                    userObject.save();
-                }, 
-                function(error) {
-                    console.log("me pic error:"+error);
-                }
-            );*/
+            
            
         }, function(error) {
             console.log("user object:"+error);
