@@ -266,9 +266,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                     userObject.save();
 					facebookConnectPlugin.api('/me/picture', null,
 						function(response) {
-							console.log("/me pic response:"+response.url);
+							console.log("/me pic response:"+response.data.url);
 							
-							userObject.set('profilePicture', response.url);
+							userObject.set('profilePicture', response.data.url);
 							userObject.save();
 						}, 
 						function(error) {
