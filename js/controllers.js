@@ -294,7 +294,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("ProfileCtrl", function($scope, $state) {
-    
+    $scope.logout = function() {
+		Parse.User.logOut();
+		$state.go('tabs.signin');	
+		
+	}
 })
 
 //
