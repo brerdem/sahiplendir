@@ -36,6 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  
 	   .state('tabs.signin', {
         url: '/signin',
+		cache: false,
 		views: {
 			'signin-tab': {
 			  templateUrl: "templates/signin.html",
