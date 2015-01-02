@@ -91,11 +91,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup) {
-	
-	// VARS
-	
-	var Image = require("parse-image");
-	
+		
 	// PHOTO ADD
 	
 	$scope.stopSlide = function(index) {
