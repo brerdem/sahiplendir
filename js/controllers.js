@@ -92,7 +92,12 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 .controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup) {
 	
+	// VARS
+	
+	var Image = require("parse-image");
+	
 	// PHOTO ADD
+	
 	$scope.stopSlide = function(index) {
 	 	$ionicSlideBoxDelegate.enableSlide(false);
 	}
@@ -136,31 +141,40 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		};
 		
 		function gotFile(fileEntry) {
-
 			fileEntry.file(function(file) {
-				var reader = new FileReader();
+			var reader = new FileReader();
 		
-				reader.onloadend = function(e) {
-					var data_str = e.target.result;
-					var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
-					var parseFile = new Parse.File(name, {base64: data_str });
- 			 			parseFile.save().then(function() {
-    				// The file has been saved to Parse.
-						console.log('başarılııııııııııııııııı:'+parseFile.url());
-						var Post = Parse.Object.extend("Post");
-						var userPost = new Post();
-						userPost.set("user_id", Parse.User.current().get("fbId"));
-						userPost.set("post_image1", parseFile.url());
+			reader.onloadend = function(e) {
+				var data_str = e.target.result;
+				
+				var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg"
+				var parseFile = new Parse.File(name, {base64: data_str });
+					parseFile.save().then(function() {
+				// The file has been saved to Parse.
+					console.log('success:'+parseFile.url());
+					
+						var PostImage = Parse.Object.extend("Image");
+						var PostObj = Parse.Object.extend("Post");
 						
-						userPost.save(null, {       
+						var post_image = new PostImage();
+						var post = new PostObj();
+						
+											
+						post.set("postTitle", "hello moto");
+						post.set("postMessage", "this is message");
+						
+						post_image.set("imagePath", parseFile.url());
+						post_image.set("postPointer", post);
+							
+						post_image.save(null, {       
 							success: function(item) {
 								console.log("saved");
+				
 								var alertPopup = $ionicPopup.alert({
-								 
-								 template: 'Kaydedildi..'
-							  	}).then(function(res) {
-              						console.log('Test Alert Box');
-            					});
+									template: 'Kaydedildi..'
+								}).then(function(res) {
+									console.log('Test Alert Box');
+								});
 								
 							   
 							
@@ -171,26 +185,24 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							console.log("error");
 							}
 						});
-						
-	
-  					}, function(error) {
-    				
+					
+
+					}, function(error) {
+					
 						console.log(error);
-  					});
+					});
 					
-					
+				
 				}
-		
+	
 				reader.readAsDataURL(file);
 			});
 
 		}
 	
-	}
+  	}
 
 })
-
-
 
 .controller("SignUp", function($scope) {
     
