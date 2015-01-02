@@ -264,19 +264,20 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                     userObject.set('email', response.email);
 					userObject.set('fbId', response.id);
                     userObject.save();
-					facebookConnectPlugin.api('/me/picture?redirect=false', null,
+					facebookConnectPlugin.api('/me/picture?type=normal', null,
 						function(res) {
 							console.log("/me pic response:"+res.data.url);
 							
 							userObject.set('profilePicture', res.data.url);
 							userObject.save();
+							$state.go('profile');
 						}, 
 						function(error) {
 							console.log("me pic error:"+error);
 						}
             		);
 					
-					//$state.go('profile');
+					//
                 },
                 function(err) {
                     console.log("/me error:"+err);
