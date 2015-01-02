@@ -296,6 +296,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("ProfileCtrl", function($scope, $state) {
     $scope.logout = function() {
 		Parse.User.logOut();
+		facebookConnectPlugin.logout(
+		function (success) {
+			console.log('successfully logged out');
+		}, 
+		function(error) {
+			console.log('not logged out');
+		});
+		
+		
 		$state.go('tabs.signin');	
 		
 	}
