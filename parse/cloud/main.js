@@ -52,8 +52,8 @@ Parse.Cloud.define("savePost", function(request, response) {
 					var post = new PostObj();
 					
 										
-					post.set("postTitle", "hello moto");
-					post.set("postMessage", "this is message");
+					post.set("postTitle", request.postTitle);
+					post.set("postMessage", request.postMessage);
 					post.set("userPointer", Parse.User.current());
 					
 					post_image.set("imagePath", parseFile.url());
@@ -62,21 +62,15 @@ Parse.Cloud.define("savePost", function(request, response) {
 						
 					post_image.save(null, {       
 						success: function(item) {
-							console.log("saved");
-			
-							var alertPopup = $ionicPopup.alert({
-								template: 'Kaydedildi..'
-							}).then(function(res) {
-								console.log('Test Alert Box');
-							});
-							
-						   
-						
+							response.success(true);
+							console.log("saved from main.js");		
 						
 						},
 						error: function(error) {
 						//Failure Callback
+						response.error(error);
 						console.log("error");
+						
 						}
 					});
 				})

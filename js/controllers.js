@@ -99,7 +99,6 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 	$ionicSlideBoxDelegate.enableSlide(false);
 	}
 	
-	
 	$scope.addPostPhoto = function(from) {
 		
 		var opt = {
@@ -117,16 +116,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		Camera.getPicture(opt).then(function(imageURL) {
 		  
 		  $scope.lastPhoto = imageURL;
-		  
-		  $timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
-		  
-		 
-		  
+     	  $timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
+
 		}, function(err) {
 		  console.err(err);
 		}, opt);
       
   	}
+	
 	$scope.savePost = function() {
 		
 		console.log ('photo url:'+$scope.lastPhoto)
@@ -138,39 +135,46 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		};
 		
 		function gotFile(fileEntry) {
+			
 			fileEntry.file(function(file) {
-			var reader = new FileReader();
-		
-			reader.onloadend = function(e) {
 				
-				
-				var cloudObj = {
-					base64: e.target.result,
-					imageName : Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg",
-					postTitle: 'test title',
-					postMessage: 'test message'
-				}
+				var reader = new FileReader();
+			
+				reader.onloadend = function(e) {
 					
-				
-				
-				Parse.Cloud.run('savePost', cloudObj, {
-				  success: function(saved) {
-					if (saved) {
+					
+						var cloudObj = {
+							base64: e.target.result,
+							imageName : Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg",
+							postTitle: 'test title hello',
+							postMessage: 'test message hello'
+						}
+							
 						
-					}
-				  },
-				  error: function(error) {
-					  console.log(error);
-				  }
-				});
-				
-				
-				
+						
+						Parse.Cloud.run('savePost', cloudObj, {
+						  success: function(saved) {
+							if (saved) {
+								
+								console.log("saved");
+			
+									var alertPopup = $ionicPopup.alert({
+										template: 'Kaydedildi..'
+									}).then(function(res) {
+										console.log('Test Alert Box');
+									});
+										
+							}
+						  },
+						  error: function(error) {
+							  console.log(error);
+						  }
+						});
 				
 				}
 	
 				reader.readAsDataURL(file);
-			});
+		   });
 
 		}
 	
