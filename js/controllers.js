@@ -69,7 +69,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
    
 	  name : Parse.User.current() ? Parse.User.current().get('name') : 'Sahiplendir',
 	  id : Parse.User.current() ? Parse.User.current().get('fbId') : 'undefined',
-	  email : Parse.User.current() ? Parse.User.current().get('email') : 'no mail'
+	  email : Parse.User.current() ? Parse.User.current().get('email') : 'no mail',
+	  picture : Parse.User.current() ? Parse.User.current().get('profilePicture') : 'no',
   }
 })
 
@@ -141,58 +142,30 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			var reader = new FileReader();
 		
 			reader.onloadend = function(e) {
-				var data_str = e.target.result;
-				
-				var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg";
 				
 				
-				
-				
-				var parseFile = new Parse.File(name, {base64: data_str });
-					parseFile.save().then(function() {
-				// The file has been saved to Parse.
-					console.log('success:'+parseFile.url());
+				var cloudObj = {
+					base64: e.target.result,
+					imageName : Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg",
+					postTitle: 'test title',
+					postMessage: 'test message'
+				}
 					
-						var PostImage = Parse.Object.extend("Image");
-						var PostObj = Parse.Object.extend("Post");
+				
+				
+				Parse.Cloud.run('savePost', cloudObj, {
+				  success: function(saved) {
+					if (saved) {
 						
-						var post_image = new PostImage();
-						var post = new PostObj();
-						
-											
-						post.set("postTitle", "hello moto");
-						post.set("postMessage", "this is message");
-						post.set("userPointer", Parse.User.current());
-						
-						post_image.set("imagePath", parseFile.url());
-						post_image.set("postPointer", post);
-							
-						post_image.save(null, {       
-							success: function(item) {
-								console.log("saved");
+					}
+				  },
+				  error: function(error) {
+					  console.log(error);
+				  }
+				});
 				
-								var alertPopup = $ionicPopup.alert({
-									template: 'Kaydedildi..'
-								}).then(function(res) {
-									console.log('Test Alert Box');
-								});
-								
-							   
-							
-							
-							},
-							error: function(error) {
-							//Failure Callback
-							console.log("error");
-							}
-						});
-					
-
-					}, function(error) {
-					
-						console.log(error);
-					});
-					
+				
+				
 				
 				}
 	
