@@ -4,7 +4,7 @@
 
 var Image = require('parse-image');
 
-Parse.Cloud.beforeSave("savePost", function(request, response) {
+Parse.Cloud.define("savePost", function(request, response) {
 	
 			var parseFile = new Parse.File(request.name, {base64: request.base64 });
 			parseFile.save().then(function() {
