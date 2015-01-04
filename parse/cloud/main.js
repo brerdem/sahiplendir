@@ -59,7 +59,7 @@ Parse.Cloud.define("savePost", function(request, response) {
 					post.set("userPointer", Parse.User.current());
 					
 					post_image.set("imagePath", parseFile.url());
-					post_image.set("imageThumbnailPath", cropped.url());
+					post_image.set("imageThumbPath", cropped.url());
 					post_image.set("postPointer", post);
 						
 					post_image.save(null, {       
