@@ -70,7 +70,7 @@ Parse.Cloud.define("savePost", function(request, response) {
 						},
 						error: function(error) {
 						//Failure Callback
-						response.error(error);
+						response.error("data not saved");
 						console.log("error");
 						
 						}
@@ -79,7 +79,7 @@ Parse.Cloud.define("savePost", function(request, response) {
 		
 
 		}, function(error) {
-		
+			response.error(error.message);
 			console.log(error);
 		});
 		

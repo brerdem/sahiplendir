@@ -149,7 +149,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							postTitle: 'test title hello',
 							postMessage: 'test message hello'
 						}
-							
+						
+						console.log(cloudObj.base64);
 						
 						
 						Parse.Cloud.run('savePost', cloudObj, {
