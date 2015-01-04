@@ -153,9 +153,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						
 						
 						Parse.Cloud.run('savePost', cloudObj, {
-						  success: function(saved) {
-							if (saved) {
-								
+						  success: function(msg) {
+							
 								console.log("saved");
 			
 									var alertPopup = $ionicPopup.alert({
@@ -163,8 +162,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 									}).then(function(res) {
 										console.log('Test Alert Box');
 									});
-										
-							}
+							
 						  },
 						  error: function(error) {
 							  console.log(error);
