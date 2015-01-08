@@ -4,7 +4,7 @@
 
 var Image = require('parse-image');
 
-Parse.Cloud.beforeSave("savePost", function(request, response) {
+Parse.Cloud.define("savePost", function(request, response) {
 		console.log(request.params.url);
 		Parse.Cloud.httpRequest({
 			
@@ -54,7 +54,7 @@ Parse.Cloud.beforeSave("savePost", function(request, response) {
 			post.set("postMessage", request.params.postMessage);
 			post.set("userPointer", Parse.User.current());
 			
-			post_image.set("imagePath", parseFile.url());
+			post_image.set("imagePath", request.params.url);
 			post_image.set("imageThumbPath", cropped.url());
 			post_image.set("postPointer", post);
 				
