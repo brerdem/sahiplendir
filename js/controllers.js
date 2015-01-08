@@ -168,7 +168,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							
 						  },
 						  error: function(error) {
-							  console.log(error);
+							  console.log("from controller: "+error.message);
 						  }
 						});
 						
