@@ -19,4 +19,15 @@ angular.module('Sahiplendir.directives', [])
   }
 })
 
+.directive('postPhoto', function() {
+	return {
+		restrict : "E",
+    	template : '<div>hello moto</div>',
+		link : function(scope, element, attrs){
+			           
+        }
+	}
+	
+})
+
 
