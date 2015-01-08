@@ -7,7 +7,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.currentSlide = 0;
 	
 	$scope.posts = [
-		{image:'http://test.clckwrk.im/test/1.jpg', text:'Tekir kedi, 4 aylık, sevecen'},
+		{image:'http://test.clckwrk.im/test/1.jpg', text:'Tekir kedi, 4 aylık, sevecen, ajgsdauygdhafshdfashdfashfdahsfdhgasfdhgafhdssfahdfashdfashdfahsgdfhasdfhasgfdhasfdhasgfdhagsfdhsafdh'},
 		{image:'http://test.clckwrk.im/test/2.jpg', text:'Sarman, tahmini 4 aylık, aşırı oyuncu'},
 		{image:'http://test.clckwrk.im/test/3.jpg', text:'Labrador, 2 yaşında, İskenderun\'da barınakta'}
 	];
@@ -150,7 +150,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							postMessage: 'test message hello'
 						}
 						
-						console.log(cloudObj.base64);
+						console.log("cloudObj base64: "+cloudObj.base64);
 						
 						
 						Parse.Cloud.run('savePost', cloudObj, {
