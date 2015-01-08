@@ -146,9 +146,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 					
 					var parseFile = new Parse.File(name, {base64: e.target.result });
 					parseFile.save().then(function() {
-						
-						
-					
+				
 						var cloudObj = {
 							url: parseFile.url(),
 							postTitle: 'test title hello',
@@ -158,7 +156,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						Parse.Cloud.run('savePost', cloudObj, {
 						  success: function(msg) {
 							
-								console.log("saved");
+								console.log(msg);
 			
 									var alertPopup = $ionicPopup.alert({
 										template: 'Kaydedildi..'
@@ -172,6 +170,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						  }
 						});
 						
+					}, function (error) {
+						console.log(error.message);
+							
 					})
 				
 				}

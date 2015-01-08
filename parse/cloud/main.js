@@ -5,8 +5,9 @@
 var Image = require('parse-image');
 
 Parse.Cloud.beforeSave("savePost", function(request, response) {
-	
+		console.log(request.params.url);
 		Parse.Cloud.httpRequest({
+			
 			url: request.params.url
 		}).then(function(response) {	
 			var image = new Image();
