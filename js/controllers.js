@@ -142,17 +142,19 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			
 				reader.onloadend = function(e) {
 					
+					var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg";
+					
+					var parseFile = new Parse.File(name, {base64: e.target.result });
+					parseFile.save().then(function() {
+						
+						
 					
 						var cloudObj = {
-							base64: e.target.result,
-							imageName : Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg",
+							url: parseFile.url(),
 							postTitle: 'test title hello',
 							postMessage: 'test message hello'
 						}
-						
-						console.log("cloudObj base64: "+cloudObj.base64);
-						
-						
+																
 						Parse.Cloud.run('savePost', cloudObj, {
 						  success: function(msg) {
 							
@@ -169,6 +171,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							  console.log(error);
 						  }
 						});
+						
+					})
 				
 				}
 	
