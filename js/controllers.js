@@ -121,8 +121,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 				
 		Camera.getPicture(opt).then(function(imageURL) {
 		  
-		  $scope.lastPhoto = imageURL;
-     	  $timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
+		  //$scope.lastPhoto = imageURL;
+     	  //$timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
 
 		}, function(err) {
 		  console.err(err);
