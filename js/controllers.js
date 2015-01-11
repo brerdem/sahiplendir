@@ -121,7 +121,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 				
 		Camera.getPicture(opt).then(function(imageURL) {
 		  
-		  //$scope.lastPhoto = imageURL;
+		  $scope.lastPhoto = imageURL;
+		  savePost();
      	  //$timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
 
 		}, function(err) {
@@ -139,7 +140,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	// SAVE POST
 	
-	$scope.savePost = function() {
+	 function savePost() {
 		
 		console.log ('photo url:'+$scope.lastPhoto)
 		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail);
