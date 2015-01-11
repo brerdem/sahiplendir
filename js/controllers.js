@@ -91,23 +91,25 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup, LoadingService) {
+.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup, LoadingService, $compile) {
 		
 	// PHOTO GALLERY
 	
 	$scope.postPhotos = [];
 	
 	
+	// disable swiping after the slidebox rendered
+	$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false)}, 500);
 	
 	// PHOTO ADD
 	
 	/*$scope.stopSlide = function(index) {
-	 	$ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false);
+	 	$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false)}, 200);
 	}*/
 	
 	$scope.addPostPhoto = function(from) {
 		
-		//LoadingService.show();
+		LoadingService.show();
 			
 		var opt = {
 			
@@ -126,7 +128,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  $scope.lastPhoto = imageURL;
 		  LoadingService.show();
 		  savePostImages();
-     	  //$timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
+     	  //$timeout(function() {   console.log($scope.imageURL)},400);
 
 		}, function(err) {
 		  console.err(err);
@@ -136,16 +138,18 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	
 	
+	// NEXT STEP
+	$scope.goToNextStep = function() {
+		$ionicSlideBoxDelegate.$getByHandle('post-main').next();
+	}
 	
 	
 	
-	
-	
-	// SAVE POST
+	// SAVE POST IMAGE
 	
 	 function savePostImages() {
 		
-		console.log ('photo url:'+$scope.lastPhoto)
+		
 		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail);
 		
 		function gotFail(e) {
@@ -183,7 +187,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 								$scope.postPhotos.push({large: img_obj.large, small: img_obj.small});
 								
 								
-								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);
+								$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-photos').update(); LoadingService.hide()},  500);
 								//$ionicSlideBoxDelegate.update();
 								
 								
@@ -214,6 +218,70 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		}
 	
   	}
+	
+	// MAPS FUNCTIONS
+	
+	function initialize() {
+		console.log(document.getElementById("map"));
+        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+        
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"),
+            mapOptions);
+        
+        //Marker + infowindow + angularjs compiled ng-click
+        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
+        var compiled = $compile(contentString)($scope);
+
+        var infowindow = new google.maps.InfoWindow({
+          content: compiled[0]
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Uluru (Ayers Rock)'
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+
+        $scope.map = map;
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+      
+      $scope.centerOnMe = function() {
+        if(!$scope.map) {
+          return;
+        }
+
+        $scope.loading = $ionicLoading.show({
+          content: 'Getting current location...',
+          showBackdrop: false
+        });
+
+        navigator.geolocation.getCurrentPosition(function(pos) {
+          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+          $scope.loading.hide();
+        }, function(error) {
+          alert('Unable to get location: ' + error.message);
+        });
+      };
+      
+      $scope.clickTest = function() {
+        alert('Example of infowindow with ng-click')
+      };
+      
+   
+	
+	
+	
+	
 
 })
 

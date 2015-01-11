@@ -1,18 +1,18 @@
-<ion-view title="İlan Ekle" class="padding has-header">
+<ion-view title="İlan Ekle" class="has-header">
 	
-	<ion-content class="padding">
-	<!--<ion-slide-box active-slide="stopSlide(index)" show-pager="false" delegate-handle="post-main">
-		<ion-slide>-->
+	<ion-content class="padding-left padding-right">
+	<ion-slide-box show-pager="false" delegate-handle="post-main">
+		<ion-slide>
         
-            <div class="item-text-wrap card">
-               <h4 class="calm text-center"><b>Adım 1/2</b></h4>
-               Önce fotoğraf çekin ya da ekleyin. Fotoğrafsız ilan Birden fazla fotoğraf çekebilirsiniz.
+            <div class="item-text-wrap card padding">
+               <h4 class="calm text-center"><b>Adım 1/3</b></h4>
+               Önce fotoğraf çekin ya da ekleyin. Maksimum 3 fotoğraf ekleyebilirsiniz. Dilerseniz fotoğrafsız ilan da çıkabilirsiniz. 
                
             </div>
 			
 			
             
-                 <ion-slide-box show-pager="true">
+                 <ion-slide-box show-pager="true" delegate-handle="post-photos">
                     <ion-slide ng-repeat="photo in postPhotos">
                     
                      <img ng-src="{{photo.large}}" class="full-image">
@@ -21,28 +21,40 @@
                 </ion-slide-box>
       
 		  	
-            <div align="center">
+            <div align="center padding-top">
                  <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
                  <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
             </div>
-            	
-            <button class="button button-balanced button-block icon icon-right ion-arrow-right-b">Devam Et</button>
-          
-      
-		<!--</ion-slide>-->
-        <!--
+            
+       
+		</ion-slide>
+        
+         <ion-slide>
+        	 <div class="item-text-wrap card padding">
+               <h4 class="calm text-center"><b>Adım 2/3</b></h4>
+               İsterseniz lokasyon bilgisi girebilirsiniz. 
+            </div>
+            <div id="map" data-tap-disabled="true"></div>
+            
+           
+        </ion-slide>
+        
+        
+        
+        
         <ion-slide>
-        	 <div class="item-text-wrap card">
-               <h4 class="calm text-center"><b>Adım 2/2</b><br>Şimdi ilan bilgilerini girebilirsiniz.</h4>
+        	 <div class="item-text-wrap card padding">
+               <h4 class="calm text-center"><b>Adım 3/3</b></h4>
+               Şimdi ilan bilgilerini girebilirsiniz.
             </div>
             
             <div class="list list-inset transparent">
-            <img class="padding full-image radius" ng-src='{{lastPhoto}}'>
+            <img class="padding full-image" ng-src='{{postPhotos[0].large}}'>
                 <label class="item item-input">
                     <input type="text" class="stable" placeholder="Başlık">
                 </label>
                 <label class="item item-input">
-                    <textarea cols="40" placeholder="Açıklama"></textarea>
+                    <textarea rows="10" placeholder="Açıklama"></textarea>
                 </label>
           
                 <div>
@@ -55,8 +67,18 @@
         </ion-slide>
         
         
-	  </ion-slide-box>-->
+	  </ion-slide-box>
 	
   	</ion-content>
+    
+    <ion-footer-bar class="bar-positive no-margin-top">
+      
+            <button class="button button-clear button-block no-margin-top icon icon-right ion-arrow-right-b" ng-click="goToNextStep()">Devam Et</button>
+      
+	</ion-footer-bar>
+    
+      
+    
+    
   
 </ion-view>
