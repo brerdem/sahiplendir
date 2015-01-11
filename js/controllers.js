@@ -175,10 +175,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						console.log("large: " +cloudObj.url);	
 																
 						Parse.Cloud.run('savePostImage', cloudObj, {
-						  success: function(thumbUrl) {
+						  success: function(img_obj) {
 							
-								console.log("thumbUrl: " +thumbUrl)		
-								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
+								console.log("thumbUrl: " +img_obj.small)		
+								$scope.postPhotos.push({large: img_obj.large, small: img_obj.small});
 								
 								
 								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);

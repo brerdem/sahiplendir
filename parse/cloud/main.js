@@ -7,7 +7,8 @@ var Image = require('parse-image');
 Parse.Cloud.define("savePostImage", function(request, response) {
 	
 		var RATIO = 9/16;
-	
+		var buffer_obj;
+		var img_large_url;
 	
 		console.log(request.params.url);
 		
@@ -21,7 +22,8 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 		
 		.then(function(response) {	
 			var image_large = new Image();
-			return image_large.setData(response.buffer);
+			buffer_obj = response.buffer;
+			return image_large.setData(buffer_obj);
 		}).then(function(image_large) {
 				
 				return image_large.crop({
@@ -42,13 +44,15 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 			var base64 = buffer.toString("base64");
 			var cropped_large = new Parse.File("large.jpg", { base64: base64 });
 			return cropped_large.save();
+			
 		})
 					
 		// then let's make thumbnail
 		
-		.then(function(response) {	
+		.then(function(cropped_large) {	
+			img_large_url = cropped_large.url();
 			var image = new Image();
-			return image.setData(response.buffer);
+			return image.setData(buffer_obj);
 		}).then(function(image) {
 				var size = Math.min(image.width(), image.height());
 				return image.crop({
@@ -79,7 +83,7 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 			var cropped = new Parse.File("thumbnail.jpg", { base64: base64 });
 			return cropped.save();
 		}).then(function(cropped) {
-			response.success(cropped.url());
+			response.success({large: img_large_url, small: cropped.url()});
 						
 		}, function(error) {
 			response.error(error);
