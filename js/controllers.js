@@ -93,10 +93,16 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 .controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup) {
 		
+	// PHOTO GALLERY
+	
+	$scope.postPhotos = [];
+	
+	
+	
 	// PHOTO ADD
 	
 	$scope.stopSlide = function(index) {
-	 	$ionicSlideBoxDelegate.enableSlide(false);
+	 	$ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false);
 	}
 	
 	$scope.addPostPhoto = function(from) {
@@ -124,6 +130,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
       
   	}
 	
+	
+	
+	
+	
+	
+	
+	
+	// SAVE POST
+	
 	$scope.savePost = function() {
 		
 		console.log ('photo url:'+$scope.lastPhoto)
@@ -142,7 +157,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			
 				reader.onloadend = function(e) {
 					
-					var name = Parse.User.current().get("fbId") + "_" + generateUUID() + ".jpg";
+					var name = "large.jpg";
 					
 					var parseFile = new Parse.File(name, {base64: e.target.result });
 					parseFile.save().then(function() {
@@ -153,16 +168,18 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							postMessage: 'test message hello'
 						}
 																
-						Parse.Cloud.run('savePost', cloudObj, {
-						  success: function(msg) {
+						Parse.Cloud.run('savePostImage', cloudObj, {
+						  success: function(thumbUrl) {
 							
-								console.log(msg);
+										
+								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
 			
-									var alertPopup = $ionicPopup.alert({
+									/*var alertPopup = $ionicPopup.alert({
 										template: 'Kaydedildi..'
 									}).then(function(res) {
+										
 										console.log('Test Alert Box');
-									});
+									});*/
 							
 						  },
 						  error: function(error) {

@@ -1,27 +1,31 @@
 <ion-view title="İlan Ekle" class="padding has-header">
 	
 	<ion-content class="padding">
-	<ion-slide-box active-slide="stopSlide(index)" show-pager="false">
+	<ion-slide-box active-slide="stopSlide(index)" show-pager="false" delegate-handle="post-main">
 		<ion-slide>
         
             <div class="item-text-wrap card">
-               <h4 class="calm text-center"><b>Adım 1/2</b><br>Önce fotoğraf çekin ya da ekleyin. Birden fazla fotoğraf çekebilirsiniz.</h4>
+               <h4 class="calm text-center"><b>Adım 1/2</b></h4>
+               Önce fotoğraf çekin ya da ekleyin. Fotoğrafsız ilan Birden fazla fotoğraf çekebilirsiniz.
                
             </div>
 			
-            <div class="row row-center">
-                  <div class="col"><button class="button button-block button-stable icon ion-camera"></button></div>
-                  <div class="col"><button class="button button-block button-stable icon ion-camera"></button></div>
-            </div>
-            <div class="row row-center">
-                  <div class="col"><button class="button button-block button-stable icon ion-camera"></button></div>
-                  <div class="col"><button class="button button-block button-stable icon ion-camera"></button></div>
-            </div>
+			<div ng-show="postPhotos.length > 0">
+            
+                 <ion-slide-box show-pager="true" delegate-handle="post-photos">
+                    <ion-slide ng-repeat="photo in postPhotos">
+                    
+                     <img src="{{photo.large}}" class="full-image">
+                 
+                    </ion-slide>
+                </ion-slide-box>
       
+		  	</div>
             <div align="center">
                  <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
                  <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
             </div>
+            	
             <button class="button button-balanced button-block icon icon-right ion-arrow-right-b">Devam Et</button>
           
       

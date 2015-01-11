@@ -4,7 +4,7 @@
 
 var Image = require('parse-image');
 
-Parse.Cloud.define("savePost", function(request, response) {
+Parse.Cloud.define("savePostImage", function(request, response) {
 		console.log(request.params.url);
 		Parse.Cloud.httpRequest({
 			
@@ -42,8 +42,20 @@ Parse.Cloud.define("savePost", function(request, response) {
 			var cropped = new Parse.File("thumbnail.jpg", { base64: base64 });
 			return cropped.save();
 		}).then(function(cropped) {
-					
-			var PostImage = Parse.Object.extend("Image");
+			reponse.success(cropped.url());
+						
+		}, function(error) {
+			reponse.error(error);
+		
+		})
+	
+});
+
+
+Parse.Cloud.define("savePost", function(request, response) {
+	
+	
+	var PostImage = Parse.Object.extend("Image");
 			var PostObj = Parse.Object.extend("Post");
 			
 			var post_image = new PostImage();
@@ -71,11 +83,7 @@ Parse.Cloud.define("savePost", function(request, response) {
 				
 				}
 			});
-		})
 	
-
-		
-		
+})
 
 
-});
