@@ -1,0 +1,34 @@
+<ion-view title="İlan Fotoğrafı Ekle" class="has-header">
+	
+	<ion-content class="padding-left padding-right">
+	
+        
+            <div class="item-text-wrap card padding">
+               <h4 class="calm text-center"><b>Adım 1/3</b></h4>
+               Önce fotoğraf çekin ya da ekleyin. Maksimum 3 fotoğraf ekleyebilirsiniz. Dilerseniz fotoğrafsız ilan da çıkabilirsiniz. 
+               
+            </div>
+			
+			
+            
+                 <ion-slide-box show-pager="true">
+                    <ion-slide ng-repeat="photo in postPhotos">
+                    
+                     <img ng-src="{{photo.large}}" class="full-image">
+                 
+                    </ion-slide>
+                </ion-slide-box>
+      
+		  	
+            <div align="center" class="padding-top">
+                 <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
+                 <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
+            </div>
+            
+       
+		
+
+        
+ </ion-content>
+ 
+ </ion-view>

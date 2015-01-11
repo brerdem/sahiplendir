@@ -1,0 +1,26 @@
+<ion-view title="İlan Mesajı Ekle" class="has-header">
+	
+	<ion-content class="padding-left padding-right">
+	
+<div class="item-text-wrap card padding">
+               <h4 class="calm text-center"><b>Adım 3/3</b></h4>
+               Şimdi ilan bilgilerini girebilirsiniz.
+            </div>
+            
+            <div class="list list-inset transparent">
+            <img class="padding full-image" ng-src='{{postPhotos[0].large}}'>
+                <label class="item item-input">
+                    <input type="text" class="stable" placeholder="Başlık">
+                </label>
+                <label class="item item-input">
+                    <textarea rows="10" placeholder="Açıklama"></textarea>
+                </label>
+          
+                <div>
+                    <button class="button button-block button-balanced" ng-click="savePost()"> Kaydet </button>
+                </div>
+             </div>
+        
+ </ion-content>
+ 
+ </ion-view>

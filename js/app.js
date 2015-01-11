@@ -88,13 +88,47 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	  .state('post.add', {
         url: '/add',
+		abstract: true,
 		views: {
 			'@' : {
-				controller: 'PostAddCtrl',
-				templateUrl: 'templates/post-add.html'
+				templateUrl: 'templates/post-add.html',
+				controller : 'PostAddCtrl'
+			}
+		}
+		
+		
+	  })
+	  
+	  .state('post.add.photo', {
+        url: '/photo',
+		views: {
+			'' : {
+				controller: 'PostAddPhotoCtrl',
+				templateUrl: 'templates/post-add-photo.html'
 			}
 		}
 	  })
+	 
+	   .state('post.add.location', {
+        url: '/location',
+		views: {
+			'' : {
+				//controller: 'PostAddLocationCtrl',
+				templateUrl: 'templates/post-add-location.html'
+			}
+		}
+	  })
+	  
+	  .state('post.add.message', {
+        url: '/message',
+		views: {
+			'' : {
+				controller: 'PostAddMessageCtrl',
+				templateUrl: 'templates/post-add-message.html'
+			}
+		}
+	  })
+	
 	  
 	
 	  

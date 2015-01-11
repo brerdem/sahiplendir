@@ -15,7 +15,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.desc = $scope.posts[0].text;
 	
 	$scope.addPost = function() {
-    	$state.go('post.add');
+    	$state.go('post.add.photo');
  	 };
 	 
 	 $scope.changeSlide = function(index) {
@@ -91,15 +91,33 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup, LoadingService, $compile) {
+// ----------------------------- POST ADD ---------------------------------------
+
+.controller("PostAddCtrl", function($scope, $state) {
+    $scope.postPhotos = [];
+	statesToGo = ['post.add.location', 'post.add.message'];
+	phase = 0;
+	
+	$scope.goToNextStep = function() {
+		$state.go(statesToGo[phase]);
+		phase++;
+	}
+	
+	
+})
+
+
+// PHOTO ADD
+
+.controller("PostAddPhotoCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup, LoadingService, $compile) {
 		
 	// PHOTO GALLERY
 	
-	$scope.postPhotos = [];
+	
 	
 	
 	// disable swiping after the slidebox rendered
-	$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false)}, 500);
+	//$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false)}, 500);
 	
 	// PHOTO ADD
 		
@@ -134,10 +152,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	
 	
-	// NEXT STEP
-	$scope.goToNextStep = function() {
-		$ionicSlideBoxDelegate.$getByHandle('post-main').next();
-	}
+	
 	
 	
 	
@@ -183,7 +198,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 								$scope.postPhotos.push({large: img_obj.large, small: img_obj.small});
 								
 								
-								$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-photos').update(); LoadingService.hide()},  500);
+								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);
 								//$ionicSlideBoxDelegate.update();
 								
 								
@@ -217,6 +232,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	// MAPS FUNCTIONS
 	
+	  
+})
+
+// LOCATION ADD
+
+.controller("PostAddLocationCtrl", function($scope, $compile) {
+		
+	// LOCATION
+		
 	function initialize() {
 		console.log(document.getElementById("map"));
         var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
@@ -275,6 +299,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	  */
 	  
 })
+
+
+// MESSAGE ADD
+
+.controller("PostAddMessageCtrl", function($scope) {
+	
+})
+
 
 .controller("SignUp", function($scope) {
     
