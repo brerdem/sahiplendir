@@ -177,6 +177,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 								console.log("thumbUrl: " +thumbUrl)		
 								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
 								console.log("length: "+ $scope.postPhotos.length);
+								$ionicSlideBoxDelegate.$getByHandle('post-photos').update();
+								
 								
 			
 									/*var alertPopup = $ionicPopup.alert({
