@@ -102,11 +102,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false)}, 500);
 	
 	// PHOTO ADD
-	
-	/*$scope.stopSlide = function(index) {
-	 	$timeout(function() { $ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false)}, 200);
-	}*/
-	
+		
 	$scope.addPostPhoto = function(from) {
 		
 		LoadingService.show();
@@ -220,7 +216,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   	}
 	
 	// MAPS FUNCTIONS
-	
+	/*
 	function initialize() {
 		console.log(document.getElementById("map"));
         var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
@@ -276,6 +272,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
       $scope.clickTest = function() {
         alert('Example of infowindow with ng-click')
       };
+	  */
       
    
 	
