@@ -38,4 +38,26 @@ angular.module('Sahiplendir.services', [])
       return JSON.parse($window.localStorage[key] || '{}');
     }
   }
-}]);
+}])
+
+<!-- LOADING -->
+
+.factory('LoadingService', ['$ionicLoading', function($ionicLoading) {
+  return {
+    show: function() {
+		return $ionicLoading.show({
+      		templateUrl: 'templates/loading.html'
+    	})
+		
+    },
+    hide: function() {
+    	return $ionicLoading.hide();
+    }
+  }
+}])
+
+
+
+
+
+

@@ -105,7 +105,22 @@ color: #FFFFFF;
 border-radius: 10px;;
 }
 
-/* side menu fonts */
+/* loading */
+
+.loading-custom {
+	width:200px;
+	height:60px;
+	background-color: #FFFFFF;
+		
+}
+
+.loading-img {
+	width:60px;
+	height:57px;
+	vertical-align:middle;		
+}
+
+
 
 
 

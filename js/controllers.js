@@ -91,7 +91,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup) {
+.controller("PostAddCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup, LoadingService) {
 		
 	// PHOTO GALLERY
 	
@@ -122,6 +122,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		Camera.getPicture(opt).then(function(imageURL) {
 		  
 		  $scope.lastPhoto = imageURL;
+		  LoadingService.show();
 		  savePost();
      	  //$timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
 
@@ -178,7 +179,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
 								console.log($scope.postPhotos);
 								
-								$timeout(function() { $ionicSlideBoxDelegate.update()},  1000);
+								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);
 								//$ionicSlideBoxDelegate.update();
 								
 								
