@@ -216,7 +216,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   	}
 	
 	// MAPS FUNCTIONS
-	/*
+	
 	function initialize() {
 		console.log(document.getElementById("map"));
         var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
@@ -251,7 +251,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       
-      $scope.centerOnMe = function() {
+      /*$scope.centerOnMe = function() {
         if(!$scope.map) {
           return;
         }
@@ -273,13 +273,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
         alert('Example of infowindow with ng-click')
       };
 	  */
-      
-   
-	
-	
-	
-	
-
+	  
 })
 
 .controller("SignUp", function($scope) {

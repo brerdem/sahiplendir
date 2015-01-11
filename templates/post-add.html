@@ -21,7 +21,7 @@
                 </ion-slide-box>
       
 		  	
-            <div align="center padding-top">
+            <div align="center" class="padding-top">
                  <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
                  <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
             </div>
@@ -34,8 +34,9 @@
                <h4 class="calm text-center"><b>Adım 2/3</b></h4>
                İsterseniz lokasyon bilgisi girebilirsiniz. 
             </div>
-            <div id="map" data-tap-disabled="true"></div>
-            
+            <ion-scroll class="map">
+            	<div id="map" data-tap-disabled="true"></div>
+            </ion-scroll>
            
         </ion-slide>
         
