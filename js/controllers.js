@@ -101,9 +101,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	// PHOTO ADD
 	
-	$scope.stopSlide = function(index) {
+	/*$scope.stopSlide = function(index) {
 	 	$ionicSlideBoxDelegate.$getByHandle('post-main').enableSlide(false);
-	}
+	}*/
 	
 	$scope.addPostPhoto = function(from) {
 		
@@ -176,8 +176,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							
 								console.log("thumbUrl: " +thumbUrl)		
 								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
-								console.log("length: "+ $scope.postPhotos.length);
-								$ionicSlideBoxDelegate.$getByHandle('post-photos').update();
+								console.log($scope.postPhotos);
+								$ionicSlideBoxDelegate.update();
 								
 								
 			

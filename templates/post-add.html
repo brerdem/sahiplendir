@@ -1,8 +1,8 @@
 <ion-view title="İlan Ekle" class="padding has-header">
 	
 	<ion-content class="padding">
-	<ion-slide-box active-slide="stopSlide(index)" show-pager="false" delegate-handle="post-main">
-		<ion-slide>
+	<!--<ion-slide-box active-slide="stopSlide(index)" show-pager="false" delegate-handle="post-main">
+		<ion-slide>-->
         
             <div class="item-text-wrap card">
                <h4 class="calm text-center"><b>Adım 1/2</b></h4>
@@ -12,7 +12,7 @@
 			
 			
             
-                 <ion-slide-box show-pager="true" delegate-handle="post-photos">
+                 <ion-slide-box show-pager="true">
                     <ion-slide ng-repeat="photo in postPhotos">
                     
                      <img ng-src="{{photo.large}}" class="full-image">
@@ -29,7 +29,8 @@
             <button class="button button-balanced button-block icon icon-right ion-arrow-right-b">Devam Et</button>
           
       
-		</ion-slide>
+		<!--</ion-slide>-->
+        <!--
         <ion-slide>
         	 <div class="item-text-wrap card">
                <h4 class="calm text-center"><b>Adım 2/2</b><br>Şimdi ilan bilgilerini girebilirsiniz.</h4>
@@ -54,7 +55,7 @@
         </ion-slide>
         
         
-	  </ion-slide-box>
+	  </ion-slide-box>-->
 	
   	</ion-content>
   
