@@ -171,7 +171,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						Parse.Cloud.run('savePostImage', cloudObj, {
 						  success: function(thumbUrl) {
 							
-										
+								console.log("thumbUrl: " +thumbUrl)		
 								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
 			
 									/*var alertPopup = $ionicPopup.alert({
