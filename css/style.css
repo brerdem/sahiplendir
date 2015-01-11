@@ -102,6 +102,7 @@ body {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	
 }
 
 /* loading */
@@ -109,18 +110,20 @@ body {
 .loading-container .loading {
 	padding:0;
 	border-radius:0;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .loading-custom {
-	width:150px;
-	height:146px;
-	background-color: #FFFFFF;
+	width:120px;
+	height:116px;
+	background: #fff url(../img/loading.gif) no-repeat center center;
+	background-size: contain;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
-		
-		
+
 }
+
 
 
 

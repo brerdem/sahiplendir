@@ -107,9 +107,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	$scope.addPostPhoto = function(from) {
 		
+		//LoadingService.show();
+			
 		var opt = {
 			
-		  quality: 50,
+		  quality: 60,
 		  correctOrientation: true,
 		  targetWidth: 400,
 		  targetHeight: 400,
@@ -177,7 +179,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							
 								console.log("thumbUrl: " +thumbUrl)		
 								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
-								console.log($scope.postPhotos);
+								
 								
 								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);
 								//$ionicSlideBoxDelegate.update();

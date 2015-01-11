@@ -46,7 +46,7 @@ angular.module('Sahiplendir.services', [])
   return {
     show: function() {
 		return $ionicLoading.show({
-      		templateUrl: 'templates/loading.html'
+      		template: "<div class='loading-custom'></div>"
     	})
 		
     },

@@ -5,11 +5,48 @@
 var Image = require('parse-image');
 
 Parse.Cloud.define("savePostImage", function(request, response) {
+	
+		var RATIO = 9/16;
+	
+	
 		console.log(request.params.url);
+		
 		Parse.Cloud.httpRequest({
 			
 			url: request.params.url
-		}).then(function(response) {	
+		})	
+			
+		// crop large picture if necessary
+		
+		
+		.then(function(response) {	
+			var image_large = new Image();
+			return image_large.setData(response.buffer);
+		}).then(function(image_large) {
+				
+				return image_large.crop({
+				  width: image_large.width(),
+				  height: image_large.width() * RATIO
+				});
+		
+		}).then(function(image_large) {
+			// Make sure it's a JPEG to save disk space and bandwidth.
+			return image_large.setFormat("JPEG");
+		 
+		}).then(function(image_large) {
+			// Get the image data in a Buffer.
+			return image_large.data();
+		 
+		}).then(function(buffer) {
+			// Save the image into a new file.
+			var base64 = buffer.toString("base64");
+			var cropped_large = new Parse.File("large.jpg", { base64: base64 });
+			return cropped_large.save();
+		})
+					
+		// then let's make thumbnail
+		
+		.then(function(response) {	
 			var image = new Image();
 			return image.setData(response.buffer);
 		}).then(function(image) {
