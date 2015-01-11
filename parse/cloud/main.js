@@ -42,10 +42,10 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 			var cropped = new Parse.File("thumbnail.jpg", { base64: base64 });
 			return cropped.save();
 		}).then(function(cropped) {
-			reponse.success(cropped.url());
+			response.success(cropped.url());
 						
 		}, function(error) {
-			reponse.error(error);
+			response.error(error);
 		
 		})
 	

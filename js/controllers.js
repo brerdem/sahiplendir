@@ -174,6 +174,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							
 								console.log("thumbUrl: " +thumbUrl)		
 								$scope.postPhotos.push({large: parseFile.url(), small: thumbUrl});
+								console.log($scope.postPhotos.length);
+								
 			
 									/*var alertPopup = $ionicPopup.alert({
 										template: 'Kaydedildi..'
