@@ -157,18 +157,19 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			
 			fileEntry.file(function(file) {
 				
+				console.log("size: "+file.size);			
+				
 				var reader = new FileReader();
 			
 				reader.onloadend = function(e) {
 					
-					/*var name = "large.jpg";
+					var name = "large.jpg";
 					
 					var parseFile = new Parse.File(name, {base64: e.target.result });
-					parseFile.save().then(function() {*/
+					parseFile.save().then(function() {
 				
 						var cloudObj = {
-							//url: parseFile.url(),
-							base64: e.target.result.replace(/^data:image\/(png|jpeg);base64,/, ""),
+							url: parseFile.url(),
 							postTitle: 'test title hello',
 							postMessage: 'test message hello'
 						}
@@ -200,10 +201,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						  }
 						});
 						
-					/*}, function (error) {
+					}, function (error) {
 						console.log(error.message);
 							
-					})*/
+					})
 				
 				}
 	
