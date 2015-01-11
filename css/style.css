@@ -108,16 +108,16 @@ border-radius: 10px;;
 /* loading */
 
 .loading-custom {
-	width:200px;
-	height:60px;
+	width:40px;
+	height:38px;
 	background-color: #FFFFFF;
 		
 }
 
 .loading-img {
-	width:60px;
-	height:57px;
-	vertical-align:middle;		
+	width:40px;
+	height:38px;
+		
 }
 
 
