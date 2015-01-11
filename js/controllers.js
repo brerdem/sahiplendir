@@ -125,7 +125,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  
 		  $scope.lastPhoto = imageURL;
 		  LoadingService.show();
-		  savePost();
+		  savePostImages();
      	  //$timeout(function() { $ionicSlideBoxDelegate.next();  console.log($scope.imageURL)},400);
 
 		}, function(err) {
@@ -143,7 +143,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	// SAVE POST
 	
-	 function savePost() {
+	 function savePostImages() {
 		
 		console.log ('photo url:'+$scope.lastPhoto)
 		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail);
@@ -161,13 +161,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			
 				reader.onloadend = function(e) {
 					
-					var name = "large.jpg";
+					/*var name = "large.jpg";
 					
 					var parseFile = new Parse.File(name, {base64: e.target.result });
-					parseFile.save().then(function() {
+					parseFile.save().then(function() {*/
 				
 						var cloudObj = {
-							url: parseFile.url(),
+							//url: parseFile.url(),
+							base64: e.target.result.replace(/^data:image\/(png|jpeg);base64,/, ""),
 							postTitle: 'test title hello',
 							postMessage: 'test message hello'
 						}
@@ -199,10 +200,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						  }
 						});
 						
-					}, function (error) {
+					/*}, function (error) {
 						console.log(error.message);
 							
-					})
+					})*/
 				
 				}
 	

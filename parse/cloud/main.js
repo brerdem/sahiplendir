@@ -42,6 +42,7 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 		}).then(function(buffer) {
 			// Save the image into a new file.
 			var base64 = buffer.toString("base64");
+			console.log(base64);
 			var cropped_large = new Parse.File("large.jpg", { base64: base64 });
 			return cropped_large.save();
 			
