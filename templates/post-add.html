@@ -10,17 +10,17 @@
                
             </div>
 			
-			
+			<div ng-show="postPhotos.length > 0">
             
                  <ion-slide-box show-pager="true" delegate-handle="post-photos">
                     <ion-slide ng-repeat="photo in postPhotos">
                     
-                     <img src="{{photo.large}}" class="full-image">
+                     <img ng-src="{{photo.large}}" class="full-image">
                  
                     </ion-slide>
                 </ion-slide-box>
       
-		  	
+		  	</div>
             <div align="center">
                  <button class="button button-balanced icon-left ion-camera" ng-click="addPostPhoto('camera')">Fotoğraf Çek</button>
                  <button class="button button-balanced icon-left ion-image" ng-click="addPostPhoto('library')">Fotoğraf Ekle</button>
