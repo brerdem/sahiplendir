@@ -93,7 +93,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // ----------------------------- POST ADD ---------------------------------------
 
-.controller("PostAddCtrl", function($scope, $state) {
+.controller("PostAddCtrl", function($scope, $state, $rootScope) {
     $scope.postPhotos = [];
 	statesToGo = ['post.add.location', 'post.add.message'];
 	phase = 0;
@@ -101,6 +101,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.goToNextStep = function() {
 		$state.go(statesToGo[phase]);
 		phase++;
+	}
+	$scope.setCurrentLocation = function() {
+		$rootScope.$broadcast('setMyLocation');
 	}
 	
 	
@@ -258,7 +261,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	    map.on('locationerror', onLocationError);
       }
 	  
-	  $scope.setZoom = function() {
+	  $scope.$on('setMyLocation', function(evt, args) {
 		 /* console.log("setted");
 		  var latlng = L.latLng(40.980679, 29.077301);
 		  var marker = L.marker(latlng).addTo($scope.map);
@@ -266,7 +269,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  	LoadingService.show();
 		   $scope.map.locate({setView: true, maxZoom: 16});
 		  
-	  }
+	  });
 	  
 	  
 	  function onLocationFound(e) {

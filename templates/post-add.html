@@ -1,6 +1,7 @@
 <div ui-view class="has-header"></div>
-  <ion-footer-bar class="bar-positive no-margin-top">
-      
-            <button class="button button-clear button-block no-margin-top icon icon-right ion-arrow-right-b" ng-click="goToNextStep()">Devam Et</button>
-      
-	</ion-footer-bar>
+<ion-footer-bar class="bar-positive no-margin-top">
+		 <button class="padding-left button button-clear no-margin-top icon ion-location" ng-show="$state.includes('post.add.location')" ng-click="setCurrentLocation()"></button>
+  		<button class="button pull-right button-clear no-margin-top" ng-click="goToNextStep()">Devam</button>
+       
+    
+</ion-footer-bar>
