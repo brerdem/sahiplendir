@@ -237,7 +237,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // LOCATION ADD
 
-.controller("PostAddLocationCtrl", function($scope, $compile, $timeout) {
+.controller("PostAddLocationCtrl", function($scope, $compile, $timeout, LoadingService) {
 		
 	// LOCATION
 	
@@ -263,13 +263,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  var latlng = L.latLng(40.980679, 29.077301);
 		  var marker = L.marker(latlng).addTo($scope.map);
 		  $scope.map.setView(latlng);*/
-		  
+		  	LoadingService.show();
 		   $scope.map.locate({setView: true, maxZoom: 16});
 		  
 	  }
 	  
 	  
 	  function onLocationFound(e) {
+		 LoadingService.hide();
 		var radius = e.accuracy / 2;
 	
 		L.marker(e.latlng).addTo($scope.map)
@@ -279,6 +280,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	  }
 	  
 	  function onLocationError(e) {
+		  LoadingService.hide();
     		console.log(e.message);
 	  }
 	 
