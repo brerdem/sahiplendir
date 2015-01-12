@@ -237,15 +237,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // LOCATION ADD
 
-.controller("PostAddLocationCtrl", function($scope, $compile) {
+.controller("PostAddLocationCtrl", function($scope, $compile, $timeout) {
 		
 	// LOCATION
 	
-	console.log(document.getElementById("map"));
+
 	
 		
 	function initialize() {
-		console.log(document.getElementById("map"));
+		console.log("maps started");
         var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
         
         var mapOptions = {
@@ -276,7 +276,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
         $scope.map = map;
       }
-      google.maps.event.addDomListener(window, 'load', initialize);
+	  //google.maps.event.addDomListener(window, 'load', initialize);
+	  
+      $timeout(initialize, 1000);
       
       /*$scope.centerOnMe = function() {
         if(!$scope.map) {
