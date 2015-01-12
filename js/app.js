@@ -113,7 +113,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/location',
 		views: {
 			'' : {
-				//controller: 'PostAddLocationCtrl',
+				controller: 'PostAddLocationCtrl',
 				templateUrl: 'templates/post-add-location.html'
 			}
 		}

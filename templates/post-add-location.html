@@ -1,18 +1,15 @@
 <ion-view title="İlan Lokasyonu Ekle" class="has-header">
 	
-	<ion-content class="padding-left padding-right map-content" ng-controller="PostAddLocationCtrl">
+	<ion-content class="padding-left padding-right map-content" ng-init='initialize()'>
 	
         
  			<div class="item-text-wrap card padding">
                <h4 class="calm text-center"><b>Adım 2/3</b></h4>
-               İsterseniz lokasyon bilgisi girebilirsiniz. 
+               İsterseniz lokasyon bilgisi girebilirsiniz.<button ng-click="setZoom()">testy</button> 
             </div>
             
             	<div id="map" data-tap-disabled="true"></div>
-            
-		
-
-        
- </ion-content>
+   
+ 	</ion-content>
  
  </ion-view>
