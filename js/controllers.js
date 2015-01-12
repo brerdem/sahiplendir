@@ -240,6 +240,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("PostAddLocationCtrl", function($scope, $compile) {
 		
 	// LOCATION
+	
+	console.log(document.getElementById("map"));
+	
 		
 	function initialize() {
 		console.log(document.getElementById("map"));
