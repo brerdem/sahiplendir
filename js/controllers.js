@@ -94,13 +94,19 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 // ----------------------------- POST ADD ---------------------------------------
 
 .controller("PostAddCtrl", function($scope, $state, $rootScope) {
-    $scope.postPhotos = [];
+    
+	$scope.buttonName = 'Devam';
+	$scope.postPhotos = [];
 	statesToGo = ['post.add.location', 'post.add.message'];
 	phase = 0;
 	
 	$scope.goToNextStep = function() {
-		$state.go(statesToGo[phase]);
-		phase++;
+		if (statesToGo[phase] == 'post.add.message') {
+			$scope.buttonName = 'Kaydet';
+		}
+			$state.go(statesToGo[phase]);
+			phase++;
+		
 	}
 	$scope.setCurrentLocation = function() {
 		$rootScope.$broadcast('setMyLocation');

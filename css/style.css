@@ -124,6 +124,8 @@ body {
 
 }
 
+/* ---------------------------------- POST ADD ------------------------------------ */
+
 /* post footer */
 
 .button.button-block.no-margin-top {
@@ -138,6 +140,25 @@ body {
 
 .scroll.map-content {
 	height:100%;
+}
+
+.bar-subheader {
+	height:70px;
+}
+
+.has-subheader {
+	top: 114px;
+}
+.op {
+	opacity:0;
+}
+
+.css-fade {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+.css-fade.ng-hide {
+    opacity: 0;
 }
 
 
