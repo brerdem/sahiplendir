@@ -39,7 +39,7 @@ angular.module('Sahiplendir.directives', [])
     link: function ($scope, $element, $attr) {
       function initialize() {
         var mapOptions = {
-          center: new google.maps.LatLng(43.07493, -89.381388),
+          center: new google.maps.LatLng(41.043396, 29.008060),
           zoom: 16,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };

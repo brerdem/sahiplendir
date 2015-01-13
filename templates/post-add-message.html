@@ -7,10 +7,10 @@
             <div class="list list-inset transparent">
             <img class="padding full-image" ng-src='{{postPhotos[0].large}}'>
                 <label class="item item-input">
-                    <input type="text" class="stable" placeholder="Başlık">
+                    <input type="text" class="stable" placeholder="Başlık" ng-model="postTextData.title">
                 </label>
                 <label class="item item-input">
-                    <textarea rows="10" placeholder="Detay"></textarea>
+                    <textarea rows="10" placeholder="Detay" ng-model="postTextData.message"></textarea>
                 </label>
           
               

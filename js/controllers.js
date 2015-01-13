@@ -97,23 +97,34 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     
 	$scope.buttonName = 'Devam';
 	$scope.postPhotos = [];
+	$scope.postAddress = '';
 	statesToGo = ['post.add.location', 'post.add.message'];
 	phase = 0;
 	
 	
 	$scope.goToNextStep = function() {
-		if (statesToGo[phase] == 'post.add.message') {
-			$scope.buttonName = 'Kaydet';
-		}
-	
 		
+		if (phase == 1) {
+			$scope.buttonName = 'Kaydet';
+		} 
+		if (phase == 2) {
+			$rootScope.$broadcast('savePostData');
+		} else {
 			$state.go(statesToGo[phase]);
 			phase++;
-		
+		}
+
 	}
 	$scope.setCurrentLocation = function() {
 		$rootScope.$broadcast('setMyLocation');
 	}
+	
+	function savePostData() {
+		
+		
+	}
+	
+	
 	
 	
 })
@@ -249,7 +260,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // LOCATION ADD
 
-.controller("PostAddLocationCtrl", function($scope, $compile, $timeout, LoadingService) {
+.controller("PostAddLocationCtrl", function($scope, $rootScope, LoadingService) {
 		
 	// LOCATION
 	
@@ -272,12 +283,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		
 		navigator.geolocation.getCurrentPosition(function (pos) {
 		  var content_str;
-		  console.log('Got pos', pos);
-		  var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+		  
+		  $rootScope.postLocation = new Parse.GeoPoint({latitude: parseFloat(pos.coords.latitude), longitude: parseFloat(pos.coords.longitude)});
+		  var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+		  
 		  $scope.map.setCenter(latlng);
 		  
 		  geocoder.geocode({'latLng': latlng}, function(results, status) {
     		if (status == google.maps.GeocoderStatus.OK) {
+				console.log(results);
 		  		if (results[0]) {
 					LoadingService.hide();
 					
@@ -285,7 +299,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						position: latlng,
 						map: $scope.map
 					});
-					console.log(results[0].address_components);
+					
 					infowindow.setContent(results[0].formatted_address);
 					infowindow.open($scope.map, marker);
 				  } else {
@@ -294,8 +308,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			} else {
       			alert('Geocoder failed due to: ' + status);
     		}
-		  })
-		  
+		  })	  
 		  
 		  
 		  /*var marker = new google.maps.Marker({
@@ -304,10 +317,6 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			draggable: false,
 			animation: google.maps.Animation.DROP
   		  });*/
-		  
-		  
-		  
-		  
 		 
 		}, function (error) {
 		  alert('Unable to get location: ' + error.message);
@@ -321,7 +330,40 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // MESSAGE ADD
 
-.controller("PostAddMessageCtrl", function($scope) {
+.controller("PostAddMessageCtrl", function($scope, $rootScope, LoadingService) {
+	
+	$scope.postTextData ={};
+	
+	$scope.$on('savePostData', function(evt, args) {
+	
+			//LoadingService.show();
+		
+			var PostObj = Parse.Object.extend("Post");
+			var post = new PostObj();
+								
+			post.set("postTitle", $scope.postTextData.title);
+			post.set("postMessage", $scope.postTextData.message);
+			post.set("postLocation", $rootScope.postLocation);
+			post.set("postPhotos", $scope.postPhotos);
+			post.set("userPointer", Parse.User.current());
+			
+			post.save(null, {       
+				success: function(item) {
+					
+					console.log("saved");		
+				
+				},
+				error: function(error) {
+				//Failure Callback
+				
+				console.log(error.message);
+				
+				}
+			});
+		
+		
+	});
+	
 	
 })
 

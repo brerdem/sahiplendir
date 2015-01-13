@@ -97,34 +97,7 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 Parse.Cloud.define("savePost", function(request, response) {
 	
 	
-	var PostImage = Parse.Object.extend("Image");
-			var PostObj = Parse.Object.extend("Post");
 			
-			var post_image = new PostImage();
-			var post = new PostObj();
-			
-								
-			post.set("postTitle", request.params.postTitle);
-			post.set("postMessage", request.params.postMessage);
-			post.set("userPointer", Parse.User.current());
-			
-			post_image.set("imagePath", request.params.url);
-			post_image.set("imageThumbPath", cropped.url());
-			post_image.set("postPointer", post);
-				
-			post_image.save(null, {       
-				success: function(item) {
-					response.success("saved");
-					console.log("saved from main.js");		
-				
-				},
-				error: function(error) {
-				//Failure Callback
-				response.error(error.message);
-				console.log("error");
-				
-				}
-			});
 	
 })
 
