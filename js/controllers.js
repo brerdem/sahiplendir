@@ -93,17 +93,20 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // ----------------------------- POST ADD ---------------------------------------
 
-.controller("PostAddCtrl", function($scope, $state, $rootScope) {
+.controller("PostAddCtrl", function($scope, $state, $rootScope,$timeout) {
     
 	$scope.buttonName = 'Devam';
 	$scope.postPhotos = [];
 	statesToGo = ['post.add.location', 'post.add.message'];
 	phase = 0;
 	
+	
 	$scope.goToNextStep = function() {
 		if (statesToGo[phase] == 'post.add.message') {
 			$scope.buttonName = 'Kaydet';
 		}
+	
+		
 			$state.go(statesToGo[phase]);
 			phase++;
 		
@@ -250,49 +253,42 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		
 	// LOCATION
 	
-	$scope.initialize = function() {
-		var map = new L.Map('map', {
-			center: [41.0, 29.0],
-			zoom: 13
-		});
-
-		var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		var osmAttrib = 'Map data © OpenStreetMap contributors';
-		var osm = new L.TileLayer(osmUrl, { attribution: osmAttrib });
 	
-		//map.setView(new L.LatLng(43.069452, -89.411373), 11);
-		map.addLayer(osm);
-		$scope.map = map;
-		map.on('locationfound', onLocationFound);
-	    map.on('locationerror', onLocationError);
-      }
-	  
-	  $scope.$on('setMyLocation', function(evt, args) {
-		 /* console.log("setted");
-		  var latlng = L.latLng(40.980679, 29.077301);
-		  var marker = L.marker(latlng).addTo($scope.map);
-		  $scope.map.setView(latlng);*/
-		  	LoadingService.show();
-		   $scope.map.locate({setView: true, maxZoom: 16});
+	
+	  $scope.mapCreated = function(map) {
+    	$scope.map = map;
+  	};
+	
+	$scope.$on('setMyLocation', function(evt, args) {
+		console.log("Centering");
+		if (!$scope.map) {
+		  return;
+		}
+	
+		LoadingService.show();
+		
+		navigator.geolocation.getCurrentPosition(function (pos) {
+		  console.log('Got pos', pos);
+		  var position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+		  $scope.map.setCenter(position);
+		  /*var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+			map: $scope.map,
+			draggable: false,
+			animation: google.maps.Animation.DROP
+  		  });*/
 		  
-	  });
-	  
-	  
-	  function onLocationFound(e) {
-		 LoadingService.hide();
-		var radius = e.accuracy / 2;
-	
-		L.marker(e.latlng).addTo($scope.map)
-			.bindPopup("You are within " + radius + " meters from this point").openPopup();
-	
-		L.circle(e.latlng, radius).addTo($scope.map);
-	  }
-	  
-	  function onLocationError(e) {
+		  var infowindow = new google.maps.InfoWindow({
+      		content: 'Hello moto', 
+			position: position
+ 		  });
+		  infowindow.open($scope.map);
+		  
 		  LoadingService.hide();
-    		console.log(e.message);
-	  }
-	 
+		}, function (error) {
+		  alert('Unable to get location: ' + error.message);
+		});
+  });
 	  
 	
 	 
