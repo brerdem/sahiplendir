@@ -264,13 +264,40 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		if (!$scope.map) {
 		  return;
 		}
+		
+		var geocoder = new google.maps.Geocoder();
+		var infowindow = new google.maps.InfoWindow();
 	
 		LoadingService.show();
 		
 		navigator.geolocation.getCurrentPosition(function (pos) {
+		  var content_str;
 		  console.log('Got pos', pos);
-		  var position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
-		  $scope.map.setCenter(position);
+		  var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+		  $scope.map.setCenter(latlng);
+		  
+		  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    		if (status == google.maps.GeocoderStatus.OK) {
+		  		if (results[0]) {
+					LoadingService.hide();
+					
+					marker = new google.maps.Marker({
+						position: latlng,
+						map: $scope.map
+					});
+					console.log(results[0].address_components);
+					infowindow.setContent(results[0].formatted_address);
+					infowindow.open($scope.map, marker);
+				  } else {
+					console.log('No results found');
+				  }
+			} else {
+      			alert('Geocoder failed due to: ' + status);
+    		}
+		  })
+		  
+		  
+		  
 		  /*var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
 			map: $scope.map,
@@ -278,13 +305,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			animation: google.maps.Animation.DROP
   		  });*/
 		  
-		  var infowindow = new google.maps.InfoWindow({
-      		content: 'Hello moto', 
-			position: position
- 		  });
-		  infowindow.open($scope.map);
 		  
-		  LoadingService.hide();
+		  
+		  
+		 
 		}, function (error) {
 		  alert('Unable to get location: ' + error.message);
 		});
