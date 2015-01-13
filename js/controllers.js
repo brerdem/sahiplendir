@@ -336,7 +336,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	$scope.$on('savePostData', function(evt, args) {
 	
-			//LoadingService.show();
+			LoadingService.show();
 			console.log($scope.postPhotos);
 			var PostObj = Parse.Object.extend("Post");
 			var post = new PostObj();
@@ -344,7 +344,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			post.set("postTitle", $scope.postTextData.title);
 			post.set("postMessage", $scope.postTextData.message);
 			post.set("postLocation", $rootScope.postLocation);
-			post.set("postPhotos", $scope.postPhotos);
+			post.set("postPhotos", JSON.stringify($scope.postPhotos));
 			post.set("userPointer", Parse.User.current());
 			
 			post.save(null, {       
