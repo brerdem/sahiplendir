@@ -96,7 +96,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("PostAddCtrl", function($scope, $state, $rootScope,$timeout) {
     
 	$scope.buttonName = 'Devam';
-	$scope.postPhotos = [];
+	$scope.postPhotos = [{large: 'uhıuewhdıuwe', small: 'duwehdıwheuı'}, {large: 'dewugduwe', small: 'deuwgduweyg'}];
 	$scope.postAddress = '';
 	statesToGo = ['post.add.location', 'post.add.message'];
 	phase = 0;
