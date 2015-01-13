@@ -337,7 +337,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.$on('savePostData', function(evt, args) {
 	
 			//LoadingService.show();
-		
+			console.log($scope.postPhotos);
 			var PostObj = Parse.Object.extend("Post");
 			var post = new PostObj();
 								
