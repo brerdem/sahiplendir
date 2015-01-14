@@ -119,10 +119,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		$rootScope.$broadcast('setMyLocation');
 	}
 	
-	function savePostData() {
-		
-		
-	}
+	
 	
 	
 	
@@ -132,7 +129,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // PHOTO ADD
 
-.controller("PostAddPhotoCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, $ionicPopup, LoadingService, $compile) {
+.controller("PostAddPhotoCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, LoadingService) {
 		
 	// PHOTO GALLERY
 	
@@ -260,7 +257,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // LOCATION ADD
 
-.controller("PostAddLocationCtrl", function($scope, $rootScope, LoadingService) {
+.controller("PostAddLocationCtrl", function($scope, $rootScope, LoadingService, PostService) {
 		
 	// LOCATION
 	
@@ -284,7 +281,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		navigator.geolocation.getCurrentPosition(function (pos) {
 		  var content_str;
 		  
-		  $rootScope.postLocation = new Parse.GeoPoint({latitude: parseFloat(pos.coords.latitude), longitude: parseFloat(pos.coords.longitude)});
+		  PostService.postloc = new Parse.GeoPoint({latitude: parseFloat(pos.coords.latitude), longitude: parseFloat(pos.coords.longitude)});
 		  var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 		  
 		  $scope.map.setCenter(latlng);
@@ -330,26 +327,26 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // MESSAGE ADD
 
-.controller("PostAddMessageCtrl", function($scope, $rootScope, LoadingService) {
+.controller("PostAddMessageCtrl", function($scope, $rootScope, LoadingService, PostService) {
 	
 	$scope.postTextData ={};
 	
 	$scope.$on('savePostData', function(evt, args) {
 	
 			LoadingService.show();
-			console.log($scope.postPhotos);
+			console.log(PostService.postloc);
 			var PostObj = Parse.Object.extend("Post");
 			var post = new PostObj();
 								
 			post.set("postTitle", $scope.postTextData.title);
 			post.set("postMessage", $scope.postTextData.message);
-			post.set("postLocation", $rootScope.postLocation);
+			post.set("postLocation", PostService.postloc);
 			post.set("postPhotos", JSON.stringify($scope.postPhotos));
 			post.set("userPointer", Parse.User.current());
 			
 			post.save(null, {       
 				success: function(item) {
-					
+					LoadingService.hide();
 					console.log("saved");		
 				
 				},

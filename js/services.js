@@ -57,6 +57,25 @@ angular.module('Sahiplendir.services', [])
 }])
 
 
+<!-- POST SERVICE -->
+
+.service('PostService', ['$ionicLoading', function($ionicLoading) {
+	
+	var postloc;
+	
+	this.setLocation = function(geopoint) {
+		this.postloc = geopoint;
+	}
+	
+	this.getLocation = function() {
+		return postloc;
+	}
+	
+}])
+
+
+
+
 
 
 
