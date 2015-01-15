@@ -96,8 +96,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("PostAddCtrl", function($scope, $state, $rootScope,$timeout) {
     
 	$scope.buttonName = 'Devam';
-	$scope.postPhotos = [{large: 'uhıuewhdıuwe', small: 'duwehdıwheuı'}, {large: 'dewugduwe', small: 'deuwgduweyg'}];
-	$scope.postAddress = '';
+		
 	statesToGo = ['post.add.location', 'post.add.message'];
 	phase = 0;
 	
@@ -181,7 +180,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 function savePostImages() {
 		
 		
-		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail);
+		window.resolveLocalFileSystemURL($scope.lastPhoto, gotFile, gotFail,PostService);
 		
 		function gotFail(e) {
 			console.log("FileSystem Error");
@@ -215,7 +214,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 						  success: function(img_obj) {
 							
 								console.log("thumbUrl: " +img_obj.small)		
-								$scope.postPhotos.push({large: img_obj.large, small: img_obj.small});
+								PostService.addPhoto({large: img_obj.large, small: img_obj.small});
 								
 								
 								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);
@@ -288,7 +287,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		  
 		  geocoder.geocode({'latLng': latlng}, function(results, status) {
     		if (status == google.maps.GeocoderStatus.OK) {
-				console.log(results);
+				
 		  		if (results[0]) {
 					LoadingService.hide();
 					
@@ -298,6 +297,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 					});
 					
 					infowindow.setContent(results[0].formatted_address);
+					PostService.setAddress(results[0].formatted_address);
 					infowindow.open($scope.map, marker);
 				  } else {
 					console.log('No results found');
@@ -328,37 +328,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 // MESSAGE ADD
 
 .controller("PostAddMessageCtrl", function($scope, $rootScope, LoadingService, PostService) {
+
+	$scope.p = {};
 	
-	$scope.postTextData ={};
 	
 	$scope.$on('savePostData', function(evt, args) {
-	
-			LoadingService.show();
-			console.log(PostService.postloc);
-			var PostObj = Parse.Object.extend("Post");
-			var post = new PostObj();
-								
-			post.set("postTitle", $scope.postTextData.title);
-			post.set("postMessage", $scope.postTextData.message);
-			post.set("postLocation", PostService.postloc);
-			post.set("postPhotos", JSON.stringify($scope.postPhotos));
-			post.set("userPointer", Parse.User.current());
-			
-			post.save(null, {       
-				success: function(item) {
-					LoadingService.hide();
-					console.log("saved");		
-				
-				},
-				error: function(error) {
-				//Failure Callback
-				
-				console.log(error.message);
-				
-				}
-			});
-		
-		
+		console.log($scope.p.title);
+		PostService.setTitle($scope.p.title);
+		PostService.setMessage($scope.p.message);
+		PostService.post();
 	});
 	
 	

@@ -59,16 +59,79 @@ angular.module('Sahiplendir.services', [])
 
 <!-- POST SERVICE -->
 
-.service('PostService', ['$ionicLoading', function($ionicLoading) {
+.factory('PostService', ['LoadingService', function(LoadingService) {
 	
+	var title = '';
+	var message = '';
+	var photos = [];
 	var postloc;
+	var address = ''; 
 	
-	this.setLocation = function(geopoint) {
-		this.postloc = geopoint;
-	}
+	return {
 	
-	this.getLocation = function() {
-		return postloc;
+		setTitle : function(t) {
+			title = t;
+		},
+		
+		getTitle : function() {
+			return title;
+		},
+		
+		setMessage : function(m) {
+			message = m;
+		},
+		
+		getMessage : function() {
+			return message;
+		},
+		
+		setAddress : function(a) {
+			address = a;
+		},
+		
+		getAddress : function() {
+			return address;
+		},
+		
+		addPhoto : function(p) {
+			photos.push(p);
+		},
+		
+		getAllPhotos : function(p) {
+			return photos;
+		},
+		getFirstPhoto : function(p) {
+			return photos[0] || {};
+		},				
+		
+		
+		post : function() {
+				LoadingService.show();
+				console.log(postloc);
+				var PostObj = Parse.Object.extend("Post");
+				var post = new PostObj();
+									
+				post.set("postTitle", title);
+				post.set("postMessage", message);
+				post.set("postAddress", address);
+				post.set("postLocation", this.postloc);
+				post.set("postPhotos", JSON.stringify(photos));
+				post.set("userPointer", Parse.User.current());
+				
+				post.save(null, {       
+					success: function(item) {
+						LoadingService.hide();
+						console.log("saved");		
+					
+					},
+					error: function(error) {
+					//Failure Callback
+					
+					console.log(error.message);
+					
+					}
+				});	
+		}
 	}
 	
 }])
