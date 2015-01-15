@@ -97,10 +97,10 @@ angular.module('Sahiplendir.services', [])
 			photos.push(p);
 		},
 		
-		getAllPhotos : function(p) {
+		getAllPhotos : function() {
 			return photos;
 		},
-		getFirstPhoto : function(p) {
+		getFirstPhoto : function() {
 			return photos[0] || {};
 		},				
 		

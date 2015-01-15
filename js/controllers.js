@@ -128,11 +128,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // PHOTO ADD
 
-.controller("PostAddPhotoCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, LoadingService) {
+.controller("PostAddPhotoCtrl", function($scope,  $ionicSlideBoxDelegate, Camera, $timeout, LoadingService, PostService) {
 		
 	// PHOTO GALLERY
 	
-	
+	$scope.photos = [];
 	
 	
 	// disable swiping after the slidebox rendered
@@ -203,9 +203,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 					parseFile.save().then(function() {
 				
 						var cloudObj = {
-							url: parseFile.url(),
-							postTitle: 'test title hello',
-							postMessage: 'test message hello'
+							url: parseFile.url()
 						}
 						
 						console.log("large: " +cloudObj.url);	
@@ -215,20 +213,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							
 								console.log("thumbUrl: " +img_obj.small)		
 								PostService.addPhoto({large: img_obj.large, small: img_obj.small});
-								
-								
+								$scope.photos = PostService.getAllPhotos();						
 								$timeout(function() { $ionicSlideBoxDelegate.update(); LoadingService.hide()},  500);
-								//$ionicSlideBoxDelegate.update();
-								
-								
-			
-									/*var alertPopup = $ionicPopup.alert({
-										template: 'Kaydedildi..'
-									}).then(function(res) {
-										
-										console.log('Test Alert Box');
-									});*/
-							
+														
 						  },
 						  error: function(error) {
 							  console.log("from controller: "+error.message);
