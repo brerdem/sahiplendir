@@ -7,13 +7,12 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.currentSlide = 0;
 	
 	$scope.posts = [
-		{image:'http://test.clckwrk.im/test/1.jpg', text:'Tekir kedi, 4 aylık, sevecen, ajgsdauygdhafshdfashdfashfdahsfdhgasfdhgafhdssfahdfashdfashdfahsgdfhasdfhasgfdhasfdhasgfdhagsfdhsafdh'},
-		{image:'http://test.clckwrk.im/test/2.jpg', text:'Sarman, tahmini 4 aylık, aşırı oyuncu'},
-		{image:'http://test.clckwrk.im/test/3.jpg', text:'Labrador, 2 yaşında, İskenderun\'da barınakta'}
+		{image:'http://test.clckwrk.im/test/1.jpg', title:'Tekir kedi, 4 aylık, sevecen', userpic:'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/1932469_10152137578423473_1839392021227593231_n.jpg?oh=680da0cc16b58a4c8b37299d539fd313&oe=5565A60F&__gda__=1428996963_8ad9aa9c3d718d9e9e53a20e92c569eb', userfullname: 'Burak Erdem', timestamp: '2015-01-17T16:59:41.370Z'},
+		{image:'http://test.clckwrk.im/test/2.jpg', title:'Çok Tatlı mutlaka yardım, 4 aylık', userpic:'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/1932469_10152137578423473_1839392021227593231_n.jpg?oh=680da0cc16b58a4c8b37299d539fd313&oe=5565A60F&__gda__=1428996963_8ad9aa9c3d718d9e9e53a20e92c569eb', userfullname: 'Atilla Kıvanç', timestamp: '2015-01-12T21:59:41.370Z'},
+		{image:'http://test.clckwrk.im/test/3.jpg', title:'Süper oyuncu çok acil', userpic:'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/1932469_10152137578423473_1839392021227593231_n.jpg?oh=680da0cc16b58a4c8b37299d539fd313&oe=5565A60F&__gda__=1428996963_8ad9aa9c3d718d9e9e53a20e92c569eb', userfullname: 'Caner Özkul', timestamp: '2015-01-11T21:59:41.370Z'}
 	];
 	
-	$scope.desc = $scope.posts[0].text;
-	
+	setScopeValues(0);
 	$scope.addPost = function() {
     	$state.go('post.add.photo');
  	 };
@@ -21,13 +20,19 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 $scope.changeSlide = function(index) {
 		$scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
 		$scope.isHiddenText = false;
-		
 		$timeout(function() {$scope.isHiddenText = true},200);
-		
-		$scope.desc = $scope.posts[index].text;
+		setScopeValues(index);
 		
 		
 	 }
+	 
+	 function setScopeValues(index) {
+		$scope.title = $scope.posts[index].title;
+		$scope.userpic = $scope.posts[index].userpic;
+		$scope.userfullname = $scope.posts[index].userfullname;
+		$scope.timestamp = moment($scope.posts[index].timestamp).fromNow();
+	 }
+	 
 	 
 	 $scope.mainLinks = [
 	 	{href: '#/home', bg:'assertive-bg' , icon: 'sahiplendir-icon-home', label : 'Ana Sayfa'},
@@ -170,11 +175,6 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   	}
 	
 	
-	
-	
-	
-	
-	
 	// SAVE POST IMAGE
 	
 	 function savePostImages() {
@@ -235,8 +235,6 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		}
 	
   	}
-	
-	// MAPS FUNCTIONS
 	
 	  
 })
