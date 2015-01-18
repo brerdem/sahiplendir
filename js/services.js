@@ -135,11 +135,14 @@ angular.module('Sahiplendir.services', [])
 		getPosts : function(type) {
 			var q = $q.defer();
 			LoadingService.show();
-			var arr = []
+			var arr = [];
 			var Posts = Parse.Object.extend("Post");
 			var query = new Parse.Query(Posts);
 			query.include("userPointer");
-			if (type == 'me') query.equalTo("userPointer", Parse.User.current());
+			console.log(Parse.User.current());
+			if (type == 'me') {
+				query.equalTo("userPointer", Parse.User.current());
+			}
 			query.find({
 			  success: function(results) {
 				//console.log (results[0].toJSON());
@@ -148,7 +151,7 @@ angular.module('Sahiplendir.services', [])
 						id: results[i].get("objectId"),
 						title: results[i].get("postTitle"),
 						message: results[i].get("postMessages"),
-						photos: results[i].get("postPhotos"),
+						photos: JSON.parse(results[i].get("postPhotos")),
 						userfullname: results[i].get("userPointer").get("name"),
 						userpic: results[i].get("userPointer").get("profilePicture"),
 						location: {latitude : results[i].get("postLocation").latitude, longitude : results[i].get("postLocation").longitude}
