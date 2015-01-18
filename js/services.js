@@ -65,7 +65,8 @@ angular.module('Sahiplendir.services', [])
 	var message = '';
 	var photos = [];
 	var postloc;
-	var address = ''; 
+	var address = '';
+	var allposts = [];
 	
 	return {
 	
@@ -132,42 +133,55 @@ angular.module('Sahiplendir.services', [])
 				});	
 		},
 		
-		getPosts : function(type) {
+		getAllPosts : function() {
+			return allposts;
+		},
+		
+		getPosts : function() {
 			var q = $q.defer();
-			LoadingService.show();
-			var arr = [];
-			var Posts = Parse.Object.extend("Post");
-			var query = new Parse.Query(Posts);
-			query.include("userPointer");
-			console.log(Parse.User.current());
-			if (type == 'me') {
-				query.equalTo("userPointer", Parse.User.current());
-			}
-			query.find({
-			  success: function(results) {
-				//console.log (results[0].toJSON());
-				for (var i = 0; i < results.length; i++) { 
-				 	var obj = {
-						id: results[i].get("objectId"),
-						title: results[i].get("postTitle"),
-						message: results[i].get("postMessages"),
-						photos: JSON.parse(results[i].get("postPhotos")),
-						userfullname: results[i].get("userPointer").get("name"),
-						userpic: results[i].get("userPointer").get("profilePicture"),
-						location: {latitude : results[i].get("postLocation").latitude, longitude : results[i].get("postLocation").longitude}
+			
+			if (allposts.length <= 0) {
+				LoadingService.show();
+				var Posts = Parse.Object.extend("Post");
+				var query = new Parse.Query(Posts);
+				query.include("userPointer");
+				console.log(Parse.User.current());
+				/*if (type == 'me') {
+					query.equalTo("userPointer", Parse.User.current());
+				}*/
+				query.find({
+				  success: function(results) {
+					for (var i = 0; i < results.length; i++) { 
+						var obj = {
+							id: results[i].id,
+							title: results[i].get("postTitle"),
+							message: results[i].get("postMessage"),
+							photos: JSON.parse(results[i].get("postPhotos")),
+							userid : results[i].get("userPointer").id,
+							userfullname: results[i].get("userPointer").get("name"),
+							userpic: results[i].get("userPointer").get("profilePicture"),
+							created: results[i].createdAt,
+							location: {latitude : results[i].get("postLocation").latitude, longitude : results[i].get("postLocation").longitude}
+						}
+						allposts.push(obj);
 					}
-					arr.push(obj);
-				}
-				LoadingService.hide();
-				q.resolve(arr);
-
-			  },
-			  error: function(error) {
-				 q.reject(error);
-				console.log("Error: " + error.code + " " + error.message);
-			  }
-			  
-			});		
+					LoadingService.hide();
+					q.resolve(allposts);
+					
+	
+				  },
+				  error: function(error) {
+					 q.reject(error);
+					console.log("Error: " + error.code + " " + error.message);
+				  }
+				  
+				});	
+				
+				
+			} else {
+				q.resolve(allposts);
+			}
+			
 			return q.promise;
 		}
 	

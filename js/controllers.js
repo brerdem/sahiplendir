@@ -46,17 +46,31 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 // POSTS
 
 .controller('PostsCtrl', function($scope, $state, PostService) {
-	PostService.getPosts($state.current.data.type).then(function(arr) {
-		$scope.posts = arr;
-	},
-	function(err) {
-		console.log(err);
-	});
+		
+		PostService.getPosts().then(function(arr) {
+			$scope.posts = arr;
+		},
+		function(err) {
+			console.log(err);
+		});
+	
+	
+	
 })
 
 
-.controller('PostDetailCtrl', function($scope) {
+.controller('PostDetailCtrl', function($scope, $filter, $stateParams, PostService) {
+	console.log($stateParams.id);
+	//$scope.post = filterFilter(PostService.getAllPosts(), $stateParams.id);
 	
+	var found = $filter('filter')(PostService.getAllPosts(), {id: $stateParams.id}, true);
+     if (found.length) {
+         $scope.post = found[0];
+		 $scope.post.time = moment(found[0].createdAt).format('llll');
+		 
+     } else {
+        console.log('bulunamadı');
+     }
 })
 
 

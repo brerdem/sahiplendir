@@ -1,9 +1,28 @@
-<ion-view title="İlan" class="padding has-header">
+<ion-view title="İlan Detayı" class="padding">
 
-<ion-content>
+  <ion-content>
+	<ion-slide-box show-pager="true" on-slide-changed='changeSlide(index)'>
+		<ion-slide ng-repeat="photo in post.photos">
+        
+		 	<img src="{{photo.large}}" class="full-image">
+     
+		</ion-slide>
+        
+    </ion-slide-box>
+    
+    <h4>{{post.title}}</h4>
+    <div class="list">
 
+      <div class="item item-divider icon ion-document">Açıklama</div>
+      <div class="item">{{post.message}}</div>
+       <div class="item item-divider icon ion-person">Gönderen</div>
+      <div class="item"><img ng-src='{{post.userpic}}' class="post-slider-userpic padding-right">{{post.userfullname}}</div>
+      <div class="item item-divider icon ion-clock">Gönderim Zamanı</div>
+     <div class="item">{{post.time}}</div>
 
-		
+	</div>
+      
+ 
   </ion-content>
   
 </ion-view>

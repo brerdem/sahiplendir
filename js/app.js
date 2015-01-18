@@ -67,14 +67,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  .state('info', {
         url: '/info',
 		controller: 'InfoCtrl',
-        templateUrl: 'templates/info.html',
+        templateUrl: 'templates/info.html'
 		
       })
 	  
 	  
 	  .state('post', {
         url: '/post',
-		abstract: true
+		abstract: true,
+		template: '<ion-nav-view></ion-nav-view>'
 		
       })
 	  
@@ -82,55 +83,45 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  .state('post.add', {
         url: '/add',
 		abstract: true,
-		views: {
-			'@' : {
-				templateUrl: 'templates/post-add.html',
-				controller : 'PostAddCtrl'
-			}
-		}
+		templateUrl: 'templates/post-add.html',
+		controller : 'PostAddCtrl'
+		
+		
 	  })
 	  
 	  .state('post.add.photo', {
         url: '/photo',
-		views: {
-			'' : {
-				controller: 'PostAddPhotoCtrl',
-				templateUrl: 'templates/post-add-photo.html'
-			}
-		}
+		controller: 'PostAddPhotoCtrl',
+		templateUrl: 'templates/post-add-photo.html'
+		
+		
 	  })
 	 
 	   .state('post.add.location', {
         url: '/location',
-		views: {
-			'' : {
-				controller: 'PostAddLocationCtrl',
-				templateUrl: 'templates/post-add-location.html'
-			}
-		}
+		controller: 'PostAddLocationCtrl',
+		templateUrl: 'templates/post-add-location.html'
+		
 	  })
 	  
 	  .state('post.add.message', {
         url: '/message',
-		views: {
-			'' : {
-				controller: 'PostAddMessageCtrl',
-				templateUrl: 'templates/post-add-message.html'
-			}
-		}
+		controller: 'PostAddMessageCtrl',
+		templateUrl: 'templates/post-add-message.html'
+			
 	  })
 	  
 	  .state('posts', {
         url: '/posts',
 		abstract: true,
-		templateUrl: 'templates/posts.html'
+		templateUrl: 'templates/posts.html',
+		
 				
 	  })
 	  .state('posts.all', {
         url: '/all',
-		parent: 'posts',
 		views: {
-			'posts-all@posts' : {
+			'posts-all' : {
 				templateUrl: 'templates/posts-list.html',
 				controller: 'PostsCtrl'
 			}
@@ -142,9 +133,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  })
 	   .state('posts.me', {
         url: '/me',
-		parent: 'posts',
 		views: {
-			'posts-me@posts' : {
+			'posts-me' : {
 				templateUrl: 'templates/posts-list.html',
 				controller: 'PostsCtrl'
 			}
@@ -154,6 +144,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 		
 	  })
+	  
+	   .state('post.detail', {
+        url: '/detail/:id',
+		controller: 'PostDetailCtrl',
+        templateUrl: 'templates/post-detail.html'
+		
+	  })
+	  
 	
 	  
 	  $urlRouterProvider.otherwise('/tab/signin')
