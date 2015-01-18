@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('Sahiplendir', ['ionic', 'Sahiplendir.controllers', 'Sahiplendir.directives'])
+var app = angular.module('Sahiplendir', ['ionic', 'Sahiplendir.controllers', 'Sahiplendir.directives', 'Sahiplendir.services'])
 
 app.config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
@@ -48,20 +48,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       })
 	  
-	
-	  
       .state('home', {
         url: '/home',
 		controller: 'MainPageCtrl',
         templateUrl: 'templates/home.html'
 		
       })
-	  
-      .state('posts', {
-        url: '/posts',
-		controller: 'PostsCtrl',
-        templateUrl: 'templates/posts.html'
-	  })
+	        
 	  .state('profile', {
         url: '/profile',
 		controller: 'ProfileCtrl',
@@ -95,8 +88,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				controller : 'PostAddCtrl'
 			}
 		}
-		
-		
 	  })
 	  
 	  .state('post.add.photo', {
@@ -128,8 +119,41 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			}
 		}
 	  })
-	
 	  
+	  .state('posts', {
+        url: '/posts',
+		abstract: true,
+		templateUrl: 'templates/posts.html'
+				
+	  })
+	  .state('posts.all', {
+        url: '/all',
+		parent: 'posts',
+		views: {
+			'posts-all@posts' : {
+				templateUrl: 'templates/posts-list.html',
+				controller: 'PostsCtrl'
+			}
+		},
+		data : {
+			type : 'all'
+		}
+		
+	  })
+	   .state('posts.me', {
+        url: '/me',
+		parent: 'posts',
+		views: {
+			'posts-me@posts' : {
+				templateUrl: 'templates/posts-list.html',
+				controller: 'PostsCtrl'
+			}
+		},
+		data : {
+			type : 'me'
+		}
+		
+	  })
 	
 	  
 	  $urlRouterProvider.otherwise('/tab/signin')

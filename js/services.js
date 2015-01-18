@@ -59,7 +59,7 @@ angular.module('Sahiplendir.services', [])
 
 <!-- POST SERVICE -->
 
-.factory('PostService', ['LoadingService', function(LoadingService) {
+.factory('PostService', ['LoadingService', '$q', function(LoadingService, $q) {
 	
 	var title = '';
 	var message = '';
@@ -103,8 +103,7 @@ angular.module('Sahiplendir.services', [])
 		getFirstPhoto : function() {
 			return photos[0] || {};
 		},				
-		
-		
+			
 		post : function() {
 				LoadingService.show();
 				console.log(postloc);
@@ -131,7 +130,44 @@ angular.module('Sahiplendir.services', [])
 					
 					}
 				});	
+		},
+		
+		getPosts : function(type) {
+			var q = $q.defer();
+			LoadingService.show();
+			var arr = []
+			var Posts = Parse.Object.extend("Post");
+			var query = new Parse.Query(Posts);
+			query.include("userPointer");
+			if (type == 'me') query.equalTo("userPointer", Parse.User.current());
+			query.find({
+			  success: function(results) {
+				//console.log (results[0].toJSON());
+				for (var i = 0; i < results.length; i++) { 
+				 	var obj = {
+						id: results[i].get("objectId"),
+						title: results[i].get("postTitle"),
+						message: results[i].get("postMessages"),
+						photos: results[i].get("postPhotos"),
+						userfullname: results[i].get("userPointer").get("name"),
+						userpic: results[i].get("userPointer").get("profilePicture"),
+						location: {latitude : results[i].get("postLocation").latitude, longitude : results[i].get("postLocation").longitude}
+					}
+					arr.push(obj);
+				}
+				LoadingService.hide();
+				q.resolve(arr);
+
+			  },
+			  error: function(error) {
+				 q.reject(error);
+				console.log("Error: " + error.code + " " + error.message);
+			  }
+			  
+			});		
+			return q.promise;
 		}
+	
 	}
 	
 }])

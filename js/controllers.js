@@ -36,7 +36,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 
 	 $scope.mainLinks = [
 	 	{href: '#/home', bg:'assertive-bg' , icon: 'sahiplendir-icon-home', label : 'Ana Sayfa'},
-		{href: '#/posts', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
+		{href: '#/posts/all', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
 		{href: '#/info',  bg:'royal-bg', icon: 'sahiplendir-icon-info', label : 'Yararlı Bilgiler'}
 	 ]
 	 
@@ -45,11 +45,13 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // POSTS
 
-.controller('PostsCtrl', function($scope) {
-	$scope.items = [];
-  for (var i = 0; i < 20; i++) {
-    $scope.items.push('Item ' + i);
-  }
+.controller('PostsCtrl', function($scope, $state, PostService) {
+	PostService.getPosts($state.current.data.type).then(function(arr) {
+		$scope.posts = arr;
+	},
+	function(err) {
+		console.log(err);
+	});
 })
 
 
@@ -86,13 +88,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   $scope.data = {
     items : [
 		{href: '#/home', icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
-		{href: '#/posts', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
+		{href: '#/posts/all', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
 		{href: '#/info', icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
 	]
   };
  
-   
-  
 })
 
 
@@ -315,8 +315,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("PostAddMessageCtrl", function($scope, $rootScope, LoadingService, PostService) {
 
 	$scope.p = {};
-	
-	
+
 	$scope.$on('savePostData', function(evt, args) {
 		console.log($scope.p.title);
 		PostService.setTitle($scope.p.title);

@@ -1,0 +1,9 @@
+<ion-content>
+	<div ng-if='$scope.posts.length == 0'>Herhangi bir ilan bulunmamaktadır.</div>
+    <ion-list>
+      <ion-item ng-repeat="post in posts">
+        {{post.userfullname}}
+      </ion-item>
+    </ion-list>
+</ion-content>
+

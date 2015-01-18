@@ -1,8 +1,21 @@
-<ion-view title="İlanlar" hide-back-button="true" class="padding has-header">
+<div ui-view="posts-view" class="padding">
 
-	<ion-content>
 	
+        <ion-tabs class="tabs-striped tabs-bottom tabs-color-positive">
+        
+          <ion-tab title="Tüm İlanlar" ui-sref="posts.all">
+            <!-- Tab 1 content -->
+            
+            <ion-view class="background" title="Tüm İlanlar"><ui-view name="posts-all" /></ion-view>
+          </ion-tab>
+        
+          <ion-tab title="İlanlarım" ui-sref="posts.me">
+            <!-- Tab 2 content -->
+            <ion-view class="background" title="İlanlarım"><ui-view name="posts-me" /></ion-view>
+          </ion-tab>
+        
+        </ion-tabs>
 
-  	</ion-content>
+  	
   
-</ion-view>
+</div>
