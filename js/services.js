@@ -161,7 +161,8 @@ angular.module('Sahiplendir.services', [])
 							userfullname: results[i].get("userPointer").get("name"),
 							userpic: results[i].get("userPointer").get("profilePicture"),
 							created: results[i].createdAt,
-							location: {latitude : results[i].get("postLocation").latitude, longitude : results[i].get("postLocation").longitude}
+							location: {lat : results[i].get("postLocation").latitude, lng : results[i].get("postLocation").longitude},
+							address : results[i].get("postAddress")
 						}
 						allposts.push(obj);
 					}

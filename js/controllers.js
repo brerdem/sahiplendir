@@ -71,6 +71,25 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
      } else {
         console.log('bulunamadı');
      }
+	 
+	$scope.mapCreated = function(map) {
+    	$scope.map = map;
+		var latlng = new google.maps.LatLng();
+		marker = new google.maps.Marker({
+						position: $scope.post.location,
+						map: $scope.map
+		});
+		
+		
+		var infowindow = new google.maps.InfoWindow({
+			content : $scope.post.address,
+			maxWidth: 200	
+		});
+		
+	    infowindow.open($scope.map, marker);
+		$scope.map.setCenter($scope.post.location);
+  	};
+		
 })
 
 

@@ -10,15 +10,17 @@
         
     </ion-slide-box>
     
-    <h4>{{post.title}}</h4>
+    <div class="item"><span><b>{{post.title}}</b></span></div>
     <div class="list">
 
-      <div class="item item-divider icon ion-document">Açıklama</div>
+      <div class="detail item item-divider"><i class="icon ion-document"></i>Açıklama</div>
       <div class="item">{{post.message}}</div>
-       <div class="item item-divider icon ion-person">Gönderen</div>
+       <div class="detail item item-divider"><i class="icon ion-person"></i>Gönderen</div>
       <div class="item"><img ng-src='{{post.userpic}}' class="post-slider-userpic padding-right">{{post.userfullname}}</div>
-      <div class="item item-divider icon ion-clock">Gönderim Zamanı</div>
+      <div class="detail item item-divider"><i class="icon ion-clock"></i>Gönderim Zamanı</div>
      <div class="item">{{post.time}}</div>
+     <div class="detail item item-divider"><i class="icon ion-map"></i>Konum</div>
+     <div style="height:250px"><map on-create="mapCreated(map)"></map></div>
 
 	</div>
       
