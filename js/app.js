@@ -17,7 +17,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  .state('tabs', {
         url: '/tab',
 		abstract: true,
-        templateUrl: "login.html",
+        templateUrl: "templates/login.html",
 		controller: 'LoginCtrl'
       })
 
@@ -36,7 +36,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  
 	   .state('tabs.signin', {
         url: '/signin',
-		cache: false,
 		views: {
 			'signin-tab': {
 			  templateUrl: "templates/signin.html",
@@ -48,14 +47,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       })
 	  
-      .state('home', {
+	  .state('app', {
+        url: '/app',
+		abstract : true,
+		templateUrl: 'templates/menu.html'
+		
+      })
+	  
+	  
+      .state('app.home', {
         url: '/home',
 		controller: 'MainPageCtrl',
         templateUrl: 'templates/home.html'
 		
       })
 	        
-	  .state('profile', {
+	  .state('app.profile', {
         url: '/profile',
 		controller: 'ProfileCtrl',
         templateUrl: 'templates/profile.html',
@@ -64,7 +71,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
       })
 	  
-	  .state('info', {
+	  .state('app.info', {
         url: '/info',
 		controller: 'InfoCtrl',
         templateUrl: 'templates/info.html'
@@ -72,7 +79,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       })
 	  
 	  
-	  .state('post', {
+	  .state('app.post', {
         url: '/post',
 		abstract: true,
 		template: '<ion-nav-view></ion-nav-view>'
@@ -80,7 +87,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       })
 	  
 
-	  .state('post.add', {
+	  .state('app.post.add', {
         url: '/add',
 		abstract: true,
 		templateUrl: 'templates/post-add.html',
@@ -89,7 +96,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
 	  })
 	  
-	  .state('post.add.photo', {
+	  .state('app.post.add.photo', {
         url: '/photo',
 		controller: 'PostAddPhotoCtrl',
 		templateUrl: 'templates/post-add-photo.html'
@@ -97,28 +104,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
 	  })
 	 
-	   .state('post.add.location', {
+	   .state('app.post.add.location', {
         url: '/location',
 		controller: 'PostAddLocationCtrl',
 		templateUrl: 'templates/post-add-location.html'
 		
 	  })
 	  
-	  .state('post.add.message', {
+	  .state('app.post.add.message', {
         url: '/message',
 		controller: 'PostAddMessageCtrl',
 		templateUrl: 'templates/post-add-message.html'
 			
 	  })
 	  
-	  .state('posts', {
+	  .state('app.posts', {
         url: '/posts',
 		abstract: true,
 		templateUrl: 'templates/posts.html',
 		
 				
 	  })
-	  .state('posts.all', {
+	  .state('app.posts.all', {
         url: '/all',
 		views: {
 			'posts-all' : {
@@ -131,7 +138,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 		
 	  })
-	   .state('posts.me', {
+	   .state('app.posts.me', {
         url: '/me',
 		views: {
 			'posts-me' : {
@@ -145,7 +152,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
 	  })
 	  
-	   .state('post.detail', {
+	   .state('app.post.detail', {
         url: '/detail/:id',
 		controller: 'PostDetailCtrl',
         templateUrl: 'templates/post-detail.html'

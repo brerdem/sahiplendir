@@ -106,6 +106,7 @@ angular.module('Sahiplendir.services', [])
 		},				
 			
 		post : function() {
+				var q = $q.defer();
 				LoadingService.show();
 				console.log(postloc);
 				var PostObj = Parse.Object.extend("Post");
@@ -120,17 +121,20 @@ angular.module('Sahiplendir.services', [])
 				
 				post.save(null, {       
 					success: function(item) {
+						q.resolve(item);
 						LoadingService.hide();
 						console.log("saved");		
 					
 					},
 					error: function(error) {
 					//Failure Callback
-					
+					q.reject(error);
 					console.log(error.message);
 					
 					}
-				});	
+				});
+				return q.promise;
+					
 		},
 		
 		getAllPosts : function() {
@@ -141,6 +145,7 @@ angular.module('Sahiplendir.services', [])
 			var q = $q.defer();
 			
 			//if (allposts.length <= 0) {
+				allposts = [];
 				LoadingService.show();
 				var Posts = Parse.Object.extend("Post");
 				var query = new Parse.Query(Posts);
@@ -154,15 +159,15 @@ angular.module('Sahiplendir.services', [])
 					for (var i = 0; i < results.length; i++) { 
 						var obj = {
 							id: results[i].id,
-							title: results[i].get("postTitle"),
-							message: results[i].get("postMessage"),
-							photos: JSON.parse(results[i].get("postPhotos")),
-							userid : results[i].get("userPointer").id,
-							userfullname: results[i].get("userPointer").get("name"),
-							userpic: results[i].get("userPointer").get("profilePicture"),
-							created: results[i].createdAt,
-							location: {lat : results[i].get("postLocation").latitude, lng : results[i].get("postLocation").longitude},
-							address : results[i].get("postAddress")
+							title: results[i].get("postTitle") || '',
+							message: results[i].get("postMessage") || '',
+							photos: JSON.parse(results[i].get("postPhotos")) || [],
+							userid : results[i].get("userPointer").id || '',
+							userfullname: results[i].get("userPointer").get("name") || '',
+							userpic: results[i].get("userPointer").get("profilePicture") || '',
+							created: results[i].createdAt || '',
+							location: {lat : results[i].get("postLocation").latitude, lng : results[i].get("postLocation").longitude} || {},
+							address : results[i].get("postAddress") || ''
 						}
 						allposts.push(obj);
 					}

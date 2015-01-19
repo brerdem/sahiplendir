@@ -45,64 +45,7 @@ moment.locale('tr');
 
 <body ng-app="Sahiplendir">
 
-<!--<ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>-->
-
-<!-- MAIN MENU --> 
-
-<ion-side-menus ng-controller="SideMenuCtrl">
-  <ion-side-menu-content drag-content="false">
-    <ion-nav-bar animation="nav-title-slide-ios7" class="bar-positive" align-title="center">
-      <ion-nav-back-button class="button-icon ion-arrow-left-c"> </ion-nav-back-button>
-      <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"> </button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
-    <ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
-  </ion-side-menu-content>
-  <ion-side-menu side="right">
-    <ion-header-bar class="bar-balanced" align-title="middle">
-        <img class="side-menu-profil-pic" ng-src="https://graph.facebook.com/{{user.id}}/picture?type=small">
-        <span class="title">{{user.name}}</span>
-    </ion-header-bar>
-    <ion-content>
-      <ion-menu-list ng-controller='SideMenuListCtrl'></ion-menu-list>
-    </ion-content>
-  </ion-side-menu>
-</ion-side-menus>
-
-
-<!-- LOGIN TABS--> 
-
-<script id="login.html" type="text/ng-template">
-
-	<ion-tabs class="tabs-striped tabs-bottom tabs-color-positive">
-	
-	  <ion-tab title="Giriş Yap" ui-sref="tabs.signin">
-		<!-- Tab 1 content -->
-		<ion-nav-view hide-nav-bar="true" name="signin-tab" class="background"></ion-nav-view>
-	  </ion-tab>
-	
-	  <ion-tab title="Kaydol" ui-sref="tabs.signup">
-		<!-- Tab 2 content -->
-			<ion-nav-view hide-nav-bar="true" name="signup-tab" class="background"></ion-nav-view>
-	  </ion-tab>
-	
-	</ion-tabs>
-</script>
-
-
-
-<!-- SIDE MENU LIST --> 
-<script id="ionMenuList.html" type="text/ng-template">
-  <div class="list">
-	
-		<a ng-href='{{item.href}}' class="menu-close item dark" ng-repeat="item in data.items">
-			<i ng-class="item.icon" class="icon padding-right side-menu-i"></i>
-			<span>{{item.label}}</span>
-		</a>
-	
-  </div>
-</script> 
+<ion-nav-view animation="slide-left-right" class="background"></ion-nav-view>
 
 <!-- Facebook Login -->
 <div id="fb-root"></div>

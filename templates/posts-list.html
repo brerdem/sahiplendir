@@ -2,7 +2,7 @@
 <ion-content>
  
   <ion-list can-swipe="true">
-    <ion-item class="item-avatar item-remove-animate" ng-repeat="post in posts" item="post" href="#/post/detail/{{post.id}}" > 
+    <ion-item class="item-avatar item-remove-animate" ng-repeat="post in posts" item="post" href="#/app/post/detail/{{post.id}}" > 
       <img ng-src="{{post.photos[0].small}}">
       <h2>{{post.title}}</h2>
       <p>{{post.userfullname}}</p>

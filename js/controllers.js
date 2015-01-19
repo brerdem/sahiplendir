@@ -14,7 +14,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	setScopeValues(0);
 	$scope.addPost = function() {
-    	$state.go('post.add.photo');
+    	$state.go('app.post.add.photo');
  	 };
 	 
 	 $scope.changeSlide = function(index) {
@@ -35,9 +35,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 
 	 
 	 $scope.mainLinks = [
-	 	{href: '#/home', bg:'assertive-bg' , icon: 'sahiplendir-icon-home', label : 'Ana Sayfa'},
-		{href: '#/posts/all', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
-		{href: '#/info',  bg:'royal-bg', icon: 'sahiplendir-icon-info', label : 'Yararlı Bilgiler'}
+	 	{href: '#/app/home', bg:'assertive-bg' , icon: 'sahiplendir-icon-home', label : 'Ana Sayfa'},
+		{href: '#/app/posts/all', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
+		{href: '#/app/info',  bg:'royal-bg', icon: 'sahiplendir-icon-info', label : 'Yararlı Bilgiler'}
 	 ]
 	 
 	 
@@ -131,9 +131,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
  
   $scope.data = {
     items : [
-		{href: '#/home', icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
-		{href: '#/posts/all', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
-		{href: '#/info', icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
+		{href: '#/app/home', icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
+		{href: '#/app/posts/all', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
+		{href: '#/app/info', icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
 	]
   };
  
@@ -146,7 +146,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     
 	$scope.buttonName = 'Devam';
 		
-	statesToGo = ['post.add.location', 'post.add.message'];
+	statesToGo = ['app.post.add.location', 'app.post.add.message'];
 	phase = 0;
 	
 	
@@ -356,7 +356,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // MESSAGE ADD
 
-.controller("PostAddMessageCtrl", function($scope, $rootScope, LoadingService, PostService) {
+.controller("PostAddMessageCtrl", function($scope, $state,  PostService) {
 
 	$scope.p = {};
 
@@ -364,7 +364,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		console.log($scope.p.title);
 		PostService.setTitle($scope.p.title);
 		PostService.setMessage($scope.p.message);
-		PostService.post();
+		PostService.post().then(function(item) {
+			$state.go('app.posts.list.all');
+		}, function(err) {
+			console.log(err.message);
+		});
 	});
 	
 	
@@ -436,7 +440,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							
 							userObject.set('profilePicture', res.data.url);
 							userObject.save();
-							$state.go('profile');
+							$state.go('app.profile');
 						}, 
 						function(error) {
 							console.log("me pic error:"+error);
@@ -470,8 +474,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		function(error) {
 			console.log('not logged out');
 		});
-		
-		
+
 		$state.go('tabs.signin');	
 		
 	}

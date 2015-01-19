@@ -15,7 +15,7 @@ angular.module('Sahiplendir.directives', [])
 .directive("ionMenuList", function() {
   return {
     restrict : "E",
-    templateUrl : "ionMenuList.html"
+    templateUrl : "templates/ion-menu-list.html"
   }
 })
 
