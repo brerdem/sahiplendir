@@ -57,8 +57,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 })
 
-.controller('PostsMeCtrl', function($scope, $state, PostService) {
-	var found = $filter('filter')(PostService.getAllPosts(), {id: Parse.User.current().id}, true);
+.controller('PostsMeCtrl', function($scope, $filter,  PostService) {
+	var found = $filter('filter')(PostService.getAllPosts(), {userid: 's35qkAMhFw'}, true);
      if (found.length) {
          $scope.posts = found;
 				 
@@ -288,10 +288,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 .controller("PostAddLocationCtrl", function($scope, $rootScope, LoadingService, PostService) {
 		
 	// LOCATION
-	
-	
-	
-	  $scope.mapCreated = function(map) {
+
+    $scope.mapCreated = function(map) {
     	$scope.map = map;
   	};
 	
@@ -332,6 +330,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 					console.log('No results found');
 				  }
 			} else {
+				LoadingService.hide();
       			alert('Geocoder failed due to: ' + status);
     		}
 		  })	  
@@ -345,8 +344,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   		  });*/
 		 
 		}, function (error) {
+			LoadingService.hide();
 		  alert('Unable to get location: ' + error.message);
-		});
+		}, {enableHighAccuracy: true, timeout: 10000});
   });
 	  
 	
