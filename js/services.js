@@ -140,7 +140,7 @@ angular.module('Sahiplendir.services', [])
 		getPosts : function() {
 			var q = $q.defer();
 			
-			if (allposts.length <= 0) {
+			//if (allposts.length <= 0) {
 				LoadingService.show();
 				var Posts = Parse.Object.extend("Post");
 				var query = new Parse.Query(Posts);
@@ -179,9 +179,9 @@ angular.module('Sahiplendir.services', [])
 				});	
 				
 				
-			} else {
+			/*} else {
 				q.resolve(allposts);
-			}
+			}*/
 			
 			return q.promise;
 		}

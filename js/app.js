@@ -123,7 +123,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		views: {
 			'posts-all' : {
 				templateUrl: 'templates/posts-list.html',
-				controller: 'PostsCtrl'
+				controller: 'PostsAllCtrl'
 			}
 		},
 		data : {
@@ -136,7 +136,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		views: {
 			'posts-me' : {
 				templateUrl: 'templates/posts-list.html',
-				controller: 'PostsCtrl'
+				controller: 'PostsMeCtrl'
 			}
 		},
 		data : {

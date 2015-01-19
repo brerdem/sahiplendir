@@ -45,7 +45,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // POSTS
 
-.controller('PostsCtrl', function($scope, $state, PostService) {
+.controller('PostsAllCtrl', function($scope, PostService) {
 		
 		PostService.getPosts().then(function(arr) {
 			$scope.posts = arr;
@@ -53,10 +53,21 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		function(err) {
 			console.log(err);
 		});
-	
-	
+
 	
 })
+
+.controller('PostsMeCtrl', function($scope, $state, PostService) {
+	var found = $filter('filter')(PostService.getAllPosts(), {id: Parse.User.current().id}, true);
+     if (found.length) {
+         $scope.posts = found;
+				 
+     } else {
+        console.log('bulunamadı');
+     }
+		
+})
+
 
 
 .controller('PostDetailCtrl', function($scope, $filter, $stateParams, PostService) {
