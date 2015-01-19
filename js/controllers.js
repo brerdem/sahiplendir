@@ -365,7 +365,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		PostService.setTitle($scope.p.title);
 		PostService.setMessage($scope.p.message);
 		PostService.post().then(function(item) {
-			$state.go('app.posts.list.all');
+			$state.go('app.posts.all');
 		}, function(err) {
 			console.log(err.message);
 		});
