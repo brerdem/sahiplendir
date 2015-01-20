@@ -12,6 +12,60 @@ angular.module('Sahiplendir.directives', [])
 })
 
 
+.directive('emailAvailable', function($timeout) { // available
+    return {
+		restrict : 'A',
+        require: 'ngModel',
+        link: function(scope, elem, attr, ctrl) {
+			
+			 
+			
+				ctrl.$parsers.push(function(viewValue) {
+					if(viewValue && viewValue.match(/[a-z0-9\-_]+@[a-z0-9\-_]+\.[a-z0-9\-_]{2,}/)) {
+						
+						if (timeout) {
+							timeout.cancel();
+						} else {
+							
+							var timeout = $timeout(function() {
+									
+							var query = new Parse.Query(Parse.User);
+							  query.equalTo("email", viewValue);
+							  query.find({
+								  success: function(results) {
+									  console.log("length: "+results.length);
+									  if (results.length == 0) {
+										ctrl.$setValidity('emailAvailable', true);
+										
+									  } else {
+										ctrl.$setValidity('emailAvailable', false);
+										 
+									  }
+									  return viewValue;
+									 
+								  },
+								  error: function(error) {
+									
+									  return undefined
+								  }
+							 })
+						}, 1000);
+					  }
+						
+					} else {
+						console.log("variable is undefined");
+						return undefined;
+					}
+				});
+			
+        }
+    };
+})
+
+
+
+
+
 .directive("ionMenuList", function() {
   return {
     restrict : "E",
