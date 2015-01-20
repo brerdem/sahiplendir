@@ -25,10 +25,11 @@
 	<label class="item item-input">
 		<input type="email" placeholder="E-Mail" name="email" ng-model="signup.email" ng-minlength=6 email-available />
 	</label>
-     {{signup_form.email.$error}}
-          
+     <div class="error assertive" ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+            <small class="error" ng-show="signup_form.email.$error.minlength">E-mailiniz en az 6 harf olmak zorunda</small>
+            <small class="error" ng-show="signup_form.email.$error.email">Geçerli bir e-mail giriniz</small>
             <small class="error" ng-show="signup_form.email.$error.unique">Bu e-mail daha önce kullanılmış</small>
-   
+    </div>
 	<label class="item item-input">
 		<input type="password" placeholder="Şifre" ng-minlength=8 required />
 	</label>
