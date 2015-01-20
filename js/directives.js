@@ -12,36 +12,33 @@ angular.module('Sahiplendir.directives', [])
 })
 
 
-.directive('emailAvailable', function($timeout) { // available
+.directive('emailAvailable', function() { // available
     return {
 		restrict : 'A',
         require: 'ngModel',
         link: function(scope, elem, attr, ctrl) {
-			
-			 
-			
-				ctrl.$parsers.push(function(viewValue) {
-					if(viewValue && viewValue.match(/[a-z0-9\-_]+@[a-z0-9\-_]+\.[a-z0-9\-_]{2,}/)) {
-						
-						if (timeout) {
-							timeout.cancel();
-						} else {
-							
-							var timeout = $timeout(function() {
+			elem.bind('blur', function (e) {
+				var val = elem.val();
+				console.log(val);
+					
+				
+					if(val.match(/[a-z0-9\-_]+@[a-z0-9\-_]+\.[a-z0-9\-_]{2,}/)) {
+					
 									
 							var query = new Parse.Query(Parse.User);
-							  query.equalTo("email", viewValue);
+							  query.equalTo("email", val);
 							  query.find({
 								  success: function(results) {
 									  console.log("length: "+results.length);
 									  if (results.length == 0) {
-										ctrl.$setValidity('emailAvailable', true);
+										ctrl.$setValidity('unique', true);
 										
 									  } else {
-										ctrl.$setValidity('emailAvailable', false);
+										ctrl.$setValidity('unique', false);
 										 
 									  }
-									  return viewValue;
+									  return val;
+									  
 									 
 								  },
 								  error: function(error) {
@@ -49,15 +46,15 @@ angular.module('Sahiplendir.directives', [])
 									  return undefined
 								  }
 							 })
-						}, 1000);
-					  }
+					
+					 
 						
 					} else {
 						console.log("variable is undefined");
 						return undefined;
 					}
-				});
-			
+				})
+
         }
     };
 })
