@@ -414,6 +414,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     };
 
 	$scope.login = function() {
+		LoadingService.show();
         console.log('Login');
         if (!window.cordova) {
             facebookConnectPlugin.browserInit('1510553752541619');
@@ -441,6 +442,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 							console.log("/me pic response:"+res.data.url);
 							userObject.set('profilePicture', res.data.url);
 							userObject.save().then(function() {
+								LoadingService.hide();
 								$state.go('app.profile');
 							})
 						}, 
@@ -467,9 +469,6 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("ProfileCtrl", function($scope, $state) {
-	
-	$scope
-	
 	
 	
     $scope.logout = function() {
