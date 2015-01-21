@@ -53,7 +53,7 @@ angular.module('Sahiplendir.directives', [])
 						console.log("variable is undefined");
 						return undefined;
 					}
-				})
+			})
 
         }
     };
