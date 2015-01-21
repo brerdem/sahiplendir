@@ -204,6 +204,16 @@ map {
 	margin-left:-5px
 }
 
+/* ---------------------------------- SIGNUP ------------------------------------ */
+
+.list input.ng-invalid.ng-dirty {
+	color: #FF0000;
+}
+
+.list input.ng-valid.ng-dirty {
+	color: #00a77e;
+}
+
 
 
 

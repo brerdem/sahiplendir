@@ -1,6 +1,6 @@
 	
   <div class="item-text-wrap card padding-left">
-    <h4 class="calm">Lütfen devam etmek için giriş yapınız.</h4>
+    <h5 class="calm">Lütfen devam etmek için giriş yapınız.</h5>
   </div>
 
 
@@ -9,18 +9,19 @@
 
 	
 	<label class="item item-input">
-		<input type="text" class="stable" placeholder="E-Mail">
+		<input type="email" class="stable" placeholder="E-Mail" name="email" ng-model="signin.email">
 	</label>
 	<label class="item item-input">
-		<input type="text" placeholder="Şifre">
+		<input type="password" placeholder="Şifre" name="password" ng-model="signin.password">
 	</label>
 	
+	<div class="button-bar padding-top">
+    
+		<button class="button  button-light button-small" ng-click="$state.go('app.home')"> Şifremi Unuttum </button>
+		<button class="button button-balanced button-small" ng-click="$state.go('app.home')"> Gönder</button>
 	
-	<div>
-		<button class="button button-block button-balanced" ng-click="$state.go('app.home')"> Ana Sayfa 3</button>
-	</div>
-    <div>
-		<button class="button button-block button-balanced" ng-click="$state.go('app.home')"> Gönder </button>
+    
+		
 	</div>
 	<div class="padding"></div>
 	

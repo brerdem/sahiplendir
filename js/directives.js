@@ -37,7 +37,7 @@ angular.module('Sahiplendir.directives', [])
 										ctrl.$setValidity('unique', false);
 										 
 									  }
-									  return val;
+									  scope.$apply();
 									  
 									 
 								  },

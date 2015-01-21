@@ -1,6 +1,23 @@
 angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
+
+.controller('SideMenuCtrl', function($scope, $ionicSideMenuDelegate) {
+	$scope.toggleRight = function() {
+    $ionicSideMenuDelegate.toggleRight();
+  };
+  $scope.user = {
+   
+	  name : Parse.User.current() ? Parse.User.current().get('name') : 'Sahiplendir',
+	  id : Parse.User.current() ? Parse.User.current().get('fbId') : 'undefined',
+	  email : Parse.User.current() ? Parse.User.current().get('email') : 'no mail',
+	  picture : Parse.User.current() ? Parse.User.current().get('profilePicture') : 'no',
+  }
+})
+
+
+
+
 .controller('MainPageCtrl', function($scope, $state, $timeout, $ionicSlideBoxDelegate) {
 	
 	$scope.isHiddenText = true;
@@ -111,21 +128,6 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     $scope.items.push('Item ' + i);
   }
 })
-
-.controller('SideMenuCtrl', function($scope, $ionicSideMenuDelegate) {
-	$scope.toggleRight = function() {
-    $ionicSideMenuDelegate.toggleRight();
-  };
-  $scope.user = {
-   
-	  name : Parse.User.current() ? Parse.User.current().get('name') : 'Sahiplendir',
-	  id : Parse.User.current() ? Parse.User.current().get('fbId') : 'undefined',
-	  email : Parse.User.current() ? Parse.User.current().get('email') : 'no mail',
-	  picture : Parse.User.current() ? Parse.User.current().get('profilePicture') : 'no',
-  }
-})
-
-
 
 .controller("SideMenuListCtrl", function($scope) {
  
@@ -433,14 +435,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 					userObject.set('name', response.name);
                     userObject.set('email', response.email);
 					userObject.set('fbId', response.id);
-                    userObject.save();
+                    //userObject.save();
 					facebookConnectPlugin.api('/me/picture?type=normal&redirect=false', null,
 						function(res) {
 							console.log("/me pic response:"+res.data.url);
-							
 							userObject.set('profilePicture', res.data.url);
-							userObject.save();
-							$state.go('app.profile');
+							userObject.save().then(function() {
+								$state.go('app.profile');
+							})
 						}, 
 						function(error) {
 							console.log("me pic error:"+error);
@@ -465,6 +467,11 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("ProfileCtrl", function($scope, $state) {
+	
+	$scope
+	
+	
+	
     $scope.logout = function() {
 		Parse.User.logOut();
 		facebookConnectPlugin.logout(
