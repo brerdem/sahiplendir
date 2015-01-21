@@ -153,6 +153,11 @@ ion-option-button.button > i.icon:before {
 	border-radius:70px;
 
 }
+.loading-custom.bg2 {
+	background: #fff url(../img/loading2.gif) no-repeat center center;
+	background-size: 120px 116px;
+}
+
 
 /* ---------------------------------- POST ADD ------------------------------------ */
 
