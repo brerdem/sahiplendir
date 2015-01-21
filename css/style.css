@@ -153,6 +153,11 @@ ion-option-button.button > i.icon:before {
 	border-radius:70px;
 
 }
+.loading-custom.bg2 {
+	background: #fff url(../img/loading2.gif) no-repeat center center;
+	background-size: 120px 116px;
+}
+
 
 /* ---------------------------------- POST ADD ------------------------------------ */
 
@@ -202,6 +207,16 @@ map {
 .detail.item.item-divider, .detail.item {
 	font-size: 14px;
 	margin-left:-5px
+}
+
+/* ---------------------------------- SIGNUP ------------------------------------ */
+
+.list input.ng-invalid.ng-dirty {
+	color: #FF0000;
+}
+
+.list input.ng-valid.ng-dirty {
+	color: #00a77e;
 }
 
 

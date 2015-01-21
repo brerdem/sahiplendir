@@ -42,11 +42,15 @@ angular.module('Sahiplendir.services', [])
 
 <!-- LOADING -->
 
-.factory('LoadingService', ['$ionicLoading', function($ionicLoading) {
+.factory('LoadingService', ['$ionicLoading', '$timeout', function($ionicLoading, $timeout) {
   return {
     show: function() {
+		
+		var cls = (Math.random() > .5) ? 'loading-custom': 'loading-custom bg2';		
+		console.log(cls);
 		return $ionicLoading.show({
-      		template: "<div class='loading-custom'></div>"
+			
+      		template: "<div class='"+cls+"'></div>"
     	})
 		
     },
