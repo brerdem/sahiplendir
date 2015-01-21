@@ -386,7 +386,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 })
 
 
-.controller('LoginCtrl', ['$scope', '$state', function($scope, $state) {
+.controller('LoginCtrl', ['$scope', '$state', 'LoadingService', function($scope, $state, LoadingService) {
 		
 	var fbLogged = new Parse.Promise();
 
