@@ -67,7 +67,7 @@ angular.module('Sahiplendir.services', [])
     show: function(msg) {
 		var alertPopup = $ionicPopup.alert({
 			 title: '<span class="assertive">Hata!</span>',
-			 template: '<div class="alert-container"><div class="row"><div class="col col-25"><img src="img/cat_alert.png"></div><div class="col col-75">'+msg+'</div></div></div>'
+			 template: '<div class="alert-container"><img src="img/cat_alert.png"><div>'+msg+'</div></div></div>'
 		});
 		return alertPopup;
 	}
