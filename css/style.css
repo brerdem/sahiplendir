@@ -159,6 +159,30 @@ ion-option-button.button > i.icon:before {
 }
 
 
+/* alert */
+
+.alert-container {
+	
+}
+
+.alert-container img {
+	width: 70px;
+	height: 70px;
+	padding: 0;
+	vertical-align: middle;
+	
+}
+
+.alert-container .col-75 {
+	
+	padding-left: 10px;
+	
+	
+}
+
+
+
+
 /* ---------------------------------- POST ADD ------------------------------------ */
 
 /* post footer */

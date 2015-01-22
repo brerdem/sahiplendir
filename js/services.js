@@ -42,7 +42,7 @@ angular.module('Sahiplendir.services', [])
 
 <!-- LOADING -->
 
-.factory('LoadingService', ['$ionicLoading', '$timeout', function($ionicLoading, $timeout) {
+.factory('LoadingService', ['$ionicLoading', function($ionicLoading) {
   return {
     show: function() {
 		
@@ -58,6 +58,21 @@ angular.module('Sahiplendir.services', [])
     	return $ionicLoading.hide();
     }
   }
+}])
+
+<!-- ALERT -->
+
+.factory('AlertService', ['$ionicPopup', function($ionicPopup) {
+  return {
+    show: function(msg) {
+		var alertPopup = $ionicPopup.alert({
+			 title: '<span class="assertive">Hata!</span>',
+			 template: '<div class="alert-container"><div class="row"><div class="col col-25"><img src="img/cat_alert.png"></div><div class="col col-75">'+msg+'</div></div></div>'
+		});
+		return alertPopup;
+	}
+  }
+  
 }])
 
 
