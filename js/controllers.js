@@ -381,7 +381,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     
 })
 
-.controller("SignIn", function($scope) {
+.controller("SignIn", function($scope, AlertService) {
+	$scope.setAlert = function(msg) {
+		AlertService.show(msg).then(function(t) { console.log('hello moto') })
+	}
     
 })
 
