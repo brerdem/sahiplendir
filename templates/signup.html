@@ -1,11 +1,13 @@
-
+ <ion-content>
+ <div align="center" class="logo"><img src="img/logo.png" class="full-image" /></div>
   <div class="item-text-wrap card padding-left">
     <h5 class="calm">Lütfen aşağıdaki alanları doldurunuz.</h5>
   </div>
 
 
 
-<form name="signup_form" novalidate ng-submit="signupForm()">
+<form name="signup_form" novalidate ng-submit="signup_form.$valid && signup.submit()">
+
 
 <div class="list list-inset transparent">
 	<label class="item item-input">
@@ -24,18 +26,18 @@
             <small class="error" ng-show="signup_form.email.$error.unique">Bu e-mail daha önce kullanılmış</small>
     </div>
 	<label class="item item-input">
-		<input type="password" placeholder="Şifre" ng-minlength=8 required />
+		<input type="password" placeholder="Şifre" ng-model="signup.pwd" ng-minlength=8 required />
 	</label>
 	
 	<label class="item item-input">
-		<input type="password" placeholder="Şifre Tekrarı" ng-minlength=8 required />
+		<input type="password" placeholder="Şifre Tekrarı" ng-model="signup.pwd2" ng-minlength=8 required />
 	</label>
 	<div>
-		<button class="button button-block button-balanced button-small" type="submit" ng-click="$state.go('app.home')"> Gönder </button>
+		<button class="button button-block button-balanced button-small" type="submit"> Gönder </button>
 	</div>
 	
 	
 	
 </div>
 
-<form name="signup_form" novalidate ng-submit="signupForm()">
+</ion-content>

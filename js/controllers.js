@@ -378,13 +378,59 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 .controller("SignUp", function($scope) {
-    
+	$scope.signup = {
+			
+		submit: function() {		
+			console.log("ok form");
+			var user = new Parse.User();
+			user.set("name", $scope.signup.firstname+" "+$scope.signup.lastname);
+			user.set("username", $scope.signup.email);
+			user.set("password", $scope.signup.pwd);
+			user.set("email", $scope.signup.email);
+
+			user.signUp(null, {
+				  success: function(user) {
+					// Hooray! Let them use the app now.
+					console.log("hooray");
+				  },
+				  error: function(user, error) {
+					// Show the error message somewhere and let the user try again.
+					alert("Error: " + error.code + " " + error.message);
+				  }
+			});
+		}
+		
+  }
+	   
 })
 
-.controller("SignIn", function($scope, AlertService) {
+.controller("SignIn", function($scope, AlertService, $state) {
 	$scope.setAlert = function(msg) {
 		AlertService.show(msg).then(function(t) { console.log('hello moto') })
 	}
+	
+	$scope.signin = {
+			
+		submit: function() {		
+			console.log("ok form");
+			Parse.User.logIn($scope.signin.email, $scope.signin.pwd, {
+			  success: function(user) {
+				// Do stuff after successful login.
+				AlertService.show("Ok").then(function() {
+					$state.go('app.home');
+				});
+				
+				
+			  },
+			  error: function(user, error) {
+				// The login failed. Check error to see why.
+				AlertService.show(error.message);
+			  }
+			});
+	   }
+		
+  }
+	
     
 })
 
