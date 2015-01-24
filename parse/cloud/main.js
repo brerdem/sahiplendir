@@ -3,6 +3,8 @@
 // For example:
 
 var Image = require('parse-image');
+var Mandrill = require('mandrill');
+Mandrill.initialize('BiJvzz48NHUb6-vSGCkRbA');
 
 Parse.Cloud.define("savePostImage", function(request, response) {
 	
@@ -94,11 +96,9 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 });
 
 
-Parse.Cloud.define("savePost", function(request, response) {
-	
-	
-			
-	
+Parse.Cloud.define("sendPassword", function(request, response) {
+		
+
 })
 
 
