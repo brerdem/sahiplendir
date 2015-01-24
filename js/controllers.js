@@ -404,10 +404,110 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	   
 })
 
-.controller("SignIn", function($scope, AlertService, $state) {
+.controller("SignIn", function($scope, AlertService, $state, $ionicPopup, LoadingService) {
+	
+	$scope.data = {};
+	
 	$scope.setAlert = function(msg) {
 		AlertService.show(msg).then(function(t) { console.log('hello moto') })
 	}
+	
+	
+	
+	$scope.sendLostPassword = function() {
+	
+		var mailPopup = $ionicPopup.show({
+			template: '<input type="email" ng-model="data.email" required>',
+			title: 'Şifremi Unuttum',
+			subTitle: 'Lütfen kayıtlı mail adresinizi giriniz',
+			scope: $scope,
+			buttons: [
+			  { text: 'Vazgeç' },
+			  {
+				text: '<b>Gönder</b>',
+				type: 'button-positive',
+				onTap: function(e) {
+				  if (!$scope.data.email) {
+					//don't allow the user to close unless he enters wifi password
+					e.preventDefault();
+				  } else {
+					
+					return $scope.data.email;
+					
+				  }
+				}
+			  }
+			]
+		 });
+		 
+		 mailPopup.then(function(res) {
+			 LoadingService.show();
+			 
+			 
+			  var query = new Parse.Query(Parse.User);
+			  query.equalTo("email", res);
+			  query.find({
+				  success: function(results) {
+					  
+					  
+					  
+					  if (results.length > 0) {
+						  
+						  console.log(results[0].get("password"));
+						  
+						  Parse.User.requestPasswordReset(res, {
+							  success: function() {
+								// Password reset request was sent successfully
+								LoadingService.hide();
+								AlertService.show("Şifre değiştirme talebiniz e-mail adresinize gönderilmiştir");	
+								
+							  },
+							  error: function(error) {
+								// Show the error message somewhere
+								console.log("Error: " + error.code + " " + error.message);
+							  }
+						  });
+						  
+						  
+						  
+						/* Parse.Cloud.run('sendPasswordMail', {mailToSend: res, name: results[0].get("name"), pwd: results[0].get("password")}, {
+							  success: function(res) {
+								console.log(res);
+								LoadingService.hide();
+								AlertService.show("Şifreniz gönderildi");	
+							
+							  },
+							  error: function(error) {
+								  console.log("from controller: "+error.message);
+							  }
+						});*/
+						
+					  } else {
+						
+						LoadingService.hide();
+						AlertService.show("Şifreniz gönderildi");	  
+						
+						 
+					  }
+					
+					  
+					 
+				  },
+				  error: function(error) {
+					
+					  console.log(error.message);
+				  }
+			 })
+			 
+		
+			 
+		 })
+		 
+		 
+		
+	}
+	
+	
 	
 	$scope.signin = {
 			
