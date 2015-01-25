@@ -5,7 +5,7 @@
   	<ion-content>
   
 	  <ion-slide-box show-pager="true" on-slide-changed='changeSlide(index)' ng-if="showSlidebox">
-		<ion-slide ng-repeat="post in posts">
+		<ion-slide ng-repeat="post in posts | limitTo:6">
                
 		 <img ng-src="{{post.photos[0].large}}" src="img/empty_post.png" class="full-image">
      
