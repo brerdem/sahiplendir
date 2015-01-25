@@ -196,6 +196,7 @@ angular.module('Sahiplendir.services', [])
 	
 				  },
 				  error: function(error) {
+					  LoadingService.hide();
 					 q.reject(error);
 					console.log("Error: " + error.code + " " + error.message);
 				  }

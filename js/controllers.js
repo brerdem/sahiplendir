@@ -18,24 +18,30 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
 
-.controller('MainPageCtrl', function($scope, $state, $timeout, $ionicSlideBoxDelegate) {
+.controller('MainPageCtrl', function($scope, $state, $timeout, PostService) {
 	
 	$scope.isHiddenText = true;
-	$scope.currentSlide = 0;
+	$scope.showSlidebox = false;
+	$scope.posts = [];
 	
-	$scope.posts = [
-		{image:'http://test.clckwrk.im/test/1.jpg', title:'Tekir kedi, 4 aylık, sevecen', userpic:'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/1932469_10152137578423473_1839392021227593231_n.jpg?oh=680da0cc16b58a4c8b37299d539fd313&oe=5565A60F&__gda__=1428996963_8ad9aa9c3d718d9e9e53a20e92c569eb', userfullname: 'Burak Erdem', timestamp: '2015-01-17T16:59:41.370Z'},
-		{image:'http://test.clckwrk.im/test/2.jpg', title:'Çok Tatlı mutlaka yardım, 4 aylık', userpic:'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/1932469_10152137578423473_1839392021227593231_n.jpg?oh=680da0cc16b58a4c8b37299d539fd313&oe=5565A60F&__gda__=1428996963_8ad9aa9c3d718d9e9e53a20e92c569eb', userfullname: 'Atilla Kıvanç', timestamp: '2015-01-12T21:59:41.370Z'},
-		{image:'http://test.clckwrk.im/test/3.jpg', title:'Süper oyuncu çok acil', userpic:'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/1932469_10152137578423473_1839392021227593231_n.jpg?oh=680da0cc16b58a4c8b37299d539fd313&oe=5565A60F&__gda__=1428996963_8ad9aa9c3d718d9e9e53a20e92c569eb', userfullname: 'Caner Özkul', timestamp: '2015-01-11T21:59:41.370Z'}
-	];
+	PostService.getPosts().then(function(arr) {
+			$scope.posts = arr;
+			$scope.showSlidebox = true;
+			setScopeValues(0);
+		},
+		function(err) {
+			console.log(err);
+		});
+		
 	
-	setScopeValues(0);
+	
+	
 	$scope.addPost = function() {
     	$state.go('app.post.add.photo');
  	 };
 	 
 	 $scope.changeSlide = function(index) {
-		$scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
+		
 		$scope.isHiddenText = false;
 		$timeout(function() {$scope.isHiddenText = true},200);
 		setScopeValues(index);
@@ -47,7 +53,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		$scope.title = $scope.posts[index].title;
 		$scope.userpic = $scope.posts[index].userpic;
 		$scope.userfullname = $scope.posts[index].userfullname;
-		$scope.timestamp = moment($scope.posts[index].timestamp).fromNow();
+		$scope.timestamp = moment($scope.posts[index].created).fromNow();
 	 }
 	 
 	 
@@ -422,7 +428,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 			subTitle: 'Lütfen kayıtlı mail adresinizi giriniz',
 			scope: $scope,
 			buttons: [
-			  { text: 'Vazgeç' },
+			  { text: 'Vazgeç'},
 			  {
 				text: '<b>Gönder</b>',
 				type: 'button-positive',
@@ -441,64 +447,68 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		 });
 		 
 		 mailPopup.then(function(res) {
-			 LoadingService.show();
 			 
+			 if (res) {
 			 
-			  var query = new Parse.Query(Parse.User);
-			  query.equalTo("email", res);
-			  query.find({
-				  success: function(results) {
-					  
-					  
-					  
-					  if (results.length > 0) {
-						  
-						  console.log(results[0].get("password"));
-						  
-						  Parse.User.requestPasswordReset(res, {
-							  success: function() {
-								// Password reset request was sent successfully
-								LoadingService.hide();
-								AlertService.show("Şifre değiştirme talebiniz e-mail adresinize gönderilmiştir");	
-								
-							  },
-							  error: function(error) {
-								// Show the error message somewhere
-								console.log("Error: " + error.code + " " + error.message);
-							  }
-						  });
-						  
-						  
-						  
-						/* Parse.Cloud.run('sendPasswordMail', {mailToSend: res, name: results[0].get("name"), pwd: results[0].get("password")}, {
-							  success: function(res) {
-								console.log(res);
-								LoadingService.hide();
-								AlertService.show("Şifreniz gönderildi");	
-							
-							  },
-							  error: function(error) {
-								  console.log("from controller: "+error.message);
-							  }
-						});*/
-						
-					  } else {
-						
-						LoadingService.hide();
-						AlertService.show("Şifreniz gönderildi");	  
-						
-						 
-					  }
-					
-					  
+					 LoadingService.show();
 					 
-				  },
-				  error: function(error) {
+					 
+					  var query = new Parse.Query(Parse.User);
+					  query.equalTo("email", res);
+					  query.find({
+						  success: function(results) {
+							  
+							  
+							  
+							  if (results.length > 0) {
+								  
+								  console.log(results[0].get("password"));
+								  
+								  Parse.User.requestPasswordReset(res, {
+									  success: function() {
+										// Password reset request was sent successfully
+										LoadingService.hide();
+										AlertService.show("Şifre değiştirme talebiniz e-mail adresinize gönderilmiştir");	
+										
+									  },
+									  error: function(error) {
+										// Show the error message somewhere
+										console.log("Error: " + error.code + " " + error.message);
+									  }
+								  });
+								  
+								  
+								  
+								/* Parse.Cloud.run('sendPasswordMail', {mailToSend: res, name: results[0].get("name"), pwd: results[0].get("password")}, {
+									  success: function(res) {
+										console.log(res);
+										LoadingService.hide();
+										AlertService.show("Şifreniz gönderildi");	
+									
+									  },
+									  error: function(error) {
+										  console.log("from controller: "+error.message);
+									  }
+								});*/
+								
+							  } else {
+								
+								LoadingService.hide();
+								AlertService.show("Şifreniz gönderildi");	  
+								
+								 
+							  }
+							
+							  
+							 
+						  },
+						  error: function(error) {
+							
+							  console.log(error.message);
+						  }
 					
-					  console.log(error.message);
-				  }
-			 })
-			 
+					 })
+			 }
 		
 			 
 		 })
