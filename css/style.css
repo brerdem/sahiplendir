@@ -54,14 +54,18 @@ body {
 
 .slider {height:100%; padding:0; margin:0}
 /*.slider h2 {position:absolute; z-index:999; top:250px; color:#FFF; text-shadow:1px 1px rgba(0,0,0,1.00)}*/
-.slider-text {background-color:#f0f0f0;margin-top:-15px}
-.slider-text .row, .slider-text .row .col {padding:0px;margin:0}
+.slider-text { margin-top:-15px;background: #FFF; }
+.slider-text  div.title-text {background-color: AliceBlue; border-bottom:solid 1px #DAEDFF}
+	
+	
+	
+.slider-text .row, .slider-text .row .col {padding:5px;margin:0}
 .slider-text .row .date {text-align:right} 
 .slider-text .row .date i {font-size:12px;padding-right:3px} 
-.slider-text h4 {font-size:14px; -webkit-animation: alpha-anim 1s ; animation: alpha-anim 1s;}
+.slider-text h4 {padding: 10px 10px 0 10px;font-size:14px; -webkit-animation: alpha-anim 1s ; animation: alpha-anim 1s;}
 @-webkit-keyframes alpha-anim {
-    from {opacity: 0; max-height:30px}
-    to {opacity: 1; max-height:5000px}
+    from {opacity: 0}
+    to {opacity: 1}
 }
 .post-slider-userpic { width:40px; height 40px; vertical-align:middle}
 
@@ -180,6 +184,10 @@ ion-option-button.button > i.icon:before {
 	
 }
 
+/* ---------------------------------- POST LIST ------------------------------------ */
+
+
+.bg-anim {-webkit-animation: alpha-anim 2s ; animation: alpha-anim 2s;}
 
 
 
@@ -242,6 +250,9 @@ input.ng-invalid.ng-dirty {
 input.ng-valid.ng-dirty {
 	color: #00a77e;
 }
+
+
+
 
 
 

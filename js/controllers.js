@@ -59,7 +59,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 
 	 $scope.mainLinks = [
 	 	{href: '#/app/home', bg:'assertive-bg' , icon: 'sahiplendir-icon-home', label : 'Ana Sayfa'},
-		{href: '#/app/posts/all', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
+		{href: '#/app/posts/all/save', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
 		{href: '#/app/info',  bg:'royal-bg', icon: 'sahiplendir-icon-info', label : 'Yararlı Bilgiler'}
 	 ]
 	 
@@ -68,8 +68,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 // POSTS
 
-.controller('PostsAllCtrl', function($scope, PostService) {
+.controller('PostsAllCtrl', function($scope, PostService, $stateParams) {
 		
+		($stateParams.s == 'save' ) ? $scope.s = 'save' : '';
 		PostService.getPosts().then(function(arr) {
 			$scope.posts = arr;
 		},
@@ -140,7 +141,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
   $scope.data = {
     items : [
 		{href: '#/app/home', icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
-		{href: '#/app/posts/all', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
+		{href: '#/app/posts/all/std', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
 		{href: '#/app/info', icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
 	]
   };
