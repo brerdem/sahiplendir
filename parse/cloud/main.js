@@ -3,6 +3,8 @@
 // For example:
 
 var Image = require('parse-image');
+var Mandrill = require('mandrill');
+Mandrill.initialize('BiJvzz48NHUb6-vSGCkRbA');
 
 Parse.Cloud.define("savePostImage", function(request, response) {
 	
@@ -94,10 +96,34 @@ Parse.Cloud.define("savePostImage", function(request, response) {
 });
 
 
-Parse.Cloud.define("savePost", function(request, response) {
+Parse.Cloud.define("sendPasswordMail", function(request, response) {
 	
+	console.log(request.params);
 	
-			
+	Mandrill.sendEmail({
+	  message: {
+		html: "<h2>Merhaba <b>"+request.params.name+"</b>,</h2>Bu mail şifrenizi unuttuğunuz için yollanmıştır. Kayıp şifreniz aşağıdaki gibidir; <br><br><h2><b>"+request.params.pwd+"</b></h2>",
+		subject: "Sahiplendir - Kayıp Şifreniz",
+		from_email: "info@sahiplendir.com",
+		from_name: "Sahiplendir",
+		to: [
+		  {
+			email: request.params.mailToSend,
+			name: request.params.name
+		  }
+		]
+	  },
+	  async: true
+	},{
+	  success: function(httpResponse) {
+		console.log(httpResponse);
+		response.success("Email sent!");
+	  },
+	  error: function(httpResponse) {
+		console.error(httpResponse);
+		response.error("Uh oh, something went wrong");
+	  }
+});	
 	
 })
 

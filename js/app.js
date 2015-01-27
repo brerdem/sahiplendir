@@ -126,7 +126,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				
 	  })
 	  .state('app.posts.all', {
-        url: '/all',
+        url: '/all/:s',
 		views: {
 			'posts-all' : {
 				templateUrl: 'templates/posts-list.html',

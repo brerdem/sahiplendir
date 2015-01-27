@@ -5,7 +5,7 @@
     <h5 class="calm">Lütfen devam etmek için giriş yapınız.</h5>
   </div>
 
-<form name="signin_form" novalidate ng-submit="signin.submit()">
+<form name="signin_form" novalidate">
 <div class="list list-inset transparent">
 
 	<label class="item item-input">
@@ -17,12 +17,12 @@
 	
 	<div class="button-bar padding-top">
     
-		<button class="button  button-light button-small" ng-click="$state.go('app.home')"> Şifremi Unuttum </button>
-		<button class="button button-balanced button-small" type="submit">Giriş</button>
+		<button class="button  button-clear button-balanced button-small" ng-click="sendLostPassword()"> <b>Şifremi Unuttum</b> </button>
+		<button class="button button-balanced button-small" ng-click="signin.submit()">Giriş</button>
 
 	</div>
 </form>
-    <button class="button button-balanced button-small" ng-click="setAlert('Lorem Ipsum is simply dummy text of the printing and typesetting industry.')">Gönder</button>
+    <button class="button button-balanced button-small" ng-click="$state.go('app.home')">Gönder</button>
 	<div class="padding"></div>
 	
 	<div align="center">

@@ -1,15 +1,5 @@
 angular.module('Sahiplendir.directives', [])
 
-.directive('backColor', function(){
-    return function(scope, element, attrs){
-        var clr = attrs.backColor;
-        var content = element.find('a');
-        content.css({
-            'background-color': ''+clr+'-bg',
-           
-        });
-    };
-})
 
 
 .directive('emailAvailable', function() { // available
@@ -20,11 +10,9 @@ angular.module('Sahiplendir.directives', [])
 			elem.bind('blur', function (e) {
 				var val = elem.val();
 				console.log(val);
-					
-				
+			
 					if(val.match(/[a-z0-9\-_]+@[a-z0-9\-_]+\.[a-z0-9\-_]{2,}/)) {
-					
-									
+										
 							var query = new Parse.Query(Parse.User);
 							  query.equalTo("email", val);
 							  query.find({

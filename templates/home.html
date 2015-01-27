@@ -4,16 +4,16 @@
                   ng-click="addPost()"><b>+</b></button></ion-nav-buttons>
   	<ion-content>
   
-	  <ion-slide-box show-pager="true" on-slide-changed='changeSlide(index)'>
-		<ion-slide ng-repeat="post in posts">
-        
-		 <img src="{{post.image}}" class="full-image">
+	  <ion-slide-box show-pager="true" on-slide-changed='changeSlide(index)' ng-if="showSlidebox">
+		<ion-slide ng-repeat="post in posts | limitTo:6">
+               
+		 <img ng-src="{{post.photos[0].large}}" src="img/empty_post.png" class="full-image">
      
 		</ion-slide>
 	  </ion-slide-box>
-     <div class="slider-text padding">
+     <div class="slider-text">
      	   
-            <h4 ng-show='isHiddenText'><b>{{title}}</b></h4>
+            <div class="title-text"><h4 ng-show='isHiddenText'><b>{{title}}</b></h4></div>
             <div class="row">
                  <div class="col">        
                     <img ng-src='{{userpic}}' class="post-slider-userpic padding-right">{{userfullname}}
