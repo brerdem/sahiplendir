@@ -363,11 +363,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	$scope.p = {};
 
 	$scope.$on('savePostData', function(evt, args) {
-		console.log($scope.p.title);
 		PostService.setTitle($scope.p.title);
 		PostService.setMessage($scope.p.message);
 		PostService.post().then(function(item) {
-			$state.go('app.posts.all');
+			$state.go('app.posts.all', {s: 'save'});
 		}, function(err) {
 			console.log(err.message);
 		});

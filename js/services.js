@@ -64,10 +64,15 @@ angular.module('Sahiplendir.services', [])
 
 .factory('AlertService', ['$ionicPopup', function($ionicPopup) {
   return {
-    show: function(msg) {
+    show: function(msg, type) {
+		
+		title_str = (typeof type === "undefined") ? "Hata!" : "Başarılı!";
+		color_cls = (typeof type === "undefined") ? "assertive" : "balanced";
+		img_src = (typeof type === "undefined") ? "cat_fail" : "cat_success";
+		
 		var alertPopup = $ionicPopup.alert({
-			 title: '<span class="assertive">Hata!</span>',
-			 template: '<div class="alert-container"><img src="img/cat_alert.png"><div>'+msg+'</div></div></div>'
+			 title: '<span class="'+color_cls+'">'+title_str+'</span>',
+			 template: '<div class="alert-container"><img src="img/'+img_src+'.png"><div>'+msg+'</div></div></div>'
 		});
 		return alertPopup;
 	}
@@ -156,6 +161,10 @@ angular.module('Sahiplendir.services', [])
 					
 		},
 		
+		resetPosts : function() {
+			return allposts = [];
+		},
+		
 		getAllPosts : function() {
 			return allposts;
 		},
@@ -163,7 +172,7 @@ angular.module('Sahiplendir.services', [])
 		getPosts : function() {
 			var q = $q.defer();
 			
-			//if (allposts.length <= 0) {
+			if (allposts.length <= 0) {
 				allposts = [];
 				LoadingService.show();
 				var Posts = Parse.Object.extend("Post");
@@ -180,7 +189,7 @@ angular.module('Sahiplendir.services', [])
 							id: results[i].id,
 							title: results[i].get("postTitle") || '',
 							message: results[i].get("postMessage") || '',
-							photos: JSON.parse(results[i].get("postPhotos")) || [],
+							photos: JSON.parse((results[i].get("postPhotos").length > 0) ? results[i].get("postPhotos") : {small: 'img/no-post-thumb.png', large: 'img/no-post.png'}),
 							userid : results[i].get("userPointer").id || '',
 							userfullname: results[i].get("userPointer").get("name") || '',
 							userpic: results[i].get("userPointer").get("profilePicture") || '',
@@ -203,9 +212,9 @@ angular.module('Sahiplendir.services', [])
 				});	
 				
 				
-			/*} else {
+			} else {
 				q.resolve(allposts);
-			}*/
+			}
 			
 			return q.promise;
 		}
