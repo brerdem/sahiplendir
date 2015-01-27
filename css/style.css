@@ -8,18 +8,19 @@ body {
 /* ICON FONTS */
 
 @font-face {
-	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-actw0m');
-	src:url('fonts/icomoon.eot?#iefix-actw0m') format('embedded-opentype'),
-		url('fonts/icomoon.woff?-actw0m') format('woff'),
-		url('fonts/icomoon.ttf?-actw0m') format('truetype'),
-		url('fonts/icomoon.svg?-actw0m#icomoon') format('svg');
+	font-family: 'sahiplendir';
+	src:url('fonts/sahiplendir.eot?-pxn7uf');
+	src:url('fonts/sahiplendir.eot?#iefix-pxn7uf') format('embedded-opentype'),
+		url('fonts/sahiplendir.woff?-pxn7uf') format('woff'),
+		url('fonts/sahiplendir.ttf?-pxn7uf') format('truetype'),
+		url('fonts/sahiplendir.svg?-pxn7uf#sahiplendir') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
+
 [class^="sahiplendir-icon-"], [class*=" sahiplendir-icon-"] {
-	font-family: 'icomoon';
+	font-family: 'sahiplendir';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -33,12 +34,18 @@ body {
 }
 
 
-.sahiplendir-icon-cat:before {
+.sahiplendir-icon-veterinarian:before {
 	content: "\e600";
 }
+
+.sahiplendir-icon-cat:before {
+	content: "\e604";
+}
+
 .sahiplendir-icon-home:before {
 	content: "\e601";
 }
+
 .sahiplendir-icon-info:before {
 	content: "\e602";
 }

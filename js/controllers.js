@@ -58,8 +58,8 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	 
 	 
 	 $scope.mainLinks = [
-	 	{href: '#/app/home', bg:'assertive-bg' , icon: 'sahiplendir-icon-home', label : 'Ana Sayfa'},
-		{href: '#/app/posts/all/save', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
+	 	{href: '#/app/posts/all/save', bg:'energized-bg' , icon: 'sahiplendir-icon-cat', label : 'Hayvanları Gör'},
+		{href: '#/app/veterinarian/list', bg:'balanced-bg' , icon: 'sahiplendir-icon-veterinarian', label : 'Veterinerler'},
 		{href: '#/app/info',  bg:'royal-bg', icon: 'sahiplendir-icon-info', label : 'Yararlı Bilgiler'}
 	 ]
 	 
@@ -142,6 +142,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     items : [
 		{href: '#/app/home', icon: 'sahiplendir-icon-home assertive', label : 'Ana Sayfa'},
 		{href: '#/app/posts/all/std', icon: 'sahiplendir-icon-cat energized', label : 'Hayvanları Gör'},
+		{href: '#/app/posts/veterinarian/list', icon: 'sahiplendir-icon-veterinarian balanced', label : 'Hayvanları Gör'},
 		{href: '#/app/info', icon: 'sahiplendir-icon-info royal', label : 'Yararlı Bilgiler'}
 	]
   };
@@ -373,6 +374,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 		PostService.setTitle($scope.p.title);
 		PostService.setMessage($scope.p.message);
 		PostService.post().then(function(item) {
+			PostService.resetPosts();
 			$state.go('app.posts.all', {s: 'save'});
 		}, function(err) {
 			console.log(err.message);
@@ -625,6 +627,17 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 	
 	
 }])
+
+.controller('VeterinarianAllCtrl', function($scope) {
+	
+		
+})
+
+
+.controller('VeterinarianDetailCtrl', function($scope) {
+			
+})
+
 
 
 .controller("ProfileCtrl", function($scope, $state) {

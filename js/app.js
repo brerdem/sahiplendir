@@ -159,7 +159,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
 	  })
 	  
+	   .state('app.veterinarian', {
+        url: '/veterinarian',
+		abstract: true,
+		template: '<ion-nav-view></ion-nav-view>'
 	
+	  })
+	  
+	   .state('app.veterinarian.list', {
+        url: '/list',
+		templateUrl: 'templates/veterinarian-list.html',
+		controller: 'VeterinarianAllCtrl'
+	
+	  })
+	  .state('app.veterinarian.detail', {
+        url: '/detail',
+		templateUrl: 'templates/veterinarian-detail.html',
+		controller: 'VeterinariansDetailCtrl'
+	
+	  })
 	  
 	  $urlRouterProvider.otherwise('/tab/signin')
 	  

@@ -184,12 +184,15 @@ angular.module('Sahiplendir.services', [])
 				}*/
 				query.find({
 				  success: function(results) {
-					for (var i = 0; i < results.length; i++) { 
+					for (var i = 0; i < results.length; i++) {
+						
+						photos_arr = JSON.parse(results[i].get("postPhotos"));
+						
 						var obj = {
 							id: results[i].id,
 							title: results[i].get("postTitle") || '',
 							message: results[i].get("postMessage") || '',
-							photos: JSON.parse((results[i].get("postPhotos").length > 0) ? results[i].get("postPhotos") : {small: 'img/no-post-thumb.png', large: 'img/no-post.png'}),
+							photos: (photos_arr.length > 0) ? photos_arr : [{small: 'img/no-post-thumb.png', large: 'img/no-post.png'}],
 							userid : results[i].get("userPointer").id || '',
 							userfullname: results[i].get("userPointer").get("name") || '',
 							userpic: results[i].get("userPointer").get("profilePicture") || '',
