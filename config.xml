@@ -18,9 +18,10 @@
 	<content src="index.html"/>
   	<access origin="*"/>
   
-<gap:splash src="splash.png" />
+	
     <preference name="phonegap-version" value="3.6.3" />
 	
+	<preference name="Orientation" value="landscape" />
 	<preference name="show-splash-screen-spinner" value="false" />
 	<preference name="auto-hide-splash-screen" value="true" />
 	<preference name="SplashScreen" value="screen" />
@@ -28,6 +29,7 @@
 	<gap:platform name="android" />
 
 	<!-- Plugins -->
+	<gap:splash src="splash.png" />
 	<gap:plugin name="org.apache.cordova.file" version="1.3.1" />
 	<gap:plugin name="org.apache.cordova.core.camera" version="0.3.2" />
 	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />

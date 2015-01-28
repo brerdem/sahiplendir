@@ -229,6 +229,73 @@ angular.module('Sahiplendir.services', [])
 
 
 
+.factory('VeterinarianService', ['LoadingService', '$q', function(LoadingService, $q) {
+	
+	
+	var allvets = [];
+	
+	return {
+
+		
+		resetVets : function() {
+			return allvets = [];
+		},
+		
+		getAllVets : function() {
+			return allvets;
+		},
+		
+		getVets : function() {
+			var q = $q.defer();
+			
+			if (allvets.length <= 0) {
+				
+				LoadingService.show();
+				var Vets = Parse.Object.extend("Veterinarian");
+				var query = new Parse.Query(Vets);
+							
+				query.find({
+				  success: function(results) {
+					for (var i = 0; i < results.length; i++) {
+											
+						var obj = {
+							id: results[i].id,
+							name: results[i].get("name") || '',
+							location: {lat : results[i].get("loc").latitude, lng : results[i].get("loc").longitude} || {},
+							tel : results[i].get("tel"),
+							email: results[i].get("email"),
+							address : results[i].get("address") || ''
+						}
+						allvets.push(obj);
+					}
+					LoadingService.hide();
+					q.resolve(allvets);
+					
+	
+				  },
+				  error: function(error) {
+					 LoadingService.hide();
+					 q.reject(error);
+					console.log("Error: " + error.code + " " + error.message);
+				  }
+				  
+				});	
+				
+				
+			} else {
+				q.resolve(allvets);
+			}
+			
+			return q.promise;
+		}
+	
+	}
+	
+}])
+
+
+
+
 
 
 

@@ -629,7 +629,16 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 }])
 
 .controller('VeterinarianAllCtrl', function($scope) {
+	$scope.mapCreated = function(map) {
+    	$scope.map = map;
+	}
 	
+	 $scope.vets = [];
+	  for (var i=0; i<10; i++) {
+		  $scope.vets.push({name: 'Hello moto', address: 'Şakir paşa cad süleyman sok'});
+		  
+	  }
+  
 		
 })
 
