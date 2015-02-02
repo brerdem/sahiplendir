@@ -170,7 +170,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('app.veterinarian.list', {
             url: '/list',
-            templateUrl: 'templates/veterinarian-list.html'
+            templateUrl: 'templates/veterinarian-list.html',
+            controller: function($scope) {
+                $scope.showMarkers('all')
+            }
 
         })
         .state('app.veterinarian.detail', {

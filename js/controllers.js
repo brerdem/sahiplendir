@@ -142,9 +142,9 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                 {href: '#/app/home', icon: 'sahiplendir-icon-home assertive', label: 'Ana Sayfa'},
                 {href: '#/app/posts/all/std', icon: 'sahiplendir-icon-cat energized', label: 'Hayvanları Gör'},
                 {
-                    href: '#/app/posts/veterinarian/list',
+                    href: '#/app/veterinarian/list',
                     icon: 'sahiplendir-icon-veterinarian balanced',
-                    label: 'Hayvanları Gör'
+                    label: 'Veterinerler'
                 },
                 {href: '#/app/info', icon: 'sahiplendir-icon-info royal', label: 'Yararlı Bilgiler'}
             ]
@@ -630,13 +630,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
     .controller('VeterinarianCtrl', function ($scope, LoadingService) {
         var infowindow;
-
+        var markers = [];
         $scope.vets = [];
         $scope.mapCreated = function (map) {
 
             var latlng;
 
             $scope.map = map;
+
             LoadingService.show();
 
 
@@ -660,9 +661,15 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                     LoadingService.hide();
                     console.log(results);
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
+
                         for (var i = 0; i < results.length; i++) {
-                            $scope.vets.push({name: results[i].name, address: results[i].vicinity});
+                            $scope.vets.push({
+                                name: results[i].name,
+                                address: results[i].vicinity,
+                                place_id: results[i].place_id
+                            });
                             bounds.extend(results[i].geometry.location);
+
                             createMarker(results[i]);
 
 
@@ -692,6 +699,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                 icon: icon,
                 position: place.geometry.location
             });
+            markers.push(marker);
 
             google.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent(place.name);
@@ -699,22 +707,50 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
             });
         }
 
+        $scope.showMarkers = function (type) {
+            console.log(type);
+
+            for (i = 0; i < markers.length; i++) {
+
+                if (type == 'all') {
+                    markers[i].setMap($scope.map);
+                } else {
+
+                    if (markers[i].getPosition().toString() != type.toString()) {
+                        markers[i].setMap(null);
+                    }
+                }
+            }
+        }
+
     })
 
     //sapp detail
-    .controller('VeterinarianDetailCtrl', function ($scope, $stateParams) {
-        var request = {
-            placeId: $scope.vets[$stateParams.id]
-        };
+    .controller('VeterinarianDetailCtrl', function ($scope, $stateParams, $ionicScrollDelegate) {
+        $scope.vet = {};
 
-        service = new google.maps.places.PlacesService(map);
+        var request = {
+            placeId: $stateParams.id
+        };
+        //console.log($scope.map);
+        var service = new google.maps.places.PlacesService($scope.map);
         service.getDetails(request, callback);
 
         function callback(place, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
+                $ionicScrollDelegate.scrollTop();
 
+                $scope.showMarkers(place.geometry.location);
+
+                $scope.vet = {
+                    address: place.formatted_address,
+                    title: place.name,
+                    tel: place.formatted_phone_number
+                }
+                console.log('ok')
             }
         }
+
 
     })
 

@@ -1,11 +1,12 @@
+<div ui-view view-title="En Yakın Veterinerler">
+    <ion-list>
+        <ion-item class="item" ng-repeat="vet in vets" href="#/app/veterinarian/detail/{{vet.place_id}}">
 
- <ion-list >
-    <ion-item class="item" ng-repeat="vet in vets" href="#/app/veterinarian/detail/{{$index}}" >
+            <h2>{{vet.name}}</h2>
 
-      <h2>{{vet.name}}</h2>
-      <p>{{vet.address}}</p>
+            <p>{{vet.address}}</p>
 
-    </ion-item>
-  </ion-list>
+        </ion-item>
+    </ion-list>
 
-
+</div>
