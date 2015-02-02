@@ -1,7 +1,5 @@
 angular.module('Sahiplendir.services', [])
 
-<!-- CAMERA -->
-
 .factory('Camera', ['$q', function($q) {
  	
   return {
@@ -21,7 +19,7 @@ angular.module('Sahiplendir.services', [])
 }])
 
 
-<!-- LOCAL STORAGE -->
+
 
 .factory('$localstorage', ['$window', function($window) {
   return {
@@ -40,7 +38,7 @@ angular.module('Sahiplendir.services', [])
   }
 }])
 
-<!-- LOADING -->
+
 
 .factory('LoadingService', ['$ionicLoading', function($ionicLoading) {
   return {
@@ -60,7 +58,7 @@ angular.module('Sahiplendir.services', [])
   }
 }])
 
-<!-- ALERT -->
+
 
 .factory('AlertService', ['$ionicPopup', function($ionicPopup) {
   return {
@@ -81,7 +79,6 @@ angular.module('Sahiplendir.services', [])
 }])
 
 
-<!-- POST SERVICE -->
 
 .factory('PostService', ['LoadingService', '$q', function(LoadingService, $q) {
 	

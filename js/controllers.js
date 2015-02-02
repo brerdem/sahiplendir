@@ -1,6 +1,5 @@
 angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
-
     .controller('SideMenuCtrl', function ($scope, $ionicSideMenuDelegate) {
         $scope.toggleRight = function () {
             $ionicSideMenuDelegate.toggleRight();
@@ -629,22 +628,81 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
     }])
 
-    .controller('VeterinarianAllCtrl', function ($scope) {
-        $scope.mapCreated = function (map) {
-            $scope.map = map;
-        }
+    .controller('VeterinarianCtrl', function ($scope, LoadingService) {
+        var infowindow;
 
         $scope.vets = [];
-        for (var i = 0; i < 10; i++) {
-            $scope.vets.push({name: 'Hello moto', address: 'Şakir paşa cad süleyman sok'});
+        $scope.mapCreated = function (map) {
 
+            var latlng;
+
+            $scope.map = map;
+            LoadingService.show();
+
+
+            navigator.geolocation.getCurrentPosition(function (pos) {
+
+                latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+
+                $scope.map.setCenter(latlng);
+
+                var request = {
+                    location: latlng,
+                    radius: 5000,
+                    types: ['veterinary_care']
+
+                }
+
+                infowindow = new google.maps.InfoWindow();
+                var service = new google.maps.places.PlacesService(map);
+                var bounds = new google.maps.LatLngBounds();
+                service.nearbySearch(request, function (results, status) {
+                    LoadingService.hide();
+                    console.log(results);
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+                            $scope.vets.push({name: results[i].name, address: results[i].vicinity});
+                            bounds.extend(results[i].geometry.location);
+                            createMarker(results[i]);
+
+
+                        }
+                        $scope.map.fitBounds(bounds);
+
+                    }
+
+
+                });
+
+            })
+
+        };
+
+        function createMarker(place) {
+
+            var icon = {
+                url: 'img/pin.png',
+                size: new google.maps.Size(44, 70),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(22, 70)
+            };
+
+            var marker = new google.maps.Marker({
+                map: $scope.map,
+                icon: icon,
+                position: place.geometry.location
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(place.name);
+                infowindow.open($scope.map, this);
+            });
         }
-
 
     })
 
 
-    .controller('VeterinarianDetailCtrl', function ($scope) {
+    .controller('VeterinarianDetailCtrl', function ($scope, $stateParams) {
 
     })
 

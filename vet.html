@@ -11,8 +11,26 @@
         Parse.initialize("8EsrtjkfqGJE3zoFJ3JxDY54WOCiDo7xuRN8UMoE", "ujUckpnMOoJEdHlZ9wXDrJDpvtYFLEguVD5GLwZx");
 
         function savePost() {
-            var vet = Parse.Object.Extend("Veterenarian");
-            vet = null;
+
+            var VetObj = Parse.Object.extend("Veterinarian");
+            var vet = new VetObj();
+
+            var title = $("#title").val();
+            var tel = $("#tel").val();
+            var p = $("#coordinate").val().split(",");
+
+            var coordinate = new Parse.GeoPoint(parseFloat(p[0]),parseFloat(p[1]));
+            var address = $("#address").val();
+
+            vet.set("title", title);
+            vet.set("tel", tel);
+            vet.set("coordinate", coordinate);
+            vet.set("address", address);
+            vet.save().then(function() {
+                alert("saved");
+
+            })
+
 
         }
 
@@ -23,11 +41,11 @@
 
 <body>
 
-<label><input type="text" id="title" name="title" placeholder="İsim"/></label>
-<label><input type="tel" id="tel" name="tel" placeholder="Tel"/></label>
-<label><input type="text" id="coordinate" name="title" placeholder="Koordinat"/></label>
-<label><textarea name="area"></textarea></label>
-
+<label><input type="text" id="title" name="title" placeholder="İsim"/></label><br>
+<label><input type="tel" id="tel" name="tel" placeholder="Tel"/></label><br>
+<label><input type="text" id="coordinate" name="coordinate" placeholder="Koordinat"/></label><br>
+<label><textarea name="address" id="address" cols="50" rows="10" placeholder="adres"></textarea></label><br>
+<button onclick="savePost()">Gönder</button>
 
 </body>
 </html>
