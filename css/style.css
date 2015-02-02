@@ -74,7 +74,7 @@ body {
     from {opacity: 0}
     to {opacity: 1}
 }
-.post-slider-userpic { width:40px; height 40px; vertical-align:middle}
+.post-slider-userpic { width:40px; height: 40px; vertical-align:middle}
 
 
 .side-menu-title {font-size:18px;vertical-align:middle}
@@ -257,21 +257,4 @@ input.ng-invalid.ng-dirty {
 input.ng-valid.ng-dirty {
 	color: #00a77e;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
