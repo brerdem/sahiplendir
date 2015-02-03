@@ -627,7 +627,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
 
     }])
-
+    //sapp veterinarian
     .controller('VeterinarianCtrl', function ($scope, LoadingService) {
         var infowindow;
         var markers = [];

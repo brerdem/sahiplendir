@@ -225,7 +225,7 @@ angular.module('Sahiplendir.services', [])
 }])
 
 
-
+//sapp vet service
 .factory('VeterinarianService', ['LoadingService', '$q', function(LoadingService, $q) {
 	
 	
@@ -282,13 +282,14 @@ angular.module('Sahiplendir.services', [])
 			} else {
 				q.resolve(allvets);
 			}
-			
+
 			return q.promise;
 		}
 	
 	}
 	
 }])
+
 
 
 
