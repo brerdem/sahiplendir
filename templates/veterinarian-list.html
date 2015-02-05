@@ -1,12 +1,20 @@
-3<div ui-view view-title="En Yakın Veterinerler">
-    <ion-list>
-        <ion-item class="item" ng-repeat="vet in vets" href="#/app/veterinarian/detail/{{vet.place_id}}">
+<ion-view title="En Yakın Veterinerler" class="has-header">
+    <div ng-if='vet.length == 0' class="bar bar-subheader">Herhangi bir veteriner bulunmamaktadır.</div>
+    <div style="height: 280px">
+        <map on-create="mapCreated(map)"></map>
+    </div>
+    <ion-content class="no-header" style="top: 280px;">
+        <ion-list>
+            <ion-item class="item" ng-repeat="vet in vets" href="#/app/veterinarian/detail/{{vet.place_id}}">
 
-            <h2>{{vet.name}}</h2>
+                <h2>{{vet.name}}</h2>
 
-            <p>{{vet.address}}</p>
+                <p>{{vet.address}}</p>
 
-        </ion-item>
-    </ion-list>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 
-</div>
+
+</ion-view>
+

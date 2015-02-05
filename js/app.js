@@ -162,8 +162,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('app.veterinarian', {
             url: '/veterinarian',
             abstract: true,
-            controller: 'VeterinarianCtrl',
-            templateUrl: 'templates/veterinarian.html'
+            template: '<ion-nav-view></ion-nav-view>'
 
 
         })
@@ -171,9 +170,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('app.veterinarian.list', {
             url: '/list',
             templateUrl: 'templates/veterinarian-list.html',
-            controller: function($scope) {
-                $scope.showMarkers('all')
-            }
+            controller: 'VeterinarianListCtrl'
 
         })
         .state('app.veterinarian.detail', {

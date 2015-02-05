@@ -1,11 +1,17 @@
-
-    <div class="item"><span><b>{{vet.title}}</b></span></div>
-    <div class="list">
-
-        <div class="detail item item-divider"><i class="icon ion-home"></i>Adres</div>
-        <div class="item">{{vet.address}}</div>
-        <div class="detail item item-divider"><i class="icon ion-ios-telephone"></i>Telefon</div>
-        <div class="item">{{vet.tel}}</div>
-
+<ion-view title="{{vet.title}}" class="has-header">
+    <div style="height: 280px">
+        <map on-create="mapCreated(map)"></map>
     </div>
+    <ion-content class="no-header" style="top: 280px;">
+        <div class="item"><span><b>{{vet.title}}</b></span></div>
+        <div class="list">
+
+            <div class="detail item item-divider"><i class="icon ion-home"></i>Adres</div>
+            <div class="item">{{vet.address}}</div>
+            <div class="detail item item-divider"><i class="icon ion-ios-telephone"></i>Telefon</div>
+            <div class="item">{{vet.tel}}</div>
+
+        </div>
+    </ion-content>
+</ion-view>
 

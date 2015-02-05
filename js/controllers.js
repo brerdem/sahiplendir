@@ -628,73 +628,67 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
 
     }])
     //sapp veterinarian
-    .controller('VeterinarianCtrl', function ($scope, LoadingService) {
-
-        if (VeterinarianService.getAllVets().length > 0 ) {
-
-
-        } else {
-
-
-
-        }
-
-
-        var infowindow;
+    .controller('VeterinarianListCtrl', function ($scope, LoadingService, VeterinarianService) {
         var markers = [];
         $scope.vets = [];
         $scope.mapCreated = function (map) {
-
-            var latlng;
-
             $scope.map = map;
-
-            LoadingService.show();
-
-
-            navigator.geolocation.getCurrentPosition(function (pos) {
-
-                latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-
-                $scope.map.setCenter(latlng);
-
-                var request = {
-                    location: latlng,
-                    radius: 5000,
-                    types: ['veterinary_care']
-
-                }
-
-                infowindow = new google.maps.InfoWindow();
-                var service = new google.maps.places.PlacesService(map);
-                var bounds = new google.maps.LatLngBounds();
-                service.nearbySearch(request, function (results, status) {
-                    LoadingService.hide();
-                    console.log(results);
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-
-                        for (var i = 0; i < results.length; i++) {
-                            $scope.vets.push({
-                                name: results[i].name,
-                                address: results[i].vicinity,
-                                place_id: results[i].place_id
-                            });
-                            bounds.extend(results[i].geometry.location);
-
-                            createMarker(results[i]);
+            if (VeterinarianService.getAllVets().length <= 0) {
+                var infowindow;
 
 
-                        }
-                        $scope.map.fitBounds(bounds);
+                var latlng;
+
+
+                LoadingService.show();
+
+
+                navigator.geolocation.getCurrentPosition(function (pos) {
+
+                    latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+
+                    $scope.map.setCenter(latlng);
+
+                    var request = {
+                        location: latlng,
+                        radius: 5000,
+                        types: ['veterinary_care']
 
                     }
 
+                    infowindow = new google.maps.InfoWindow();
+                    var service = new google.maps.places.PlacesService(map);
+                    var bounds = new google.maps.LatLngBounds();
+                    service.nearbySearch(request, function (results, status) {
+                        LoadingService.hide();
+                        console.log(results);
+                        if (status == google.maps.places.PlacesServiceStatus.OK) {
 
-                });
+                            for (var i = 0; i < results.length; i++) {
+                                VeterinarianService.addVet({
+                                    name: results[i].name,
+                                    address: results[i].vicinity,
+                                    place_id: results[i].place_id,
+                                    location: results[i].geometry.location
+                                });
+                                createMarker(results[i]);
+                                bounds.extend(results[i].geometry.location);
 
-            })
 
+                            }
+                            $scope.map.fitBounds(bounds);
+
+
+                        }
+
+
+                    });
+
+                })
+
+            }
         };
+
 
         function createMarker(place) {
 
@@ -712,10 +706,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
             });
             markers.push(marker);
 
-            google.maps.event.addListener(marker, 'click', function () {
-                infowindow.setContent(place.name);
-                infowindow.open($scope.map, this);
-            });
+            /* google.maps.event.addListener(marker, 'click', function () {
+             infowindow.setContent(place.name);
+             infowindow.open($scope.map, this);
+             });*/
         }
 
         $scope.showMarkers = function (type) {
@@ -733,35 +727,65 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                 }
             }
         }
+        $scope.vets = VeterinarianService.getAllVets();
+
+        //$scope.showMarkers('all');
+
 
     })
 
     //sapp detail
     .controller('VeterinarianDetailCtrl', function ($scope, $stateParams, $ionicScrollDelegate) {
         $scope.vet = {};
+        $scope.mapCreated = function (map) {
+            $scope.map = map;
 
-        var request = {
-            placeId: $stateParams.id
-        };
-        //console.log($scope.map);
-        var service = new google.maps.places.PlacesService($scope.map);
-        service.getDetails(request, callback);
 
-        function callback(place, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                $ionicScrollDelegate.scrollTop();
 
-                $scope.showMarkers(place.geometry.location);
+            var request = {
+                placeId: $stateParams.id
+            };
+            //console.log($scope.map);
+            var service = new google.maps.places.PlacesService($scope.map);
+            service.getDetails(request, callback);
 
-                $scope.vet = {
-                    address: place.formatted_address,
-                    title: place.name,
-                    tel: place.formatted_phone_number
+            function callback(place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+                    $scope.map.setCenter(place.geometry.location);
+
+
+                    $scope.vet = {
+                        address: place.formatted_address,
+                        title: place.name,
+                        tel: place.formatted_phone_number
+                    }
+                    createMarker(place);
+                    console.log('ok')
                 }
-                console.log('ok')
             }
         }
+        function createMarker(place) {
 
+            var icon = {
+                url: 'img/pin.png',
+                size: new google.maps.Size(44, 70),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(22, 70)
+            };
+
+            var marker = new google.maps.Marker({
+                map: $scope.map,
+                icon: icon,
+                position: place.geometry.location
+            });
+
+
+            /* google.maps.event.addListener(marker, 'click', function () {
+             infowindow.setContent(place.name);
+             infowindow.open($scope.map, this);
+             });*/
+        }
 
     })
 
