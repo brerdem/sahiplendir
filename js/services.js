@@ -42,7 +42,7 @@ angular.module('Sahiplendir.services', [])
             show: function () {
 
                 var cls = (Math.random() > .5) ? 'loading-custom' : 'loading-custom bg2';
-                console.log(cls);
+
                 return $ionicLoading.show({
 
                     template: "<div class='" + cls + "'></div>"
@@ -231,6 +231,7 @@ angular.module('Sahiplendir.services', [])
 
 
         var allvets = [];
+        var markers = [];
 
         return {
 
@@ -238,17 +239,42 @@ angular.module('Sahiplendir.services', [])
                 return allvets = [];
             },
 
+            getMarkers: function () {
+                return markers;
+            },
+
+
             getAllVets: function () {
                 return allvets;
             },
 
             addVet: function (vet) {
                 allvets.push(vet);
-            }
+            },
+            addVetMarker: function (loc, map) {
+                var icon = {
+                    url: 'img/pin.png',
+                    size: new google.maps.Size(44, 70),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(22, 70)
+                };
 
+                var marker = new google.maps.Marker({
+                    map: map,
+                    icon: icon,
+                    position: loc
+                });
+
+
+                /* google.maps.event.addListener(marker, 'click', function () {
+                 infowindow.setContent(place.name);
+                 infowindow.open($scope.map, this);
+                 });*/
+
+            }
         }
 
-    })
+    });
 
 
 
