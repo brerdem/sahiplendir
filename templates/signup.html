@@ -21,9 +21,9 @@
 	<label class="item item-input">
 		<input type="email" placeholder="E-Mail" name="email" ng-model="signup.email" ng-minlength=6 email-available />
 	</label>
-     <div class="error assertive" ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+     <div class="error email-in-use ng-hide" ng-show="signup_form.email.$dirty && signup_form.email.$invalid && signup_form.email.$error.unique">
            
-            <small class="error" ng-show="signup_form.email.$error.unique">Bu e-mail daha önce kullanılmış</small>
+            Bu e-mail daha önce kullanılmış
     </div>
 	<label class="item item-input">
 		<input type="password" placeholder="Şifre" ng-model="signup.pwd" ng-minlength=8 required />

@@ -250,6 +250,12 @@ map {
 
 /* ---------------------------------- SIGNUP ------------------------------------ */
 
+div.error {
+    background: red;
+    color: #ffffff;
+}
+
+
 input.ng-invalid.ng-dirty {
 	color: #FF0000;
 }
@@ -257,6 +263,20 @@ input.ng-invalid.ng-dirty {
 input.ng-valid.ng-dirty {
 	color: #00a77e;
 }
+
+div.error.email-in-use.ng-hide {
+    height:0;
+}
+
+div.error.email-in-use {
+    height: 26px;
+    font-size: 12px;
+    text-align: center;
+    -webkit-transition: height 200ms;
+    transition: height 200ms;
+}
+
+
 
 /* ---------------------------------- VETERINARIAN ------------------------------------ */
 
