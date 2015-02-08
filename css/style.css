@@ -50,6 +50,14 @@ body {
 	content: "\e602";
 }
 
+.sahiplendir-icon-phone:before {
+    content: "\e606";
+}
+
+.sahiplendir-icon-call:before {
+    content: "\e605";
+}
+
 
 /* ---------------------------------- LOGIN ------------------------------------ */
 .logo {
@@ -283,3 +291,9 @@ div.error.email-in-use {
 .top280 {
     top: 280px;
 }
+.call-button {
+    vertical-align: middle;
+    width: 40px;
+    float: right;
+}
+

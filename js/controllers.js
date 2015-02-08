@@ -696,6 +696,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                 }
             }
         }
+        $scope.callNumber = function () {
+            document.location.href = 'tel:'+$scope.vet.tel;
+
+        }
 
 
     })
