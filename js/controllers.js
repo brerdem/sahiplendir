@@ -692,6 +692,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                     }
 
                     VeterinarianService.addVetMarker(place.geometry.location, $scope.map);
+                    $scope.$apply();
                     console.log('ok')
                 }
             }
