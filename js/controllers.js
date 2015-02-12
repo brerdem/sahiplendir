@@ -14,7 +14,18 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     })
 
 
-    .controller('MainPageCtrl', function ($scope, $state, $timeout, PostService) {
+    .controller('MainPageCtrl', function ($scope, $state, $timeout, PostService, $filter) {
+
+
+        $scope.a = {name: 'aaaaaaa', title:'bbbbbbb'};
+        var f = $filter('filter')($scope.a, function(val, index) {
+               return $scope.a.name = $scope.a.name.substr(3);
+            }
+        )
+
+        console.log(f.name);
+
+
 
         $scope.isHiddenText = true;
         $scope.showSlidebox = false;
