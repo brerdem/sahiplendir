@@ -14,18 +14,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
     })
 
 
-    .controller('MainPageCtrl', function ($scope, $state, $timeout, PostService, $filter) {
-
-
-        $scope.a = {name: 'aaaaaaa', title:'bbbbbbb'};
-        var f = $filter('filter')($scope.a, function(val, index) {
-               return $scope.a.name = $scope.a.name.substr(3);
-            }
-        )
-
-        console.log(f.name);
-
-
+    .controller('MainPageCtrl', function ($scope, $state, $timeout, PostService) {
 
         $scope.isHiddenText = true;
         $scope.showSlidebox = false;
@@ -74,6 +63,10 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
             },
             {href: '#/app/info', bg: 'royal-bg', icon: 'sahiplendir-icon-info', label: 'Yararlı Bilgiler'}
         ]
+
+        $scope.gotoPostDetail = function (id) {
+            $state.go('app.post.detail', {id: id});
+        }
 
 
     })
@@ -709,7 +702,7 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
             }
         }
         $scope.callNumber = function () {
-            document.location.href = 'tel:'+$scope.vet.tel;
+            document.location.href = 'tel:' + $scope.vet.tel;
 
         }
 

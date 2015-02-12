@@ -251,10 +251,20 @@ map {
 	
 }
 
-.detail.item.item-divider, .detail.item {
+.detail.item.item-divider {
 	font-size: 14px;
 	margin-left:-5px
 }
+
+.detail-panel.item:not('.detail') {
+    font-size: 12px;
+
+}
+
+
+
+
+
 
 /* ---------------------------------- SIGNUP ------------------------------------ */
 

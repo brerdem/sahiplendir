@@ -178,7 +178,7 @@ angular.module('Sahiplendir.services', [])
                         success: function (results) {
                             for (var i = 0; i < results.length; i++) {
 
-                                photos_arr = JSON.parse(results[i].get("postPhotos"));
+                                var photos_arr = JSON.parse(results[i].get("postPhotos"));
 
                                 var obj = {
                                     id: results[i].id,
