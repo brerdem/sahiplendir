@@ -703,9 +703,14 @@ angular.module('Sahiplendir.controllers', ['Sahiplendir.services'])
                     }
 
                     VeterinarianService.addVetMarker(place.geometry.location, $scope.map);
+                    $scope.$apply();
                     console.log('ok')
                 }
             }
+        }
+        $scope.callNumber = function () {
+            document.location.href = 'tel:'+$scope.vet.tel;
+
         }
 
 
